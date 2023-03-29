@@ -19,6 +19,7 @@
     "vite": "^4.2.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-mkcert": "^1.13.4",
-    "vite-plugin-pwa": "^0.14.6"
+    "vite-plugin-pwa": "^0.14.6",
+    "vitest": "^0.29.8"
   }
 }
