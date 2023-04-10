@@ -1,3 +1,18 @@
+// components
+import { StyledAppContainer } from '../styled-components/StyledAppContainer/StyledAppContainer.jsx';
+import { StyledBottomNavigation } from '../styled-components/StyledBottomNavigation/StyledBottomNavigation.jsx';
+import { appAnimations } from './appAnimations.js';
+
+// loading page
+import { StyledLoadingScreen } from '../styled-components/StyledLoadingScreen/StyledLoadingScreen.jsx';
+
 export function App() {
-	return <h1>Hello World!</h1>;
+	return (
+		<>
+			<StyledLoadingScreen />
+			<StyledAppContainer {...appAnimations}>
+				<StyledBottomNavigation />
+			</StyledAppContainer>
+		</>
+	);
 }

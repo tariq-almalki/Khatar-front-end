@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // components
+import { App } from '@components/App/App';
+import { Profile } from '@components/Profile/Profile.jsx';
 
 // loaders
 
@@ -10,20 +12,20 @@ export function Router() {
 	const router = createBrowserRouter([
 		{
 			path: '/',
-			element: null,
+			element: <App />,
 			errorElement: null,
 			action: undefined,
 			loader: undefined,
 			children: [
 				{
-					path: 'request-for-help',
+					path: '/help',
 					element: null,
 					errorElement: null,
 					action: undefined,
 					loader: undefined,
 				},
 				{
-					path: 'create-poll',
+					path: '/poll',
 					element: null,
 					errorElement: null,
 					action: undefined,
@@ -32,8 +34,8 @@ export function Router() {
 			],
 		},
 		{
-			path: 'profile',
-			element: null,
+			path: '/profile',
+			element: <Profile />,
 			errorElement: null,
 			action: undefined,
 			loader: undefined,
