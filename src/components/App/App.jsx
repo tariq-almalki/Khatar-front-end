@@ -9,7 +9,7 @@ import { StyledLoadingScreen } from '../styled-components/StyledLoadingScreen/St
 export function App() {
 	return (
 		<>
-			<StyledLoadingScreen />
+			{/* <StyledLoadingScreen /> */}
 			<StyledAppContainer {...appAnimations}>
 				<StyledBottomNavigation />
 			</StyledAppContainer>

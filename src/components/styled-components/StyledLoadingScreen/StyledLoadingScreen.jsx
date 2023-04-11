@@ -18,24 +18,20 @@ const StyledLoadingScreenComponent = styled(motion.div)`
 
 const animations = {
 	initial: {
-		// opacity: 0,
 		filter: 'blur(0em)',
 	},
 	animate: {
 		opacity: 1,
 		filter: 'blur(0.1em)',
-		transitionEnd: {
-			x: '-100%',
+		transition: {
+			repeat: 2,
+			duration: 1,
+			repeatType: 'reverse',
+			repeatDelay: 0.7,
 		},
 	},
 	exit: {
 		opacity: 0,
-	},
-	transition: {
-		repeat: 3,
-		duration: 1,
-		repeatType: 'reverse',
-		repeatDelay: 0.7,
 	},
 };
 

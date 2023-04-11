@@ -1,11 +1,13 @@
 import { StyledProfileContainer } from '../styled-components/StyledProfileContainer/StyledProfileContainer';
-import { Link } from 'react-router-dom';
 import { profileAnimations } from './profileAnimations';
+import { TailWindSideBar } from '../tailwindcss-components/TailWindSideBar/TailWindSideBar';
+import { StyledProfileMainSectionContainer } from '../styled-components/StyledProfileMainSectionContainer/StyledProfileMainSectionContainer';
 
 export function Profile() {
 	return (
 		<StyledProfileContainer {...profileAnimations}>
-			<Link to="/">Go Home</Link>
+			<TailWindSideBar />
+			<StyledProfileMainSectionContainer />
 		</StyledProfileContainer>
 	);
 }

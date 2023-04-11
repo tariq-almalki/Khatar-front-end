@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import imgUrl from '@/assets/images/mapbox-layers.jpg';
 
 export const StyledAppContainer = styled(motion.div)`
 	height: 100vh;
 	width: 100vw;
-	background-color: #3d3838;
+	background-image: url(${imgUrl});
+	background-size: contain;
 	overflow: hidden;
 `;
