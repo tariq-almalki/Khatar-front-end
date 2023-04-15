@@ -4,7 +4,7 @@ import { AwesomeButton } from 'react-awesome-button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // styles imports
-import AwesomeButtonStyles from '@/styles.module.scss';
+import AwesomeButtonStyles from '@/styles/styles.module.scss';
 import { LinkCommonStyles } from './styles';
 
 // config

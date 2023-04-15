@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { TailWindUpperMenu } from '../TailWindUpperMenu/TailWindUpperMenu';
 import { TailWindLowerMenu } from '../TailwindLowerMenu/TailWindLowerMenu';
 

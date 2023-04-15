@@ -1,6 +1,8 @@
 // components
 import { StyledAppContainer } from '../styled-components/StyledAppContainer/StyledAppContainer.jsx';
 import { StyledBottomNavigation } from '../styled-components/StyledBottomNavigation/StyledBottomNavigation.jsx';
+
+// animations
 import { appAnimations } from './appAnimations.js';
 
 // loading page

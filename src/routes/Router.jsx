@@ -1,8 +1,13 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, ScrollRestoration } from 'react-router-dom';
 
-// components
+// App & App components
 import { App } from '@components/App/App';
+
+// Profile & Profile components
 import { Profile } from '@components/Profile/Profile.jsx';
+import { ProfileErrorElement } from '../components/Profile/ProfileErrorElement.jsx';
+import { Account } from '../components/Profile/children-components/Account/Account.jsx';
+import { Team } from '../components/Profile/children-components/Team/Team.jsx';
 
 // loaders
 
@@ -36,26 +41,40 @@ export function Router() {
 		{
 			path: '/profile',
 			element: <Profile />,
-			errorElement: null,
+			errorElement: <ProfileErrorElement />,
 			action: undefined,
 			loader: undefined,
 			children: [
 				{
-					path: 'user',
+					path: 'badges',
 					element: null,
+					errorElement: null,
+					action: undefined,
+					loader: undefined,
+				},
+				{
+					path: 'account',
+					element: <Account />,
 					errorElement: null,
 					action: undefined,
 					loader: undefined,
 				},
 				{
 					path: 'team',
-					element: null,
+					element: <Team />,
 					errorElement: null,
 					action: undefined,
 					loader: undefined,
 				},
 				{
 					path: 'friends',
+					element: null,
+					errorElement: null,
+					action: undefined,
+					loader: undefined,
+				},
+				{
+					path: 'chat',
 					element: null,
 					errorElement: null,
 					action: undefined,
