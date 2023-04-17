@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 // components
-import { ProfileImage } from './ProfileImage/ProfileImage';
-// import { ChangePassword } from '../ChangePassword/ChangePassword.jsx';
+import { ProfileImage } from './BasicInfo/ProfileImage/ProfileImage';
 import { ChangePasswordPrompt } from '../ChangePasswordPrompt/ChangePasswordPrompt';
 import { ContactInfo } from './ContactInfo/ContactInfo';
 import { BasicInfo } from './BasicInfo/BasicInfo';
@@ -50,6 +49,11 @@ const StyledChangePasswordContainer = styled.div`
 `;
 
 export function Profile() {
+	// for stopping animation upon routing
+	const body = document.querySelector('body');
+	body.classList.add('no-animation');
+	setTimeout(() => body.classList.remove('no-animation'), 300);
+
 	return (
 		<ProfileComponent>
 			<ProfileImage />

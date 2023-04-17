@@ -4,9 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
 // animations
-import { accountAnimations } from './accountAnimations';
+import { friendsAnimations } from './friendsAnimations';
 
-const StyledAccount = styled(motion.div)`
+const StyledFriends = styled(motion.div)`
 	display: flex;
 	flex-wrap: wrap;
 	flex-grow: 1;
@@ -37,10 +37,10 @@ const StyledButton = styled.div`
 	}
 `;
 
-export function Account() {
+export function Friends() {
 	const location = useLocation();
 
-	const regexExpr = /(?<=\/profile\/friends\/)(basic\-info|contact\-info|change\-password)(?=\/?)/;
+	const regexExpr = /(?<=\/profile\/friends\/)(my\-friends|friend\-requests|search\-users)(?=\/?)/;
 
 	const result = regexExpr.test(location.pathname);
 
@@ -49,7 +49,7 @@ export function Account() {
 			{result ? (
 				<Outlet />
 			) : (
-				<StyledAccount {...accountAnimations}>
+				<StyledFriends {...friendsAnimations}>
 					<StyledButtonLink to="my-friends">
 						<StyledButton className="btn-outline glass btn">My Friends</StyledButton>
 					</StyledButtonLink>
@@ -61,7 +61,7 @@ export function Account() {
 					<StyledButtonLink to="search-users">
 						<StyledButton className="btn-outline glass btn">Search Users</StyledButton>
 					</StyledButtonLink>
-				</StyledAccount>
+				</StyledFriends>
 			)}
 		</>
 	);

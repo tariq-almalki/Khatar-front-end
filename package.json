@@ -4,10 +4,10 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite --open",
 		"test": "vitest",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview --open"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.4.0",
