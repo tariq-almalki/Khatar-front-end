@@ -9,7 +9,7 @@ import {
 	faHandshakeAngle,
 	faGear,
 	faCommentDots,
-	faRibbon,
+	faAward,
 } from '@fortawesome/free-solid-svg-icons';
 
 export function TailWindUpperMenu() {
@@ -21,8 +21,8 @@ export function TailWindUpperMenu() {
 				</NavLink>
 			</li>
 			<li>
-				<NavLink to="badges" className="flex-col p-3">
-					<FontAwesomeIcon icon={faRibbon} className="flex-col place-content-end" />
+				<NavLink to="awards" className="flex-col p-3">
+					<FontAwesomeIcon icon={faAward} className="flex-col place-content-end" />
 				</NavLink>
 			</li>
 			<li>

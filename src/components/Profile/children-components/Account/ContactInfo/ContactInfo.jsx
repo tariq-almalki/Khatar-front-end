@@ -1,53 +1,18 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-const ContactInfoComponent = styled.div`
+import { accountAnimations } from '../accountAnimations';
+
+const ContactInfoComponent = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	flex-grow: 1;
-	/* border: 1px solid red; */
-	gap: 1.5em;
-	padding: 0.5em;
-	border: 1px solid #ffffff;
-	border-radius: 0.6em;
-	background-color: #333;
-`;
-
-const StyledSpan = styled.div`
+	align-items: center;
+	justify-content: center;
 	font-family: 'Rajdhani';
-	align-self: flex-start;
-	font-size: 2em;
-	/* border: 1px solid red; */
-`;
-
-const StyledDiv = styled.div`
-	display: flex;
-	flex-direction: column;
-	min-width: 16.5em;
-	gap: 1em;
-	border: 1px solid #ffffff;
-	border-radius: 0.6em;
-	/* border: 1px solid red; */
+	font-size: 3.5em;
 `;
 
 export function ContactInfo() {
-	return (
-		<ContactInfoComponent>
-			<StyledSpan>
-				<span>Contact Info</span>
-			</StyledSpan>
-			<StyledDiv>
-				<div className="input-group-sm input-group input-group-vertical">
-					<span>Email</span>
-					<input type="email" placeholder="Email" className="input-bordered input input-sm" disabled />
-					<button className="btn-sm btn">change</button>
-				</div>
-				<div className="input-group-sm input-group input-group-vertical">
-					<span>Phone Number</span>
-					<input type="text" placeholder="Phone Number" className="input-bordered input input-sm" disabled />
-					<button className="btn-sm btn">change</button>
-				</div>
-			</StyledDiv>
-		</ContactInfoComponent>
-	);
+	return <ContactInfoComponent {...accountAnimations}>Contact Info</ContactInfoComponent>;
 }

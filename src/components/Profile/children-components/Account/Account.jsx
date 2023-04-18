@@ -40,7 +40,7 @@ const StyledButton = styled.div`
 export function Account() {
 	const location = useLocation();
 
-	const regexExpr = /(?<=\/profile\/friends\/)(basic\-info|contact\-info|change\-password)(?=\/?)/;
+	const regexExpr = /(?<=\/profile\/account\/)(basic\-info|contact\-info|change\-password)(?=\/?)/;
 
 	const result = regexExpr.test(location.pathname);
 
@@ -50,16 +50,16 @@ export function Account() {
 				<Outlet />
 			) : (
 				<StyledAccount {...accountAnimations}>
-					<StyledButtonLink to="my-friends">
-						<StyledButton className="btn-outline glass btn">My Friends</StyledButton>
+					<StyledButtonLink to="basic-info">
+						<StyledButton className="btn-outline glass btn">Basic Info</StyledButton>
 					</StyledButtonLink>
 					<div className="divider lg:divider-horizontal">OR</div>
-					<StyledButtonLink to="friend-requests">
-						<StyledButton className="btn-outline glass btn">Friend Requests</StyledButton>
+					<StyledButtonLink to="contact-info">
+						<StyledButton className="btn-outline glass btn">Contact Info</StyledButton>
 					</StyledButtonLink>
 					<div className="divider lg:divider-horizontal">OR</div>
-					<StyledButtonLink to="search-users">
-						<StyledButton className="btn-outline glass btn">Search Users</StyledButton>
+					<StyledButtonLink to="change-password">
+						<StyledButton className="btn-outline glass btn">Change Password</StyledButton>
 					</StyledButtonLink>
 				</StyledAccount>
 			)}

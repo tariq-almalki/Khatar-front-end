@@ -10,6 +10,10 @@ import { ProfileErrorElement } from './errorElements/ProfileErrorElement/Profile
 
 // Account
 import { Account } from '../components/Profile/children-components/Account/Account';
+import { BasicInfo } from '../components/Profile/children-components/Account/BasicInfo/BasicInfo';
+import { ContactInfo } from '../components/Profile/children-components/Account/ContactInfo/ContactInfo';
+import { ChangePassword } from '../components/Profile/children-components/Account/ChangePassword/ChangePassword';
+import { AccountErrorElement } from '../routes/errorElements/AccountErrorElement/AccountErrorElement';
 
 // Team
 import { Team } from '../components/Profile/children-components/Team/Team';
@@ -22,6 +26,7 @@ import { Friends } from '../components/Profile/children-components/Friends/Frien
 import { MyFriends } from '../components/Profile/children-components/Friends/MyFriends/MyFriends';
 import { FriendRequests } from '../components/Profile/children-components/Friends/FriendRequests/FriendRequests';
 import { SearchUsers } from '../components/Profile/children-components/Friends/SearchUsers/SearchUsers';
+import { FriendsErrorElement } from './errorElements/FriendsErrorElement/FriendsErrorElement';
 
 // loaders
 
@@ -60,7 +65,7 @@ export function Router() {
 			loader: undefined,
 			children: [
 				{
-					path: 'badges',
+					path: 'awards',
 					element: null,
 					errorElement: null,
 					action: undefined,
@@ -69,27 +74,27 @@ export function Router() {
 				{
 					path: 'account',
 					element: <Account />,
-					errorElement: null,
+					errorElement: <AccountErrorElement />,
 					action: undefined,
 					loader: undefined,
 					children: [
 						{
 							path: 'basic-info',
-							element: <MyTeam />,
+							element: <BasicInfo />,
 							errorElement: null,
 							action: undefined,
 							loader: undefined,
 						},
 						{
 							path: 'contact-info',
-							element: <MyTeam />,
+							element: <ContactInfo />,
 							errorElement: null,
 							action: undefined,
 							loader: undefined,
 						},
 						{
 							path: 'change-password',
-							element: <MyTeam />,
+							element: <ChangePassword />,
 							errorElement: null,
 							action: undefined,
 							loader: undefined,
@@ -122,7 +127,7 @@ export function Router() {
 				{
 					path: 'friends',
 					element: <Friends />,
-					errorElement: null,
+					errorElement: <FriendsErrorElement />,
 					action: undefined,
 					loader: undefined,
 					children: [
