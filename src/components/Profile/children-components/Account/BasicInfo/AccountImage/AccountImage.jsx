@@ -2,17 +2,16 @@ import styled from 'styled-components';
 
 const AccountImageComponent = styled.div`
 	display: flex;
-	flex-direction: row;
 	justify-content: center;
-	align-items: start;
-	padding: 0.1em;
-	border: 1px solid red;
+	align-items: center;
+	flex-direction: column;
+	padding: 1em;
+	width: 100%;
 `;
 
 const StyledDiv = styled.div`
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	padding: 0.2em;

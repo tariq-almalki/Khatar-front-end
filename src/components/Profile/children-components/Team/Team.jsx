@@ -27,9 +27,13 @@ const StyledButtonLink = styled(Link)`
 
 const StyledButton = styled.div`
 	font-family: 'Rajdhani' !important;
-	font-size: 3.5em !important;
+	font-size: 2.5em !important;
 	color: white !important;
 	flex-grow: 1;
+
+	@media only all and (min-width: 1023px) {
+		font-size: 3.5em !important;
+	}
 
 	&:hover {
 		background-color: #661ae6 !important;

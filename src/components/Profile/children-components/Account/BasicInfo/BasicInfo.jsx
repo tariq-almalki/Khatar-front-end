@@ -11,21 +11,9 @@ const BasicInfoComponent = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
-	flex-wrap: wrap;
 	align-items: start;
 	font-family: 'Rajdhani';
-	font-size: 3.5em;
-	/* padding: 1em; */
-`;
-
-const BasicInfoLimitingContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	/* padding: 0.5em; */
-	height: 100%;
-	max-width: 45em;
-	border: 1px solid red;
+	padding: 1em;
 `;
 
 export function BasicInfo() {
