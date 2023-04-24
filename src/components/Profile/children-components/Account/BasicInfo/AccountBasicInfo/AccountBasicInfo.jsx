@@ -14,15 +14,14 @@ const StyledAccountBasicInfoComponent = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-grow: 1;
 	width: 100%;
 	padding: 0.5em;
-	border: 1px solid red;
 `;
 
 const StyledForm = styled(Form)`
 	padding: 1em;
-	border: 1px solid red;
+	flex-grow: 0.5;
+	max-width: 820px;
 `;
 
 export function AccountBasicInfo() {

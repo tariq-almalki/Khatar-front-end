@@ -15,7 +15,7 @@ const StyledDiv = styled.div`
 	justify-content: center;
 	align-items: center;
 	padding: 0.2em;
-	gap: 0.3em;
+	gap: 1.5em;
 `;
 
 const StyledInput = styled.input`

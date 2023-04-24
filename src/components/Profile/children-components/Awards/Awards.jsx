@@ -4,9 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
 // animations
-import { friendsAnimations } from './friendsAnimations';
+import { awardsAnimations } from './awardsAnimations';
 
-const StyledFriends = styled(motion.div)`
+const StyledAwards = styled(motion.div)`
 	display: flex;
 	flex-wrap: wrap;
 	flex-grow: 1;
@@ -41,10 +41,10 @@ const StyledButton = styled.div`
 	}
 `;
 
-export function Friends() {
+export function Awards() {
 	const location = useLocation();
 
-	const regexExpr = /(?<=\/profile\/friends\/)(my\-friends|friend\-requests|search\-users)(?=\/?)/;
+	const regexExpr = /(?<=\/profile\/awards\/)(my\-awards|team\-awards)(?=\/?)/;
 
 	const result = regexExpr.test(location.pathname);
 
@@ -53,19 +53,15 @@ export function Friends() {
 			{result ? (
 				<Outlet />
 			) : (
-				<StyledFriends {...friendsAnimations}>
-					<StyledButtonLink to="my-friends">
-						<StyledButton className="btn-outline glass btn">Friends</StyledButton>
+				<StyledAwards {...awardsAnimations}>
+					<StyledButtonLink to="my-awards">
+						<StyledButton className="btn-outline glass btn">Awards</StyledButton>
 					</StyledButtonLink>
 					<div className="divider lg:divider-horizontal">OR</div>
-					<StyledButtonLink to="friend-requests">
-						<StyledButton className="btn-outline glass btn">Friend Requests</StyledButton>
+					<StyledButtonLink to="team-awards">
+						<StyledButton className="btn-outline glass btn">Team Awards</StyledButton>
 					</StyledButtonLink>
-					<div className="divider lg:divider-horizontal">OR</div>
-					<StyledButtonLink to="search-users">
-						<StyledButton className="btn-outline glass btn">Search Users</StyledButton>
-					</StyledButtonLink>
-				</StyledFriends>
+				</StyledAwards>
 			)}
 		</>
 	);

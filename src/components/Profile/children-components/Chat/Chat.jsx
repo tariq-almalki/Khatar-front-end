@@ -4,9 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
 // animations
-import { friendsAnimations } from './friendsAnimations';
+import { chatAnimations } from './chatAnimations';
 
-const StyledFriends = styled(motion.div)`
+const StyledChat = styled(motion.div)`
 	display: flex;
 	flex-wrap: wrap;
 	flex-grow: 1;
@@ -41,10 +41,10 @@ const StyledButton = styled.div`
 	}
 `;
 
-export function Friends() {
+export function Chat() {
 	const location = useLocation();
 
-	const regexExpr = /(?<=\/profile\/friends\/)(my\-friends|friend\-requests|search\-users)(?=\/?)/;
+	const regexExpr = /(?<=\/profile\/chat\/)(general\-chat|friends\-chat|team\-chat)(?=\/?)/;
 
 	const result = regexExpr.test(location.pathname);
 
@@ -53,19 +53,19 @@ export function Friends() {
 			{result ? (
 				<Outlet />
 			) : (
-				<StyledFriends {...friendsAnimations}>
-					<StyledButtonLink to="my-friends">
-						<StyledButton className="btn-outline glass btn">Friends</StyledButton>
+				<StyledChat {...chatAnimations}>
+					<StyledButtonLink to="general-chat">
+						<StyledButton className="btn-outline glass btn">General Chat</StyledButton>
 					</StyledButtonLink>
 					<div className="divider lg:divider-horizontal">OR</div>
-					<StyledButtonLink to="friend-requests">
-						<StyledButton className="btn-outline glass btn">Friend Requests</StyledButton>
+					<StyledButtonLink to="friends-chat">
+						<StyledButton className="btn-outline glass btn">Friends Chat</StyledButton>
 					</StyledButtonLink>
 					<div className="divider lg:divider-horizontal">OR</div>
-					<StyledButtonLink to="search-users">
-						<StyledButton className="btn-outline glass btn">Search Users</StyledButton>
+					<StyledButtonLink to="team-chat">
+						<StyledButton className="btn-outline glass btn">Team Chat</StyledButton>
 					</StyledButtonLink>
-				</StyledFriends>
+				</StyledChat>
 			)}
 		</>
 	);

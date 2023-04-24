@@ -28,6 +28,19 @@ import { FriendRequests } from '../components/Profile/children-components/Friend
 import { SearchUsers } from '../components/Profile/children-components/Friends/SearchUsers/SearchUsers';
 import { FriendsErrorElement } from './errorElements/FriendsErrorElement/FriendsErrorElement';
 
+// Awards
+import { Awards } from '../components/Profile/children-components/Awards/Awards';
+import { MyAwards } from '../components/Profile/children-components/Awards/MyAwards/MyAwards';
+import { TeamAwards } from '../components/Profile/children-components/Awards/TeamAwards/TeamAwards';
+import { AwardsErrorElement } from '../routes/errorElements/AwardsErrorElement/AwardsErrorElement';
+
+// Chat
+import { Chat } from '../components/Profile/children-components/Chat/Chat';
+import { GeneralChat } from '../components/Profile/children-components/Chat/GeneralChat/GeneralChat';
+import { FriendsChat } from '../components/Profile/children-components/Chat/FriendsChat/FriendsChat';
+import { TeamChat } from '../components/Profile/children-components/Chat/TeamChat/TeamChat';
+import { ChatErrorElement } from './errorElements/ChatErrorElement/ChatErrorElement';
+
 // loaders
 
 // actions
@@ -66,10 +79,26 @@ export function Router() {
 			children: [
 				{
 					path: 'awards',
-					element: null,
-					errorElement: null,
+					element: <Awards />,
+					errorElement: <AwardsErrorElement />,
 					action: undefined,
 					loader: undefined,
+					children: [
+						{
+							path: 'my-awards',
+							element: <MyAwards />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+						{
+							path: 'team-awards',
+							element: <TeamAwards />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+					],
 				},
 				{
 					path: 'account',
@@ -156,10 +185,33 @@ export function Router() {
 				},
 				{
 					path: 'chat',
-					element: null,
-					errorElement: null,
+					element: <Chat />,
+					errorElement: <ChatErrorElement />,
 					action: undefined,
 					loader: undefined,
+					children: [
+						{
+							path: 'general-chat',
+							element: <GeneralChat />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+						{
+							path: 'friends-chat',
+							element: <FriendsChat />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+						{
+							path: 'team-chat',
+							element: <TeamChat />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+					],
 				},
 				{
 					path: 'help-requests',
