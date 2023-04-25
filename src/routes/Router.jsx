@@ -41,9 +41,26 @@ import { FriendsChat } from '../components/Profile/children-components/Chat/Frie
 import { TeamChat } from '../components/Profile/children-components/Chat/TeamChat/TeamChat';
 import { ChatErrorElement } from './errorElements/ChatErrorElement/ChatErrorElement';
 
-// loaders
+// Help Requests
+import { HelpRequests } from '../components/Profile/children-components/HelpRequests/HelpRequests';
+import { MyHelpRequests } from '../components/Profile/children-components/HelpRequests/MyHelpRequests/MyHelpRequests';
+import { OthersHelpRequests } from '../components/Profile/children-components/HelpRequests/OthersHelpRequests/OthersHelpRequests';
+import { HelpRequestsErrorElement } from './errorElements/HelpRequestsErrorElement/HelpRequestsErrorElement';
 
-// actions
+// Polls
+import { Polls } from '../components/Profile/children-components/Polls/Polls';
+import { OthersPolls } from '../components/Profile/children-components/Polls/OthersPolls/OthersPolls';
+import { MyPolls } from '../components/Profile/children-components/Polls/MyPolls/MyPolls';
+import { PollsErrorElement } from './errorElements/PollsErrorElement/PollsErrorElement';
+
+// Notifications
+import { Notifications } from '../components/Profile/children-components/Notifications/Notifications';
+import { AllNotifications } from '../components/Profile/children-components/Notifications/AllNotifications/AllNotifications';
+import { InvitationRequestsNotifications } from '../components/Profile/children-components/Notifications/InvitationRequestsNotifications/InvitationRequestsNotifications';
+import { AwardsNotifications } from '../components/Profile/children-components/Notifications/AwardsNotifications/AwardsNotifications';
+import { HelpRequestsNotifications } from '../components/Profile/children-components/Notifications/HelpRequestsNotifications/HelpRequestsNotifications';
+import { PollsNotifications } from '../components/Profile/children-components/Notifications/PollsNotifications/PollsNotifications';
+import { NotificationsErrorElement } from './errorElements/NotificationsErrorElement/NotificationsErrorElement';
 
 export function Router() {
 	const router = createBrowserRouter([
@@ -215,24 +232,93 @@ export function Router() {
 				},
 				{
 					path: 'help-requests',
-					element: null,
-					errorElement: null,
+					element: <HelpRequests />,
+					errorElement: <HelpRequestsErrorElement />,
 					action: undefined,
 					loader: undefined,
+					children: [
+						{
+							path: 'my-help-requests',
+							element: <MyHelpRequests />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+						{
+							path: 'others-help-requests',
+							element: <OthersHelpRequests />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+					],
 				},
 				{
 					path: 'polls',
-					element: null,
-					errorElement: null,
+					element: <Polls />,
+					errorElement: <PollsErrorElement />,
 					action: undefined,
 					loader: undefined,
+					children: [
+						{
+							path: 'my-polls',
+							element: <MyPolls />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+						{
+							path: 'others-polls',
+							element: <OthersPolls />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+					],
 				},
 				{
 					path: 'notifications',
-					element: null,
-					errorElement: null,
+					element: <Notifications />,
+					errorElement: <NotificationsErrorElement />,
 					action: undefined,
 					loader: undefined,
+					children: [
+						{
+							path: 'all-notifications',
+							element: <AllNotifications />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+						{
+							path: 'invitation-requests-notifications',
+							element: <InvitationRequestsNotifications />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+						{
+							path: 'awards-notifications',
+							element: <AwardsNotifications />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+						{
+							path: 'help-requests-notifications',
+							element: <HelpRequestsNotifications />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+						{
+							path: 'polls-notifications',
+							element: <PollsNotifications />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+					],
 				},
 				{
 					path: 'settings',

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 // components
-import { NameUsernameType } from './account-details-components/NameUsernameType/NameUsernameType';
-import { AddressBirthdayGender } from './account-details-components/AddressBirthdayGender/AddressBirthdayGender';
+import { NameUsernameType } from './NameUsernameType/NameUsernameType';
+import { AddressBirthdayGender } from './AddressBirthdayGender/AddressBirthdayGender';
 
 const AccountDetailsComponent = styled.div`
 	display: flex;
