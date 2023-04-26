@@ -28,10 +28,10 @@ const StyledDiv = styled.div`
 export function StyledProfileMainSectionContainer(props) {
 	return (
 		<StyledProfileMainSectionContainerComponent>
-			<StyledHeaderMainSection location={props.location} />
-			<TailWindDivider />
+			<StyledHeaderMainSection theme={props.theme} location={props.location} />
+			<TailWindDivider theme={props.theme} />
 			<StyledDiv>
-				<Outlet />
+				<Outlet context={{ theme: props.theme }} />
 			</StyledDiv>
 		</StyledProfileMainSectionContainerComponent>
 	);

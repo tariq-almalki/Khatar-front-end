@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate, useOutletContext } from 'react-router-dom';
+import { useContext } from 'react';
 
 const StyledNotifications = styled(motion.div)`
 	display: flex;
@@ -21,17 +22,17 @@ const StyledContainer = styled.div`
 	height: 95%;
 	width: 100%;
 	border-radius: 0.5em;
-	border: 1.5px solid #999;
+	border: 2px solid #999;
 `;
 
 const StyledLink = styled(Link)`
-font-family: 'Rajdhani';
-`
+	font-family: 'Rajdhani';
+`;
 
 const StyledSpan = styled.span`
 	font-family: 'Rajdhani';
 	padding-left: 1em;
-    cursor: default;
+	cursor: default;
 `;
 
 export function Notifications() {
@@ -45,12 +46,12 @@ export function Notifications() {
 	return (
 		<StyledNotifications>
 			<StyledContainer>
-				<div className="navbar rounded-lg bg-base-100">
+				<div className="navbar whitespace-nowrap rounded-t-md bg-base-100">
 					<div className="flex-1">
 						<StyledSpan className="text-xl normal-case">{state?.type}</StyledSpan>
 					</div>
 					<div className="flex-none gap-2">
-						<div className="dropdown dropdown-end">
+						<div className="dropdown-end dropdown">
 							<button className="btn-ghost btn-square btn">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +77,10 @@ export function Notifications() {
 									</StyledLink>
 								</li>
 								<li>
-									<StyledLink to="invitation-requests-notifications" state={{ type: 'Invitation Requests' }}>
+									<StyledLink
+										to="invitation-requests-notifications"
+										state={{ type: 'Invitation Requests' }}
+									>
 										Invitation Requests
 									</StyledLink>
 								</li>

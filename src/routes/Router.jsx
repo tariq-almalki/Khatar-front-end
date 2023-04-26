@@ -9,57 +9,57 @@ import { Profile } from '@components/Profile/Profile.jsx';
 import { ProfileErrorElement } from './errorElements/ProfileErrorElement/ProfileErrorElement';
 
 // Account
-import { Account } from '../components/Profile/children-components/Account/Account';
-import { BasicInfo } from '../components/Profile/children-components/Account/BasicInfo/BasicInfo';
-import { ContactInfo } from '../components/Profile/children-components/Account/ContactInfo/ContactInfo';
-import { ChangePassword } from '../components/Profile/children-components/Account/ChangePassword/ChangePassword';
+import { Account } from '../components/Profile/Account/Account';
+import { BasicInfo } from '../components/Profile/Account/BasicInfo/BasicInfo';
+import { ContactInfo } from '../components/Profile/Account/ContactInfo/ContactInfo';
+import { ChangePassword } from '../components/Profile/Account/ChangePassword/ChangePassword';
 import { AccountErrorElement } from '../routes/errorElements/AccountErrorElement/AccountErrorElement';
 
 // Team
-import { Team } from '../components/Profile/children-components/Team/Team';
-import { MyTeam } from '../components/Profile/children-components/Team/MyTeam/MyTeam';
-import { SearchTeams } from '../components/Profile/children-components/Team/SearchTeams/SearchTeams';
+import { Team } from '../components/Profile/Team/Team';
+import { MyTeam } from '../components/Profile/Team/MyTeam/MyTeam';
+import { SearchTeams } from '../components/Profile/Team/SearchTeams/SearchTeams';
 import { TeamErrorElement } from '../routes/errorElements/TeamErrorElement/TeamErrorElement';
 
 // Friends
-import { Friends } from '../components/Profile/children-components/Friends/Friends';
-import { MyFriends } from '../components/Profile/children-components/Friends/MyFriends/MyFriends';
-import { FriendRequests } from '../components/Profile/children-components/Friends/FriendRequests/FriendRequests';
-import { SearchUsers } from '../components/Profile/children-components/Friends/SearchUsers/SearchUsers';
+import { Friends } from '../components/Profile/Friends/Friends';
+import { MyFriends } from '../components/Profile/Friends/MyFriends/MyFriends';
+import { FriendRequests } from '../components/Profile/Friends/FriendRequests/FriendRequests';
+import { SearchUsers } from '../components/Profile/Friends/SearchUsers/SearchUsers';
 import { FriendsErrorElement } from './errorElements/FriendsErrorElement/FriendsErrorElement';
 
 // Awards
-import { Awards } from '../components/Profile/children-components/Awards/Awards';
-import { MyAwards } from '../components/Profile/children-components/Awards/MyAwards/MyAwards';
-import { TeamAwards } from '../components/Profile/children-components/Awards/TeamAwards/TeamAwards';
+import { Awards } from '../components/Profile/Awards/Awards';
+import { MyAwards } from '../components/Profile/Awards/MyAwards/MyAwards';
+import { TeamAwards } from '../components/Profile/Awards/TeamAwards/TeamAwards';
 import { AwardsErrorElement } from '../routes/errorElements/AwardsErrorElement/AwardsErrorElement';
 
 // Chat
-import { Chat } from '../components/Profile/children-components/Chat/Chat';
-import { GeneralChat } from '../components/Profile/children-components/Chat/GeneralChat/GeneralChat';
-import { FriendsChat } from '../components/Profile/children-components/Chat/FriendsChat/FriendsChat';
-import { TeamChat } from '../components/Profile/children-components/Chat/TeamChat/TeamChat';
+import { Chat } from '../components/Profile/Chat/Chat';
+import { GeneralChat } from '../components/Profile/Chat/GeneralChat/GeneralChat';
+import { FriendsChat } from '../components/Profile/Chat/FriendsChat/FriendsChat';
+import { TeamChat } from '../components/Profile/Chat/TeamChat/TeamChat';
 import { ChatErrorElement } from './errorElements/ChatErrorElement/ChatErrorElement';
 
 // Help Requests
-import { HelpRequests } from '../components/Profile/children-components/HelpRequests/HelpRequests';
-import { MyHelpRequests } from '../components/Profile/children-components/HelpRequests/MyHelpRequests/MyHelpRequests';
-import { OthersHelpRequests } from '../components/Profile/children-components/HelpRequests/OthersHelpRequests/OthersHelpRequests';
+import { HelpRequests } from '../components/Profile/HelpRequests/HelpRequests';
+import { MyHelpRequests } from '../components/Profile/HelpRequests/MyHelpRequests/MyHelpRequests';
+import { OthersHelpRequests } from '../components/Profile/HelpRequests/OthersHelpRequests/OthersHelpRequests';
 import { HelpRequestsErrorElement } from './errorElements/HelpRequestsErrorElement/HelpRequestsErrorElement';
 
 // Polls
-import { Polls } from '../components/Profile/children-components/Polls/Polls';
-import { OthersPolls } from '../components/Profile/children-components/Polls/OthersPolls/OthersPolls';
-import { MyPolls } from '../components/Profile/children-components/Polls/MyPolls/MyPolls';
+import { Polls } from '../components/Profile/Polls/Polls';
+import { OthersPolls } from '../components/Profile/Polls/OthersPolls/OthersPolls';
+import { MyPolls } from '../components/Profile/Polls/MyPolls/MyPolls';
 import { PollsErrorElement } from './errorElements/PollsErrorElement/PollsErrorElement';
 
 // Notifications
-import { Notifications } from '../components/Profile/children-components/Notifications/Notifications';
-import { AllNotifications } from '../components/Profile/children-components/Notifications/AllNotifications/AllNotifications';
-import { InvitationRequestsNotifications } from '../components/Profile/children-components/Notifications/InvitationRequestsNotifications/InvitationRequestsNotifications';
-import { AwardsNotifications } from '../components/Profile/children-components/Notifications/AwardsNotifications/AwardsNotifications';
-import { HelpRequestsNotifications } from '../components/Profile/children-components/Notifications/HelpRequestsNotifications/HelpRequestsNotifications';
-import { PollsNotifications } from '../components/Profile/children-components/Notifications/PollsNotifications/PollsNotifications';
+import { Notifications } from '../components/Profile/Notifications/Notifications';
+import { AllNotifications } from '../components/Profile/Notifications/AllNotifications/AllNotifications';
+import { InvitationRequestsNotifications } from '../components/Profile/Notifications/InvitationRequestsNotifications/InvitationRequestsNotifications';
+import { AwardsNotifications } from '../components/Profile/Notifications/AwardsNotifications/AwardsNotifications';
+import { HelpRequestsNotifications } from '../components/Profile/Notifications/HelpRequestsNotifications/HelpRequestsNotifications';
+import { PollsNotifications } from '../components/Profile/Notifications/PollsNotifications/PollsNotifications';
 import { NotificationsErrorElement } from './errorElements/NotificationsErrorElement/NotificationsErrorElement';
 
 export function Router() {

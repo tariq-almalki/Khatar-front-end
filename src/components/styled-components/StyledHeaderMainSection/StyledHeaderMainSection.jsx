@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { titleize, humanize } from 'underscore.string';
+import { useContext } from 'react';
 
 const StyledHeaderMainSectionComponent = styled.div`
 	display: flex;
@@ -10,9 +11,11 @@ const StyledHeaderMainSectionComponent = styled.div`
 	padding-left: 1em;
 	padding-bottom: 0.5em;
 	font-family: 'Rajdhani';
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].profileHeaderBackgroundColor};
+	color: ${props => useContext(ThemeContext).colors[props.theme].profileHeaderColor};
 `;
 
 export function StyledHeaderMainSection(props) {
 	const header = titleize(humanize(props.location.pathname.match(/(?<=\/profile\/)([\w-]+)(?=\/?)/g)[0]));
-	return <StyledHeaderMainSectionComponent>{header}</StyledHeaderMainSectionComponent>;
+	return <StyledHeaderMainSectionComponent theme={props.theme}>{header}</StyledHeaderMainSectionComponent>;
 }

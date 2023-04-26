@@ -11,55 +11,85 @@ import {
 	faCommentDots,
 	faAward,
 } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 
-export function TailWindUpperMenu() {
+const StyledUl = styled.ul`
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].sideBarColor};
+	transition: all 0.2s ease;
+`;
+
+const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
+	color: ${props => useContext(ThemeContext).colors[props.theme].iconColor};
+	transition: all 0.2s ease;
+`;
+
+const StyledNavLink = styled(NavLink)`
+	&:hover {
+		background-color: ${props => useContext(ThemeContext).colors[props.theme].sideBarLinkHoverColor};
+	}
+
+	&.active {
+		background-color: ${props => useContext(ThemeContext).colors[props.theme].sideBarLinkActiveColor};
+	}
+`;
+
+export function TailWindUpperMenu(props) {
 	return (
-		<ul className="menu gap-1 bg-base-100 p-1">
+		<StyledUl theme={props.theme} className="menu gap-1 p-1">
 			<li className="mb-12 mt-2">
-				<NavLink to="/" className="flex-col px-2">
-					<FontAwesomeIcon icon={faHouse} className="flex-col place-content-end" />
-				</NavLink>
+				<StyledNavLink theme={props.theme} to="/" className="flex-col px-2">
+					<StyledFontAwesomeIcon theme={props.theme} icon={faHouse} className="flex-col place-content-end" />
+				</StyledNavLink>
 			</li>
 			<li>
-				<NavLink to="awards" className="flex-col p-3">
-					<FontAwesomeIcon icon={faAward} className="flex-col place-content-end" />
-				</NavLink>
+				<StyledNavLink theme={props.theme} to="awards" className="flex-col p-3">
+					<StyledFontAwesomeIcon theme={props.theme} icon={faAward} className="flex-col place-content-end" />
+				</StyledNavLink>
 			</li>
 			<li>
-				<NavLink to="team" className="flex-col p-3">
-					<FontAwesomeIcon icon={faPeopleGroup} className="flex-col place-content-end" />
-				</NavLink>
+				<StyledNavLink theme={props.theme} to="team" className="flex-col p-3">
+					<StyledFontAwesomeIcon theme={props.theme} icon={faPeopleGroup} className="flex-col place-content-end" />
+				</StyledNavLink>
 			</li>
 			<li>
-				<NavLink to="friends" className="flex-col p-3">
-					<FontAwesomeIcon icon={faUserFriends} className="flex-col place-content-end" />
-				</NavLink>
+				<StyledNavLink theme={props.theme} to="friends" className="flex-col p-3">
+					<StyledFontAwesomeIcon theme={props.theme} icon={faUserFriends} className="flex-col place-content-end" />
+				</StyledNavLink>
 			</li>
 			<li>
-				<NavLink to="chat" className="flex-col p-3">
-					<FontAwesomeIcon icon={faCommentDots} className="flex-col place-content-end" />
-				</NavLink>
+				<StyledNavLink theme={props.theme} to="chat" className="flex-col p-3">
+					<StyledFontAwesomeIcon theme={props.theme} icon={faCommentDots} className="flex-col place-content-end" />
+				</StyledNavLink>
 			</li>
 			<li>
-				<NavLink to="help-requests" className="flex-col p-3">
-					<FontAwesomeIcon icon={faHandshakeAngle} className="flex-col place-content-end" />
-				</NavLink>
+				<StyledNavLink theme={props.theme} to="help-requests" className="flex-col p-3">
+					<StyledFontAwesomeIcon
+						theme={props.theme}
+						icon={faHandshakeAngle}
+						className="flex-col place-content-end"
+					/>
+				</StyledNavLink>
 			</li>
 			<li>
-				<NavLink to="polls" className="pv-3 flex-col p-3">
-					<FontAwesomeIcon icon={faSquarePollVertical} className="flex-col place-content-end" />
-				</NavLink>
+				<StyledNavLink theme={props.theme} to="polls" className="pv-3 flex-col p-3">
+					<StyledFontAwesomeIcon
+						theme={props.theme}
+						icon={faSquarePollVertical}
+						className="flex-col place-content-end"
+					/>
+				</StyledNavLink>
 			</li>
 			<li>
-				<NavLink to="notifications" className="flex-col p-3">
-					<FontAwesomeIcon icon={faBell} className="flex-col place-content-end" />
-				</NavLink>
+				<StyledNavLink theme={props.theme} to="notifications" className="flex-col p-3">
+					<StyledFontAwesomeIcon theme={props.theme} icon={faBell} className="flex-col place-content-end" />
+				</StyledNavLink>
 			</li>
 			<li>
-				<NavLink to="settings" className="flex-col p-3">
-					<FontAwesomeIcon icon={faGear} className="flex-col place-content-end" />
-				</NavLink>
+				<StyledNavLink theme={props.theme} to="settings" className="flex-col p-3">
+					<StyledFontAwesomeIcon theme={props.theme} icon={faGear} className="flex-col place-content-end" />
+				</StyledNavLink>
 			</li>
-		</ul>
+		</StyledUl>
 	);
 }
