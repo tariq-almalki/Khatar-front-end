@@ -37,7 +37,7 @@ const StyledNavLink = styled(NavLink)`
 export function TailWindUpperMenu(props) {
 	return (
 		<StyledUl theme={props.theme} className="menu gap-1 p-1">
-			<li className="mb-12 mt-2">
+			<li className="mb-10 mt-2">
 				<StyledNavLink theme={props.theme} to="/" className="flex-col px-2">
 					<StyledFontAwesomeIcon theme={props.theme} icon={faHouse} className="flex-col place-content-end" />
 				</StyledNavLink>

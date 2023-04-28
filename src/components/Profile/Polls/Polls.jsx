@@ -30,6 +30,8 @@ const StyledButton = styled.div`
 	font-family: 'Rajdhani' !important;
 	font-size: 2.5em !important;
 	flex-grow: 1;
+	border-radius: 4px !important;
+	border: 1px solid ${props => useContext(ThemeContext).colors[props.theme].bigSquaresBorderColor} !important;
 
 	color: ${props => useContext(ThemeContext).colors[props.theme].textColor} !important;
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].bigSquaresBackgroundColor} !important;

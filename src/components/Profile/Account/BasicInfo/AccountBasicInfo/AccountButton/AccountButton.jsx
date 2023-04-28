@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 
 const AccountButtonComponent = styled.div`
 	display: flex;
@@ -22,13 +23,15 @@ const StyledButton = styled.button`
 	border-radius: 0.5em;
 	border: 1px solid rgba(166, 173, 187, 0.2);
 	padding: 0.2em;
+
+	color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoButtonColor};
 `;
 
-export function AccountButton() {
+export function AccountButton(props) {
 	return (
 		<AccountButtonComponent>
 			<StyledDiv>
-				<StyledButton>Update Basic info</StyledButton>
+				<StyledButton theme={props.theme}>Update Basic info</StyledButton>
 			</StyledDiv>
 		</AccountButtonComponent>
 	);

@@ -9,7 +9,7 @@ import { profileAnimations } from './profileAnimations';
 
 export function Profile() {
 	const location = useLocation();
-	const [theme, setTheme] = useLocalStorage('isDarkMode', 'dark');
+	const [theme, setTheme] = useLocalStorage('theme', 'dark');
 
 	return (
 		<StyledProfileContainer theme={theme} {...profileAnimations}>

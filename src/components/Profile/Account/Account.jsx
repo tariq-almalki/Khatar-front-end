@@ -14,7 +14,7 @@ const StyledAccount = styled(motion.div)`
 	padding: 1em;
 	max-width: 1920px;
 
-	@media only all and (max-width: 1023px) {
+	@media only all and (max-width: 1279px) {
 		flex-direction: column;
 	}
 `;
@@ -30,6 +30,9 @@ const StyledButton = styled.div`
 	font-family: 'Rajdhani' !important;
 	font-size: 2.5em !important;
 	flex-grow: 1;
+	border-radius: 4px !important;
+	border: 1px solid ${props => useContext(ThemeContext).colors[props.theme].bigSquaresBorderColor} !important;
+
 	color: ${props => useContext(ThemeContext).colors[props.theme].textColor} !important;
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].bigSquaresBackgroundColor} !important;
 
@@ -38,10 +41,9 @@ const StyledButton = styled.div`
 		color: ${props => useContext(ThemeContext).colors[props.theme].textColor} !important;
 	}
 
-	@media only all and (min-width: 1023px) {
+	@media only all and (min-width: 1280px) {
 		font-size: 3.5em !important;
 	}
-
 `;
 
 const StyledDivider = styled.div`
@@ -72,7 +74,7 @@ export function Account() {
 	return (
 		<>
 			{result ? (
-				<Outlet />
+				<Outlet context={{ theme: outletContext.theme }} />
 			) : (
 				<StyledAccount {...accountAnimations}>
 					<StyledButtonLink to="basic-info">
@@ -80,7 +82,7 @@ export function Account() {
 							Basic Info
 						</StyledButton>
 					</StyledButtonLink>
-					<StyledDivider theme={outletContext.theme} className="divider lg:divider-horizontal">
+					<StyledDivider theme={outletContext.theme} className="divider xl:divider-horizontal">
 						OR
 					</StyledDivider>
 					<StyledButtonLink to="contact-info">
@@ -88,12 +90,20 @@ export function Account() {
 							Contact Info
 						</StyledButton>
 					</StyledButtonLink>
-					<StyledDivider theme={outletContext.theme} className="divider lg:divider-horizontal">
+					<StyledDivider theme={outletContext.theme} className="divider xl:divider-horizontal">
 						OR
 					</StyledDivider>
 					<StyledButtonLink to="change-password">
 						<StyledButton theme={outletContext.theme} className="btn-outline glass btn">
 							Change Password
+						</StyledButton>
+					</StyledButtonLink>
+					<StyledDivider theme={outletContext.theme} className="divider xl:divider-horizontal">
+						OR
+					</StyledDivider>
+					<StyledButtonLink to="change-password">
+						<StyledButton theme={outletContext.theme} className="btn-outline glass btn">
+							Delete Account
 						</StyledButton>
 					</StyledButtonLink>
 				</StyledAccount>

@@ -8,12 +8,16 @@ import { appAnimations } from './appAnimations.js';
 // loading page
 import { StyledLoadingScreen } from '../styled-components/StyledLoadingScreen/StyledLoadingScreen.jsx';
 
+import { useLocalStorage } from '../../hooks/useLocalStorage.jsx';
+
 export function App() {
+	const [theme] = useLocalStorage('theme', 'dark');
+
 	return (
 		<>
 			{/* <StyledLoadingScreen /> */}
 			<StyledAppContainer {...appAnimations}>
-				<StyledBottomNavigation />
+				<StyledBottomNavigation theme={theme} />
 			</StyledAppContainer>
 		</>
 	);

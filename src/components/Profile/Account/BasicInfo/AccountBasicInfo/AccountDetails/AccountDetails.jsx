@@ -12,11 +12,11 @@ const AccountDetailsComponent = styled.div`
 	gap: 1em;
 `;
 
-export function AccountDetails() {
+export function AccountDetails(props) {
 	return (
 		<AccountDetailsComponent>
-			<NameUsernameType />
-			<AddressBirthdayGender />
+			<NameUsernameType theme={props.theme} />
+			<AddressBirthdayGender theme={props.theme} />
 		</AccountDetailsComponent>
 	);
 }

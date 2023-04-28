@@ -24,7 +24,7 @@ const StyledForm = styled(Form)`
 	max-width: 820px;
 `;
 
-export function AccountBasicInfo() {
+export function AccountBasicInfo(props) {
 	const navigation = useNavigation();
 	const submit = useSubmit();
 	const formik = useFormik({
@@ -46,9 +46,9 @@ export function AccountBasicInfo() {
 	return (
 		<StyledAccountBasicInfoComponent>
 			<StyledForm method="post" onSubmit={formik.handleSubmit}>
-				<AccountDetails formik={formik} />
-				<AccountBio formik={formik} />
-				<AccountButton />
+				<AccountDetails theme={props.theme} formik={formik} />
+				<AccountBio theme={props.theme} formik={formik} />
+				<AccountButton theme={props.theme} />
 			</StyledForm>
 		</StyledAccountBasicInfoComponent>
 	);

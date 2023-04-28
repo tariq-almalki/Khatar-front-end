@@ -11,6 +11,7 @@ const StyledProfileMainSectionContainerComponent = styled.div`
 
 const StyledDiv = styled.div`
 	display: flex;
+	justify-content: center;
 	flex-grow: 1;
 	overflow-y: auto;
 

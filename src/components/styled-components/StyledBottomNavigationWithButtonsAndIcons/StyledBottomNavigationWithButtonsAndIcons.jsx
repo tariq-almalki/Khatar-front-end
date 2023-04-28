@@ -2,10 +2,10 @@
 import { StyledBottomNavigationWithButtonsAndIconsContainer } from '../StyledBottomNavigationWithButtonsAndIconsContainer/StyledBottomNavigationWithButtonsAndIconsContainer';
 import { AwesomeButtonsLinked } from './AwesomeButtonsLinked/AwesomeButtonsLinked';
 
-export function StyledBottomNavigationWithButtonsAndIcons() {
+export function StyledBottomNavigationWithButtonsAndIcons(props) {
 	return (
 		<StyledBottomNavigationWithButtonsAndIconsContainer>
-			<AwesomeButtonsLinked />
+			<AwesomeButtonsLinked theme={props.theme} />
 		</StyledBottomNavigationWithButtonsAndIconsContainer>
 	);
 }

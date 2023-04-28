@@ -4,7 +4,7 @@ import { useContext } from 'react';
 
 const StyledHeaderMainSectionComponent = styled.div`
 	display: flex;
-	height: 10%;
+	max-height: 3em;
 	width: 100%;
 	font-size: 2em;
 	padding-top: 1em;

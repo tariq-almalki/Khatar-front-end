@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { App } from '@components/App/App';
 import { AppErrorElement } from './errorElements/AppErrorElement/AppErrorElement';
 
+// --------------------------------------------------------------------------------------------------------------------
+
 // Profile & Profile components
 import { Profile } from '@components/Profile/Profile.jsx';
 import { ProfileErrorElement } from './errorElements/ProfileErrorElement/ProfileErrorElement';
@@ -61,6 +63,8 @@ import { AwardsNotifications } from '../components/Profile/Notifications/AwardsN
 import { HelpRequestsNotifications } from '../components/Profile/Notifications/HelpRequestsNotifications/HelpRequestsNotifications';
 import { PollsNotifications } from '../components/Profile/Notifications/PollsNotifications/PollsNotifications';
 import { NotificationsErrorElement } from './errorElements/NotificationsErrorElement/NotificationsErrorElement';
+
+// --------------------------------------------------------------------------------------------------------------------
 
 export function Router() {
 	const router = createBrowserRouter([
