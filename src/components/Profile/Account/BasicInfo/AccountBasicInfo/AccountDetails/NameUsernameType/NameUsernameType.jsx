@@ -4,25 +4,28 @@ import styled, { ThemeContext } from 'styled-components';
 const StyledNameUsernameType = styled.div``;
 
 const StyleSpan = styled.span`
-	color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoSpanTextColor} !important;
+	color: ${props => useContext(ThemeContext).colors[props.theme].accountSpanTextColor} !important;
 	font-size: 0.95rem !important;
 `;
 
 const StyledInput = styled.input`
+	color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].accountInputBackgroundColor} !important;
+
 	::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
-		color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoInputTextColor} !important;
+		color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 		opacity: 1; /* Firefox */
 	}
 
 	:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
-		color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoInputTextColor} !important;
+		color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 	}
 
 	::-ms-input-placeholder {
 		/* Microsoft Edge */
-		color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoInputTextColor} !important;
+		color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 	}
 `;
 

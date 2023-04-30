@@ -13,7 +13,7 @@ import { useContext } from 'react';
 const BasicInfoComponent = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
-	background-color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoBackgroundColor};
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].accountBackgroundColor};
 	border-radius: 4px;
 	border: 1px solid black;
 	margin: 1em;
@@ -30,7 +30,7 @@ export function BasicInfo() {
 
 	return (
 		<BasicInfoComponent theme={outletContext.theme} {...accountAnimations}>
-			<AccountImage />
+			<AccountImage theme={outletContext.theme} />
 			<AccountBasicInfo theme={outletContext.theme} />
 		</BasicInfoComponent>
 	);

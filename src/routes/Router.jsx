@@ -15,6 +15,7 @@ import { Account } from '../components/Profile/Account/Account';
 import { BasicInfo } from '../components/Profile/Account/BasicInfo/BasicInfo';
 import { ContactInfo } from '../components/Profile/Account/ContactInfo/ContactInfo';
 import { ChangePassword } from '../components/Profile/Account/ChangePassword/ChangePassword';
+import { DeleteAccount } from '../components/Profile/Account/DeleteAccount/DeleteAccount';
 import { AccountErrorElement } from '../routes/errorElements/AccountErrorElement/AccountErrorElement';
 
 // Team
@@ -145,6 +146,13 @@ export function Router() {
 						{
 							path: 'change-password',
 							element: <ChangePassword />,
+							errorElement: null,
+							action: undefined,
+							loader: undefined,
+						},
+						{
+							path: 'delete-account',
+							element: <DeleteAccount />,
 							errorElement: null,
 							action: undefined,
 							loader: undefined,

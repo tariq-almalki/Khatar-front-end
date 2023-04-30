@@ -67,7 +67,7 @@ export function Account() {
 
 	const outletContext = useOutletContext();
 
-	const regexExpr = /(?<=\/profile\/account\/)(basic\-info|contact\-info|change\-password)(?=\/?)/;
+	const regexExpr = /(?<=\/profile\/account\/)(basic\-info|contact\-info|change\-password|delete\-account)(?=\/?)/;
 
 	const result = regexExpr.test(location.pathname);
 
@@ -101,7 +101,7 @@ export function Account() {
 					<StyledDivider theme={outletContext.theme} className="divider xl:divider-horizontal">
 						OR
 					</StyledDivider>
-					<StyledButtonLink to="change-password">
+					<StyledButtonLink to="delete-account">
 						<StyledButton theme={outletContext.theme} className="btn-outline glass btn">
 							Delete Account
 						</StyledButton>
