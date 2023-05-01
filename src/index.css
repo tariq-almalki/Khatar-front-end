@@ -14,14 +14,18 @@ body {
 	overflow: hidden;
 }
 
+#root {
+	height: 100%;
+}
+
 @media screen and (orientation: landscape) and (max-width: 950px) {
 	#root {
 		display: none;
 	}
 
 	body::after {
-		display: flex;
 		height: 100%;
+		display: flex;
 		background-color: white;
 		justify-content: center;
 		align-items: center;
@@ -31,8 +35,4 @@ body {
 		content: 'horizontal view is not available';
 		font-family: 'Rajdhani';
 	}
-}
-
-#root {
-	height: 100%;
 }

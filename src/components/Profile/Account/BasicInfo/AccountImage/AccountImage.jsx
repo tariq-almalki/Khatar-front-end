@@ -10,6 +10,12 @@ const AccountImageComponent = styled.div`
 	width: 100%;
 `;
 
+const StyledImageIndicator = styled.div`
+	&.avatar.online:before {
+		box-shadow: 0 0 0 3px ${props => useContext(ThemeContext).colors[props.theme].accountBackgroundColor} !important;
+	}
+`;
+
 const StyledDivImage = styled.div`
 	background-color: ${props =>
 		useContext(ThemeContext).colors[props.theme].basicInfoAccountImageBackgroundColor} !important;
@@ -38,14 +44,17 @@ export function AccountImage(props) {
 	return (
 		<AccountImageComponent>
 			<StyledDiv>
-				<div className="placeholder online avatar before:!right-[-0.5%] before:!top-[-0.5%] before:!h-[20%] before:!w-[20%]">
+				<StyledImageIndicator
+					theme={props.theme}
+					className="placeholder online avatar before:!right-[-0.5%] before:!top-[-0.5%] before:!h-[20%] before:!w-[20%]"
+				>
 					<StyledDivImage
 						theme={props.theme}
 						className="w-36 rounded-3xl bg-neutral-focus text-neutral-content transition-[width]"
 					>
 						<span className="text-3xl">K</span>
 					</StyledDivImage>
-				</div>
+				</StyledImageIndicator>
 				<StyledInput
 					theme={props.theme}
 					type="file"

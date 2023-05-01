@@ -1,8 +1,10 @@
-import '@theme-toggles/react/css/InnerMoon.css';
 import { InnerMoon } from '@theme-toggles/react';
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
+
+// toggle styles
+import '@theme-toggles/react/css/InnerMoon.css';
 
 const StyledInnerMoon = styled(InnerMoon)`
 	display: flex;
@@ -39,6 +41,12 @@ const StyledNavLink = styled(NavLink)`
 	}
 `;
 
+const StyledImageIndicator = styled.div`
+	&.avatar.online:before {
+		box-shadow: 0 0 0 1.5px ${props => useContext(ThemeContext).colors[props.theme].accountBackgroundColor} !important;
+	}
+`;
+
 export function TailWindLowerMenu(props) {
 	function themeHandler() {
 		props.setTheme(props.theme === 'dark' ? 'light' : 'dark');
@@ -51,11 +59,11 @@ export function TailWindLowerMenu(props) {
 			</li>
 			<li>
 				<StyledNavLink theme={props.theme} to="account">
-					<div className="placeholder indicator online avatar">
+					<StyledImageIndicator theme={props.theme} className="placeholder indicator online avatar">
 						<div className="w-8 rounded-xl bg-neutral-focus text-neutral-content ">
 							<span className="text-xl">K</span>
 						</div>
-					</div>
+					</StyledImageIndicator>
 				</StyledNavLink>
 			</li>
 		</StyledUl>

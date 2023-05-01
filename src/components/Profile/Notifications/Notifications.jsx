@@ -6,7 +6,8 @@ import { useContext } from 'react';
 
 const StyledNotifications = styled(motion.div)`
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: start;
 	align-items: center;
 	margin: auto;
 	flex-grow: 1;
@@ -19,7 +20,8 @@ const StyledNotifications = styled(motion.div)`
 const StyledContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	height: 95%;
+	flex-grow: 1;
+	max-height: 750px;
 	width: 100%;
 	border-radius: 0.5em;
 	border: 2px solid #999;
@@ -27,16 +29,41 @@ const StyledContainer = styled.div`
 
 const StyledLink = styled(Link)`
 	font-family: 'Rajdhani';
+
+	&:hover {
+		background-color: ${props => useContext(ThemeContext).colors[props.theme].notificationLinkHoverColor};
+	}
+
+	&.active {
+		background-color: ${props => useContext(ThemeContext).colors[props.theme].notificationLinkActiveColor};
+	}
+`;
+
+const StyledNavBar = styled.div`
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].notificationNavBarBackgroundColor} !important;
+`;
+
+const StyledUl = styled.ul`
+	color: ${props => useContext(ThemeContext).colors[props.theme].notificationUlTextColor} !important;
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].notificationUlBackgroundColor} !important;
+`;
+
+const StyledSvg = styled.svg`
+	color: ${props => useContext(ThemeContext).colors[props.theme].notificationSvgColor} !important;
 `;
 
 const StyledSpan = styled.span`
+	color: ${props => useContext(ThemeContext).colors[props.theme].notificationNavBarTextColor};
 	font-family: 'Rajdhani';
 	padding-left: 1em;
 	cursor: default;
 `;
 
 export function Notifications() {
+	const outletContext = useOutletContext();
+
 	const { state } = useLocation();
+
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -46,14 +73,17 @@ export function Notifications() {
 	return (
 		<StyledNotifications>
 			<StyledContainer>
-				<div className="navbar whitespace-nowrap rounded-t-md bg-base-100">
+				<StyledNavBar theme={outletContext.theme} className="navbar whitespace-nowrap rounded-t-md bg-base-100">
 					<div className="flex-1">
-						<StyledSpan className="text-xl normal-case">{state?.type}</StyledSpan>
+						<StyledSpan theme={outletContext.theme} className="text-xl normal-case">
+							{state?.type}
+						</StyledSpan>
 					</div>
 					<div className="flex-none gap-2">
 						<div className="dropdown-end dropdown">
 							<button className="btn-ghost btn-square btn">
-								<svg
+								<StyledSvg
+									theme={outletContext.theme}
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
 									viewBox="0 0 24 24"
@@ -65,19 +95,21 @@ export function Notifications() {
 										strokeWidth="2"
 										d="M4 6h16M4 12h16M4 18h16"
 									></path>
-								</svg>
+								</StyledSvg>
 							</button>
-							<ul
+							<StyledUl
+								theme={outletContext.theme}
 								tabIndex={0}
 								className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
 							>
 								<li>
-									<StyledLink to="all-notifications" state={{ type: 'All' }}>
+									<StyledLink theme={outletContext.theme} to="all-notifications" state={{ type: 'All' }}>
 										All
 									</StyledLink>
 								</li>
 								<li>
 									<StyledLink
+										theme={outletContext.theme}
 										to="invitation-requests-notifications"
 										state={{ type: 'Invitation Requests' }}
 									>
@@ -85,27 +117,37 @@ export function Notifications() {
 									</StyledLink>
 								</li>
 								<li>
-									<StyledLink to="awards-notifications" state={{ type: 'Awards' }}>
+									<StyledLink
+										theme={outletContext.theme}
+										to="awards-notifications"
+										state={{ type: 'Awards' }}
+									>
 										Awards
 									</StyledLink>
 								</li>
 								<li>
-									<StyledLink to="polls-notifications" state={{ type: 'Polls' }}>
+									<StyledLink
+										theme={outletContext.theme}
+										to="polls-notifications"
+										state={{ type: 'Polls' }}
+									>
 										Polls
 									</StyledLink>
 								</li>
 								<li>
-									<StyledLink to="help-requests-notifications" state={{ type: 'Help Requests' }}>
+									<StyledLink
+										theme={outletContext.theme}
+										to="help-requests-notifications"
+										state={{ type: 'Help Requests' }}
+									>
 										Help Requests
 									</StyledLink>
 								</li>
-							</ul>
+							</StyledUl>
 						</div>
 					</div>
-				</div>
-				<div>
-					<Outlet />
-				</div>
+				</StyledNavBar>
+				<Outlet context={outletContext} />
 			</StyledContainer>
 		</StyledNotifications>
 	);

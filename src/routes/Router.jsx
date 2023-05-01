@@ -67,11 +67,7 @@ import { NotificationsErrorElement } from './errorElements/NotificationsErrorEle
 
 // --------------------------------------------------------------------------------------------------------------------
 
-import { useLockScreenOrientation } from '../hooks/useLockScreenOrientation';
-
 export function Router() {
-	useLockScreenOrientation();
-
 	const router = createBrowserRouter([
 		{
 			path: '/',

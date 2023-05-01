@@ -1,4 +1,4 @@
-export const LinkCommonStyles = { flex: '0.2 1 0em' };
+export const LinkCommonStyles = { flex: '0.2 1 75px', maxWidth: '320px' };
 
 const ButtonCommonStyles1 = {
 	flex: '0.2 1 0em',

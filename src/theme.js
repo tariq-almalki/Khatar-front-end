@@ -42,6 +42,15 @@ export const theme = {
 			buttonFontColor: '#000',
 			buttonIconColor: '#000',
 			//
+			notificationNavBarBackgroundColor: '#111',
+			notificationNavBarTextColor: '#fff',
+			notificationUlBackgroundColor: '#111',
+			notificationUlTextColor: '#fff',
+			notificationSvgColor: '#EEE',
+			notificationLinkHoverColor: '#333',
+			notificationLinkActiveColor: '#222',
+			notificationOutletColor: '#222',
+			//
 			basicInfoButtonColor: '#FCFCFC',
 			basicInfoButtonColorDark: '#FCFCFC',
 			basicInfoButtonColorHover: '#3088FF',
@@ -112,6 +121,15 @@ export const theme = {
 			buttonPrimaryBorder: '#fff',
 			buttonFontColor: '#fff',
 			buttonIconColor: '#fff',
+			//
+			notificationNavBarBackgroundColor: '#fff',
+			notificationNavBarTextColor: '#000',
+			notificationUlBackgroundColor: '#fff',
+			notificationUlTextColor: '#000',
+			notificationSvgColor: '#111',
+			notificationLinkHoverColor: '#EEEEEE',
+			notificationLinkActiveColor: '#EEEEEE',
+			notificationOutletColor: '#eee',
 			//
 			basicInfoButtonColor: '#111',
 			basicInfoButtonColorDark: '#111',
