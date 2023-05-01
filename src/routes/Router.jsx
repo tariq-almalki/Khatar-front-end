@@ -67,7 +67,11 @@ import { NotificationsErrorElement } from './errorElements/NotificationsErrorEle
 
 // --------------------------------------------------------------------------------------------------------------------
 
+import { useLockScreenOrientation } from '../hooks/useLockScreenOrientation';
+
 export function Router() {
+	useLockScreenOrientation();
+
 	const router = createBrowserRouter([
 		{
 			path: '/',
@@ -336,6 +340,29 @@ export function Router() {
 					path: 'settings',
 					element: null,
 					errorElement: null,
+					action: undefined,
+					loader: undefined,
+				},
+			],
+		},
+		{
+			path: '/auth',
+			element: <Profile />,
+			errorElement: <ProfileErrorElement />,
+			action: undefined,
+			loader: undefined,
+			children: [
+				{
+					path: 'sign-up',
+					element: <Profile />,
+					errorElement: <ProfileErrorElement />,
+					action: undefined,
+					loader: undefined,
+				},
+				{
+					path: 'sign-in',
+					element: <Profile />,
+					errorElement: <ProfileErrorElement />,
 					action: undefined,
 					loader: undefined,
 				},

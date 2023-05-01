@@ -22,7 +22,7 @@ const BasicInfoComponent = styled(motion.div)`
 	max-width: fit-content;
 	align-items: start;
 	font-family: 'Rajdhani';
-	padding: 1em;
+	/* padding: 1em; */
 `;
 
 export function BasicInfo() {

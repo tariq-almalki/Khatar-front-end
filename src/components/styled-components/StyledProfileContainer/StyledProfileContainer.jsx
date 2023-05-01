@@ -4,7 +4,7 @@ import { useContext } from 'react';
 
 export const StyledProfileContainer = styled(motion.div)`
 	display: flex;
-	height: 100vh;
+	height: 100%;
 	width: 100vw;
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].profileContainerColor};
 `;

@@ -4,7 +4,7 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite --host 192.168.137.1",
 		"test": "vitest",
 		"build": "vite build",
 		"preview": "vite preview"

@@ -8,6 +8,31 @@
 	box-sizing: border-box;
 }
 
+html,
 body {
+	height: 100%;
 	overflow: hidden;
+}
+
+@media screen and (orientation: landscape) and (max-width: 950px) {
+	#root {
+		display: none;
+	}
+
+	body::after {
+		display: flex;
+		height: 100%;
+		background-color: white;
+		justify-content: center;
+		align-items: center;
+		color: black;
+		font-size: 1em;
+		font-weight: bold;
+		content: 'horizontal view is not available';
+		font-family: 'Rajdhani';
+	}
+}
+
+#root {
+	height: 100%;
 }
