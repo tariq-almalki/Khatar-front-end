@@ -28,7 +28,8 @@
 		"sass": "^1.62.1",
 		"styled-components": "^5.3.10",
 		"underscore.string": "^3.3.6",
-		"yup": "^1.1.1"
+		"yup": "^1.1.1",
+		"zustand": "^4.3.7"
 	},
 	"devDependencies": {
 		"@swc/plugin-styled-components": "^1.5.60",
@@ -36,6 +37,7 @@
 		"@types/react-dom": "^18.2.1",
 		"@vitejs/plugin-react-swc": "^3.3.0",
 		"autoprefixer": "^10.4.14",
+		"colors": "^1.4.0",
 		"postcss": "^8.4.23",
 		"tailwindcss": "^3.3.2",
 		"vite": "^4.3.3",

@@ -67,6 +67,16 @@ import { NotificationsErrorElement } from './errorElements/NotificationsErrorEle
 
 // --------------------------------------------------------------------------------------------------------------------
 
+// Auth components
+import { Auth } from '../components/Auth/Auth';
+import { AuthErrorElement } from './errorElements/AuthErrorElement/AuthErrorElement';
+
+// SignIn
+import { SignIn } from '../components/Auth/SignIn/SignIn';
+
+// SignUp
+import { SignUp } from '../components/Auth/SignUp/SignUp';
+
 export function Router() {
 	const router = createBrowserRouter([
 		{
@@ -343,22 +353,22 @@ export function Router() {
 		},
 		{
 			path: '/auth',
-			element: <Profile />,
-			errorElement: <ProfileErrorElement />,
+			element: <Auth />,
+			errorElement: <AuthErrorElement />,
 			action: undefined,
 			loader: undefined,
 			children: [
 				{
-					path: 'sign-up',
-					element: <Profile />,
-					errorElement: <ProfileErrorElement />,
+					path: 'sign-in',
+					element: <SignIn />,
+					errorElement: null,
 					action: undefined,
 					loader: undefined,
 				},
 				{
-					path: 'sign-in',
-					element: <Profile />,
-					errorElement: <ProfileErrorElement />,
+					path: 'sign-up',
+					element: <SignUp />,
+					errorElement: null,
 					action: undefined,
 					loader: undefined,
 				},

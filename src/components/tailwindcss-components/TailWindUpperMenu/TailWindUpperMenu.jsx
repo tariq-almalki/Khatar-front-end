@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import {
 	faPeopleGroup,
 	faHouse,
@@ -81,7 +82,16 @@ export function TailWindUpperMenu(props) {
 				</StyledNavLink>
 			</li>
 			<li>
-				<StyledNavLink theme={props.theme} to="notifications" className="flex-col p-3">
+				<StyledNavLink
+					theme={props.theme}
+					to="notifications"
+					state={{
+						url: 'all-notifications',
+						type: `All`,
+						key: nanoid(5)
+					}}
+					className="flex-col p-3"
+				>
 					<StyledFontAwesomeIcon theme={props.theme} icon={faBell} className="flex-col place-content-end" />
 				</StyledNavLink>
 			</li>

@@ -62,13 +62,13 @@ const StyledSpan = styled.span`
 export function Notifications() {
 	const outletContext = useOutletContext();
 
-	const { state } = useLocation();
+	let { state } = useLocation();
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		navigate('all-notifications', { state: { type: 'All' } });
-	}, []);
+		navigate(state.url, { state });
+	}, [state?.key]);
 
 	return (
 		<StyledNotifications>
@@ -76,7 +76,7 @@ export function Notifications() {
 				<StyledNavBar theme={outletContext.theme} className="navbar whitespace-nowrap rounded-t-md bg-base-100">
 					<div className="flex-1">
 						<StyledSpan theme={outletContext.theme} className="text-xl normal-case">
-							{state?.type}
+							{state.type}
 						</StyledSpan>
 					</div>
 					<div className="flex-none gap-2">
@@ -103,7 +103,11 @@ export function Notifications() {
 								className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
 							>
 								<li>
-									<StyledLink theme={outletContext.theme} to="all-notifications" state={{ type: 'All' }}>
+									<StyledLink
+										theme={outletContext.theme}
+										to="all-notifications"
+										state={{ url: 'all-notifications', type: 'All' }}
+									>
 										All
 									</StyledLink>
 								</li>
@@ -111,7 +115,7 @@ export function Notifications() {
 									<StyledLink
 										theme={outletContext.theme}
 										to="invitation-requests-notifications"
-										state={{ type: 'Invitation Requests' }}
+										state={{ url: 'invitation-requests-notifications', type: 'Invitation Requests' }}
 									>
 										Invitation Requests
 									</StyledLink>
@@ -120,7 +124,7 @@ export function Notifications() {
 									<StyledLink
 										theme={outletContext.theme}
 										to="awards-notifications"
-										state={{ type: 'Awards' }}
+										state={{ url: 'awards-notifications', type: 'Awards' }}
 									>
 										Awards
 									</StyledLink>
@@ -129,7 +133,7 @@ export function Notifications() {
 									<StyledLink
 										theme={outletContext.theme}
 										to="polls-notifications"
-										state={{ type: 'Polls' }}
+										state={{ url: 'polls-notifications', type: 'Polls' }}
 									>
 										Polls
 									</StyledLink>
@@ -138,7 +142,7 @@ export function Notifications() {
 									<StyledLink
 										theme={outletContext.theme}
 										to="help-requests-notifications"
-										state={{ type: 'Help Requests' }}
+										state={{ url: 'help-requests-notifications', type: 'Help Requests' }}
 									>
 										Help Requests
 									</StyledLink>

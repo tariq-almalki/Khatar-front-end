@@ -67,8 +67,8 @@ export const theme = {
 			//
 			changePasswordButtonColor: '#FCFCFC',
 			changePasswordButtonColorDark: '#FCFCFC',
-			changePasswordButtonColorHover: '#FF9219',
-			changePasswordButtonColorActive: '#FFA33D`',
+			changePasswordButtonColorHover: '#3088FF',
+			changePasswordButtonColorActive: '#2481FF`',
 			changePasswordButtonBorderColor: '#000',
 			changePasswordButtonFontColor: '#000',
 			//
