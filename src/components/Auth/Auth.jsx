@@ -4,9 +4,7 @@ import { Outlet } from 'react-router-dom';
 // animations
 import { authAnimations } from './authAnimations';
 
-const StyledAuth = styled.div`
-        /* height: */
-`;
+const StyledAuth = styled.div``;
 
 export function Auth() {
 	return (

@@ -77,6 +77,8 @@ import { SignIn } from '../components/Auth/SignIn/SignIn';
 // SignUp
 import { SignUp } from '../components/Auth/SignUp/SignUp';
 
+// --------------------------------------------------------------------------------------------------------------------
+
 export function Router() {
 	const router = createBrowserRouter([
 		{

@@ -42,6 +42,8 @@ export const theme = {
 			buttonFontColor: '#000',
 			buttonIconColor: '#000',
 			//
+			sideBarIndicatorColor: '#ddd',
+			//
 			notificationNavBarBackgroundColor: '#111',
 			notificationNavBarTextColor: '#fff',
 			notificationUlBackgroundColor: '#111',
@@ -121,6 +123,8 @@ export const theme = {
 			buttonPrimaryBorder: '#fff',
 			buttonFontColor: '#fff',
 			buttonIconColor: '#fff',
+			//
+			sideBarIndicatorColor: '#000',
 			//
 			notificationNavBarBackgroundColor: '#fff',
 			notificationNavBarTextColor: '#000',

@@ -43,7 +43,7 @@ const StyledNavLink = styled(NavLink)`
 
 const StyledImageIndicator = styled.div`
 	&.avatar.online:before {
-		box-shadow: 0 0 0 1.5px ${props => useContext(ThemeContext).colors[props.theme].accountBackgroundColor} !important;
+		box-shadow: 0 0 0 1.5px ${props => useContext(ThemeContext).colors[props.theme].sideBarIndicatorColor} !important;
 	}
 `;
 
