@@ -15,6 +15,7 @@ import { accountAnimations } from '../accountAnimations';
 const ChangePasswordComponent = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
+	padding: 16px;
 	flex-grow: 1;
 	align-items: center;
 	justify-content: start;
@@ -81,13 +82,8 @@ export function ChangePassword() {
 
 	const formik = useFormik({
 		initialValues: {
-			name: '',
-			username: '',
-			address: '',
-			birthday: '',
-			gender: '',
-			userType: '',
-			bio: '',
+			newPassword: '',
+			confirmNewPassword: '',
 		},
 		validationSchema,
 		onSubmit: async values => {

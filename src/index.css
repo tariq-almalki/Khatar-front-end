@@ -14,6 +14,10 @@ body {
 	overflow: hidden;
 }
 
+body {
+	background-color: var(--theme);
+}
+
 #root {
 	height: 100%;
 }

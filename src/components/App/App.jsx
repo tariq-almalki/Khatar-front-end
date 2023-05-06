@@ -4,14 +4,19 @@ import { StyledBottomNavigation } from '../styled-components/StyledBottomNavigat
 
 // animations
 import { appAnimations } from './appAnimations.js';
+// hooks
+import { useLocalStorage } from '../../hooks/useLocalStorage.jsx';
+import { useEffect } from 'react';
 
 // loading page
 import { StyledLoadingScreen } from '../styled-components/StyledLoadingScreen/StyledLoadingScreen.jsx';
 
-import { useLocalStorage } from '../../hooks/useLocalStorage.jsx';
-
 export function App() {
 	const [theme] = useLocalStorage('theme', 'dark');
+
+	useEffect(() => {
+		document.documentElement.style.setProperty('--theme', theme === 'dark' ? '#000' : '#fff');
+	}, [theme]);
 
 	return (
 		<>

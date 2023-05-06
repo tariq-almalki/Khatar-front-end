@@ -49,6 +49,7 @@ const StyledButton = styled.div`
 const StyledDivider = styled.div`
 	font-weight: bold !important;
 	font-style: italic !important;
+	font-family: 'Rajdhani';
 	color: ${props => useContext(ThemeContext).colors[props.theme].bigSquaresOrDividerColor} !important;
 
 	&::before {

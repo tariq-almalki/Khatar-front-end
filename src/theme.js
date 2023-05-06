@@ -81,6 +81,9 @@ export const theme = {
 			deleteAccountButtonBorderColor: '#000',
 			deleteAccountButtonFontColor: '#000',
 			//
+			// sign up colors
+			// signUpAuthPageBackgroundColor: '#111',
+			//
 		},
 		dark: {
 			profileContainerColor: '#000',
@@ -162,6 +165,17 @@ export const theme = {
 			deleteAccountButtonColorActive: '#E00000`',
 			deleteAccountButtonBorderColor: '#000',
 			deleteAccountButtonFontColor: '#000',
+			//
+			// auth page colors
+			authPageBackgroundColor: '#444',
+			authPageDiv1Color: '#fff',
+			authPageButtonColor:'#FCFCFC',
+			authPageButtonColorDark: '#FCFCFC',
+			authPageButtonColorHover: '#eee',
+			authPageButtonColorActive: '#ccc',
+			authPageButtonBorderColor: '#000',
+			authPageButtonFontColor: '#fff',
+			dividerTextColor: '#fff'
 			//
 		},
 	},

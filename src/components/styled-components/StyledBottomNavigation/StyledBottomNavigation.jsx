@@ -4,7 +4,7 @@ import { StyledBottomNavigationGlossyContainer } from '../StyledBottomNavigation
 // motion component
 export function StyledBottomNavigation(props) {
 	return (
-		<StyledBottomNavigationGlossyContainer>
+		<StyledBottomNavigationGlossyContainer className={props.theme}>
 			<StyledBottomNavigationWithButtonsAndIcons theme={props.theme} />
 		</StyledBottomNavigationGlossyContainer>
 	);

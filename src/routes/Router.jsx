@@ -70,6 +70,7 @@ import { NotificationsErrorElement } from './errorElements/NotificationsErrorEle
 // Auth components
 import { Auth } from '../components/Auth/Auth';
 import { AuthErrorElement } from './errorElements/AuthErrorElement/AuthErrorElement';
+import { AuthPage } from '../components/Auth/AuthPage/AuthPage';
 
 // SignIn
 import { SignIn } from '../components/Auth/SignIn/SignIn';
@@ -360,6 +361,13 @@ export function Router() {
 			action: undefined,
 			loader: undefined,
 			children: [
+				{
+					index: true,
+					element: <AuthPage />,
+					errorElement: null,
+					action: undefined,
+					loader: undefined,
+				},
 				{
 					path: 'sign-in',
 					element: <SignIn />,

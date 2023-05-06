@@ -40,7 +40,7 @@ export const awesomeButtonsLinkedConfig = [
 	},
 	{
 		link: {
-			to: '/auth/sign-up',
+			to: '/auth',
 			id: nanoid(),
 		},
 		button: {

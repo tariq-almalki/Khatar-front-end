@@ -83,13 +83,8 @@ export function ContactInfo() {
 
 	const formik = useFormik({
 		initialValues: {
-			name: '',
-			username: '',
-			address: '',
-			birthday: '',
-			gender: '',
-			userType: '',
-			bio: '',
+			email: '',
+			phoneNumber: '',
 		},
 		validationSchema,
 		onSubmit: async values => {
