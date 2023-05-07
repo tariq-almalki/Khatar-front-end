@@ -25,27 +25,12 @@ const StyledAuth = styled(motion.div)`
 	width: 100%;
 `;
 
-const StyledDiv = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-	width: 100%;
-
-	/* glossy effect */
-	backdrop-filter: blur(16px) saturate(180%);
-	-webkit-backdrop-filter: blur(16px) saturate(180%);
-	background-color: rgba(18, 19, 56, 0.418);
-`;
-
 export function Auth() {
 	const [theme] = useLocalStorage('theme', 'dark');
 
 	return (
 		<StyledAuth theme={theme} {...authAnimations}>
-			<StyledDiv>
-				<Outlet context={{ theme }} />
-			</StyledDiv>
+			<Outlet context={{ theme }} />
 		</StyledAuth>
 	);
 }

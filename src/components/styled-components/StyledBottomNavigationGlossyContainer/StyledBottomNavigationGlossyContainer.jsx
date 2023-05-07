@@ -10,12 +10,12 @@ export const StyledBottomNavigationGlossyContainer = styled.div`
 	padding: 1em;
 
 	&.dark {
-		--background-color: 255, 255, 255;
-		--border-color: 255, 255, 255;
+		--background-color: 0, 0, 0;
+		--border-color: 0, 0, 0;
 	}
 
 	&.light {
-		--background-color: 0, 0, 0;
+		--background-color: 221, 221, 221;
 		--border-color: 0, 0, 0;
 	}
 

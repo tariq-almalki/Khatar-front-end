@@ -78,6 +78,9 @@ import { SignIn } from '../components/Auth/SignIn/SignIn';
 // SignUp
 import { SignUp } from '../components/Auth/SignUp/SignUp';
 
+// ForgotPassword
+import { ForgotPassword } from '../components/Auth/ForgotPassword/ForgotPassword';
+
 // --------------------------------------------------------------------------------------------------------------------
 
 export function Router() {
@@ -378,6 +381,13 @@ export function Router() {
 				{
 					path: 'sign-up',
 					element: <SignUp />,
+					errorElement: null,
+					action: undefined,
+					loader: undefined,
+				},
+				{
+					path: 'forgot-password',
+					element: <ForgotPassword />,
 					errorElement: null,
 					action: undefined,
 					loader: undefined,

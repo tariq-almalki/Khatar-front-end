@@ -8,6 +8,7 @@ export const theme = {
 			sideBarLinkHoverColor: '#ddd',
 			sideBarLinkActiveColor: '#ddd',
 			sideBarRightBorderColor: '#000',
+			sideBarIndicatorColor: '#ddd',
 			bigSquaresBackgroundColor: '#CFCFCF',
 			bigSquaresHoverColor: '#EDEDED',
 			bigSquaresBorderColor: '#000',
@@ -22,15 +23,15 @@ export const theme = {
 			accountInputTextColor: '#fff',
 			basicInfoBioBackgroundColor: '#111',
 			basicInfoBioTextColor: '#fff',
-			//
+			// text and icon color of profile component
 			textColor: '#000',
-			iconColor: '#000000',
-			//
+			iconColor: '#000',
+			// App component
 			buttonPrimaryColor: '#FCFCFC',
 			buttonPrimaryColorDark: '#E6E6E6',
 			//
-			button0PrimaryColorHover: '#FFE822',
-			button0PrimaryColorActive: '#FFE92A',
+			button0PrimaryColorHover: '#FF5A00',
+			button0PrimaryColorActive: '#FF5A00',
 			//
 			button1PrimaryColorHover: '#3088FF',
 			button1PrimaryColorActive: '#2481FF',
@@ -41,8 +42,7 @@ export const theme = {
 			buttonPrimaryBorder: '#000',
 			buttonFontColor: '#000',
 			buttonIconColor: '#000',
-			//
-			sideBarIndicatorColor: '#ddd',
+			// App component
 			//
 			notificationNavBarBackgroundColor: '#111',
 			notificationNavBarTextColor: '#fff',
@@ -81,8 +81,42 @@ export const theme = {
 			deleteAccountButtonBorderColor: '#000',
 			deleteAccountButtonFontColor: '#000',
 			//
-			// sign up colors
-			// signUpAuthPageBackgroundColor: '#111',
+			// auth page colors
+			authPageBackgroundColor: '#ddd',
+			authPageTextColor: '#000',
+			authPageButtonColor: '#FCFCFC',
+			authPageButtonColorDark: '#FCFCFC',
+			authPageButtonColorHover: '#eee',
+			authPageButtonColorActive: '#ccc',
+			authPageButtonBorderColor: '#111',
+			authPageButtonFontColor: '#000',
+			authPageDividerColor: '#333',
+			//
+			// sign in page colors
+			signInPageBackgroundColor: '#ddd',
+			signInPageTextColor: '#000',
+			signInRightBorderColor: '#ddd',
+			signInButtonColor: '#FCFCFC',
+			signInButtonColorDark: '#FCFCFC',
+			signInButtonColorHover: '#eee',
+			signInButtonColorActive: '#ccc',
+			signInButtonBorderColor: '#111',
+			signInButtonFontColor: '#000',
+			signInDividerColor: '#000',
+			signInInputTextColor: '#999',
+			//
+			// sign up page colors
+			signUpPageBackgroundColor: '#ddd',
+			signUpPageTextColor: '#000',
+			signUpRightBorderColor: '#ddd',
+			signUpButtonColor: '#FCFCFC',
+			signUpButtonColorDark: '#FCFCFC',
+			signUpButtonColorHover: '#eee',
+			signUpButtonColorActive: '#ccc',
+			signUpButtonBorderColor: '#111',
+			signUpButtonFontColor: '#000',
+			signUpDividerColor: '#000',
+			signUpInputTextColor: '#999',
 			//
 		},
 		dark: {
@@ -93,6 +127,7 @@ export const theme = {
 			sideBarLinkHoverColor: '#222',
 			sideBarLinkActiveColor: '#222',
 			sideBarRightBorderColor: '#fff',
+			sideBarIndicatorColor: '#000',
 			bigSquaresBackgroundColor: '#000',
 			bigSquaresHoverColor: '#333',
 			bigSquaresBorderColor: '#fff',
@@ -107,27 +142,26 @@ export const theme = {
 			accountInputTextColor: '#000',
 			basicInfoBioBackgroundColor: '#eee',
 			basicInfoBioTextColor: '#000',
-			//
+			// text and icon color of profile component
 			textColor: '#fff',
-			iconColor: '#ffffff',
+			iconColor: '#fff',
+			// App component
+			buttonPrimaryColor: '#222',
+			buttonPrimaryColorDark: '#222',
 			//
-			buttonPrimaryColor: '#000',
-			buttonPrimaryColorDark: '#121212',
+			button0PrimaryColorHover: '#FF5A00',
+			button0PrimaryColorActive: '#FF5A00',
 			//
-			button0PrimaryColorHover: '#E7D800',
-			button0PrimaryColorActive: '#E7D800',
+			button1PrimaryColorHover: '#3088FF',
+			button1PrimaryColorActive: '#3088FF',
 			//
-			button1PrimaryColorHover: '#0030D1',
-			button1PrimaryColorActive: '#0030D1',
-			//
-			button2PrimaryColorHover: '#E00000',
-			button2PrimaryColorActive: '#E00000',
+			button2PrimaryColorHover: '#FF2C3C',
+			button2PrimaryColorActive: '#FF2C3C',
 			//
 			buttonPrimaryBorder: '#fff',
 			buttonFontColor: '#fff',
 			buttonIconColor: '#fff',
-			//
-			sideBarIndicatorColor: '#000',
+			// App component
 			//
 			notificationNavBarBackgroundColor: '#fff',
 			notificationNavBarTextColor: '#000',
@@ -167,15 +201,41 @@ export const theme = {
 			deleteAccountButtonFontColor: '#000',
 			//
 			// auth page colors
-			authPageBackgroundColor: '#444',
-			authPageDiv1Color: '#fff',
-			authPageButtonColor:'#FCFCFC',
-			authPageButtonColorDark: '#FCFCFC',
-			authPageButtonColorHover: '#eee',
-			authPageButtonColorActive: '#ccc',
-			authPageButtonBorderColor: '#000',
+			authPageBackgroundColor: '#000',
+			authPageTextColor: '#fff',
+			authPageButtonColor: '#222',
+			authPageButtonColorDark: '#222',
+			authPageButtonColorHover: '#444',
+			authPageButtonColorActive: '#444',
+			authPageButtonBorderColor: '#FCFCFC',
 			authPageButtonFontColor: '#fff',
-			dividerTextColor: '#fff'
+			authPageDividerColor: '#fff',
+			//
+			// sign in page colors
+			signInPageBackgroundColor: '#000',
+			signInPageTextColor: '#fff',
+			signInRightBorderColor: '#000',
+			signInButtonColor: '#222',
+			signInButtonColorDark: '#222',
+			signInButtonColorHover: '#444',
+			signInButtonColorActive: '#444',
+			signInButtonBorderColor: '#FCFCFC',
+			signInButtonFontColor: '#fff',
+			signInDividerColor: '#fff',
+			signInInputTextColor: '#999',
+			//
+			// sign up page colors
+			signUpPageBackgroundColor: '#000',
+			signUpPageTextColor: '#fff',
+			signUpRightBorderColor: '#000',
+			signUpButtonColor: '#222',
+			signUpButtonColorDark: '#222',
+			signUpButtonColorHover: '#444',
+			signUpButtonColorActive: '#444',
+			signUpButtonBorderColor: '#FCFCFC',
+			signUpButtonFontColor: '#fff',
+			signUpDividerColor: '#fff',
+			signUpInputTextColor: '#999',
 			//
 		},
 	},
