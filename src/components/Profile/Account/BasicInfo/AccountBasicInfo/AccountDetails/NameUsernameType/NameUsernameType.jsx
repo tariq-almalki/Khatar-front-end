@@ -1,5 +1,8 @@
 import { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
+import { firestore } from '@/firebase';
+import { doc } from 'firebase/firestore';
+import { useDocument } from 'react-firebase-hooks/firestore';
 
 const StyledNameUsernameType = styled.div``;
 
@@ -29,17 +32,21 @@ const StyledInput = styled.input`
 	}
 `;
 
-export function NameUsernameType(props) {
+export function NameUsernameType({ theme, user }) {
+	const [value, loading, error] = useDocument(doc(firestore, 'users', user.uid));
+
 	return (
 		<StyledNameUsernameType>
 			<div>
 				<label className="label">
-					<StyleSpan theme={props.theme} className="label-text">
+					<StyleSpan theme={theme} className="label-text">
 						Name
 					</StyleSpan>
 				</label>
 				<StyledInput
-					theme={props.theme}
+					value={loading ? 'Loading...' : value.data().name}
+					disabled
+					theme={theme}
 					type="text"
 					placeholder="Name"
 					className="input-bordered input w-full max-w-xs"
@@ -47,12 +54,14 @@ export function NameUsernameType(props) {
 			</div>
 			<div>
 				<label className="label">
-					<StyleSpan theme={props.theme} className="label-text">
+					<StyleSpan theme={theme} className="label-text">
 						Username
 					</StyleSpan>
 				</label>
 				<StyledInput
-					theme={props.theme}
+					value={loading ? 'Loading...' : value.data().username}
+					disabled
+					theme={theme}
 					type="text"
 					placeholder="Username"
 					className="input-bordered input w-full max-w-xs"
@@ -60,12 +69,14 @@ export function NameUsernameType(props) {
 			</div>
 			<div>
 				<label className="label">
-					<StyleSpan theme={props.theme} className="label-text">
+					<StyleSpan theme={theme} className="label-text">
 						Type
 					</StyleSpan>
 				</label>
 				<StyledInput
-					theme={props.theme}
+					value={loading ? 'Loading...' : value.data().type}
+					disabled
+					theme={theme}
 					type="text"
 					placeholder="Type"
 					className="input-bordered input w-full max-w-xs"

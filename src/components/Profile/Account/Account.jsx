@@ -66,7 +66,7 @@ const StyledDivider = styled.div`
 export function Account() {
 	const location = useLocation();
 
-	const outletContext = useOutletContext();
+	const { theme, user } = useOutletContext();
 
 	const regexExpr = /(?<=\/profile\/account\/)(basic\-info|contact\-info|change\-password|delete\-account)(?=\/?)/;
 
@@ -75,35 +75,35 @@ export function Account() {
 	return (
 		<>
 			{result ? (
-				<Outlet context={{ theme: outletContext.theme }} />
+				<Outlet context={{ theme, user }} />
 			) : (
 				<StyledAccount {...accountAnimations}>
 					<StyledButtonLink to="basic-info">
-						<StyledButton theme={outletContext.theme} className="btn-outline glass btn">
+						<StyledButton theme={theme} className="btn-outline glass btn">
 							Basic Info
 						</StyledButton>
 					</StyledButtonLink>
-					<StyledDivider theme={outletContext.theme} className="divider xl:divider-horizontal">
+					<StyledDivider theme={theme} className="divider xl:divider-horizontal">
 						OR
 					</StyledDivider>
 					<StyledButtonLink to="contact-info">
-						<StyledButton theme={outletContext.theme} className="btn-outline glass btn">
+						<StyledButton theme={theme} className="btn-outline glass btn">
 							Contact Info
 						</StyledButton>
 					</StyledButtonLink>
-					<StyledDivider theme={outletContext.theme} className="divider xl:divider-horizontal">
+					<StyledDivider theme={theme} className="divider xl:divider-horizontal">
 						OR
 					</StyledDivider>
 					<StyledButtonLink to="change-password">
-						<StyledButton theme={outletContext.theme} className="btn-outline glass btn">
+						<StyledButton theme={theme} className="btn-outline glass btn">
 							Change Password
 						</StyledButton>
 					</StyledButtonLink>
-					<StyledDivider theme={outletContext.theme} className="divider xl:divider-horizontal">
+					<StyledDivider theme={theme} className="divider xl:divider-horizontal">
 						OR
 					</StyledDivider>
 					<StyledButtonLink to="delete-account">
-						<StyledButton theme={outletContext.theme} className="btn-outline glass btn">
+						<StyledButton theme={theme} className="btn-outline glass btn">
 							Delete Account
 						</StyledButton>
 					</StyledButtonLink>

@@ -2,12 +2,12 @@ import styled, { ThemeContext } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useContext } from 'react';
 
-const StyledLoadingScreenComponent = styled(motion.div)`
+const StyledBlurLoadingScreenComponent = styled(motion.div)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100%;
-	width: 100%;
+	height: 100vh;
+	width: 100vw;
 	overflow: hidden;
 	font-size: 5em;
 	font-family: 'Rajdhani';
@@ -18,11 +18,11 @@ const StyledLoadingScreenComponent = styled(motion.div)`
 
 const animations = {
 	initial: {
-		// filter: 'blur(0em)',
+		filter: 'blur(0em)',
 	},
 	animate: {
 		opacity: 1,
-		// filter: 'blur(0.1em)',
+		filter: 'blur(0.1em)',
 		transition: {
 			repeat: 2,
 			duration: 1,
@@ -35,7 +35,7 @@ const animations = {
 	},
 };
 
-export function StyledLoadingScreen({ theme }) {
+export function StyledBlurLoadingScreen({ theme }) {
 	const [ended, setEnded] = useState(true);
 
 	function onAnimationCompleteHandler() {
@@ -45,14 +45,14 @@ export function StyledLoadingScreen({ theme }) {
 	return (
 		<AnimatePresence>
 			{ended && (
-				<StyledLoadingScreenComponent
+				<StyledBlurLoadingScreenComponent
 					theme={theme}
 					key="modal"
 					{...animations}
 					onAnimationComplete={onAnimationCompleteHandler}
 				>
 					Loading...
-				</StyledLoadingScreenComponent>
+				</StyledBlurLoadingScreenComponent>
 			)}
 		</AnimatePresence>
 	);

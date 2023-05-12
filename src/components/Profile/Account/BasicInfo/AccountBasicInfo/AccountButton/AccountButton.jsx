@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
-import { AwesomeButtonProgress } from 'react-awesome-button';
-import AwesomeButtonStyles from '@/styles/styles.module.scss';
+import { AwesomeButton } from 'react-awesome-button';
+import AwesomeButtonStyles1 from '@/styles/styles.module.scss';
 
 const AccountButtonComponent = styled.div`
 	display: flex;
@@ -21,7 +21,7 @@ const StyledDiv = styled.div`
 `;
 
 export function AccountButton(props) {
-	const AwesomeButtonProgressStyles = {
+	const AwesomeButtonStyles2 = {
 		'--button-primary-color': useContext(ThemeContext).colors[props.theme].basicInfoButtonColor,
 		'--button-primary-color-dark': useContext(ThemeContext).colors[props.theme].basicInfoButtonColorDark,
 		'--button-primary-color-hover': useContext(ThemeContext).colors[props.theme].basicInfoButtonColorHover,
@@ -32,11 +32,11 @@ export function AccountButton(props) {
 	return (
 		<AccountButtonComponent>
 			<StyledDiv>
-				<AwesomeButtonProgress
+				<AwesomeButton
 					type="primary"
-					style={AwesomeButtonProgressStyles}
+					style={AwesomeButtonStyles2}
 					theme={props.theme}
-					cssModule={AwesomeButtonStyles}
+					cssModule={AwesomeButtonStyles1}
 					loadingLabel="Wait..."
 					resultLabel="Success!"
 					releaseDelay={1000}
@@ -44,8 +44,8 @@ export function AccountButton(props) {
 						release();
 					}}
 				>
-					Update Basic info
-				</AwesomeButtonProgress>
+					Edit
+				</AwesomeButton>
 			</StyledDiv>
 		</AccountButtonComponent>
 	);

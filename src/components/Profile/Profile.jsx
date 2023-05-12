@@ -6,6 +6,10 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 
+// loading screen
+// import { StyledBlurLoadingScreen } from '../styled-components/StyledBlurLoadingScreen/StyledBlurLoadingScreen';
+import { StyledLoadingScreen } from '../styled-components/StyledLoadingScreen/StyledLoadingScreen';
+
 // animations
 import { profileAnimations } from './profileAnimations';
 
@@ -15,22 +19,18 @@ export function Profile() {
 	const [user, loading, error] = useAuthState(auth);
 
 	if (loading) {
-		return (
-			<div>
-				<p>Initialising User...</p>
-			</div>
-		);
+		return <StyledLoadingScreen theme={theme} />;
 	}
 
 	if (error) {
-		throw error;
+		throw new Error('Something weird Happened!');
 	}
 
 	if (user) {
 		return (
 			<StyledProfileContainer theme={theme} {...profileAnimations}>
 				<TailWindSideBar theme={theme} setTheme={setTheme} />
-				<StyledProfileMainSectionContainer theme={theme} location={location} />
+				<StyledProfileMainSectionContainer user={user} theme={theme} location={location} />
 			</StyledProfileContainer>
 		);
 	} else {

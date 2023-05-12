@@ -26,12 +26,12 @@ const BasicInfoComponent = styled(motion.div)`
 `;
 
 export function BasicInfo() {
-	const outletContext = useOutletContext();
+	const { theme, user } = useOutletContext();
 
 	return (
-		<BasicInfoComponent theme={outletContext.theme} {...accountAnimations}>
-			<AccountImage theme={outletContext.theme} />
-			<AccountBasicInfo theme={outletContext.theme} />
+		<BasicInfoComponent theme={theme} {...accountAnimations}>
+			<AccountImage user={user} theme={theme} />
+			<AccountBasicInfo user={user} theme={theme} />
 		</BasicInfoComponent>
 	);
 }

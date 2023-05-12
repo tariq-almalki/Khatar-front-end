@@ -1,6 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
-import { useOutletContext, Form, Link, useSubmit, redirect } from 'react-router-dom';
+import { useOutletContext, Form, Link, useSubmit, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { AwesomeButton } from 'react-awesome-button';
 import AwesomeButtonStyles1 from '@/styles/styles.module.scss';
@@ -206,6 +206,7 @@ const StyledErrorDiv = styled.div`
 export function SignUp() {
 	const { theme } = useOutletContext();
 	const submit = useSubmit();
+	const navigate = useNavigate();
 	const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
 
 	if (error) {
@@ -228,9 +229,9 @@ export function SignUp() {
 		onSubmit: async values => {
 			try {
 				// creating new user
-				const user = await createUserWithEmailAndPassword(values.email, values.password);
+				const userCredential = await createUserWithEmailAndPassword(values.email, values.password);
 				// Add a new document in collection "cities"
-				const result = await setDoc(doc(firestore, 'users', user.user.uid), {
+				await setDoc(doc(firestore, 'users', userCredential.user.uid), {
 					name: values.name,
 					username: values.username,
 					address: values.address,
@@ -238,11 +239,10 @@ export function SignUp() {
 					phoneNumber: values.phoneNumber,
 					dob: values.dob,
 					gender: values.gender,
+					type: 'basic',
 				});
 
-				console.log(result);
-
-				redirect('/profile/account');
+				navigate('/profile/account');
 			} catch (err) {
 				console.log(err);
 			}
@@ -425,7 +425,7 @@ export function SignUp() {
 					</StyledLabel>
 					<StyledDiv2>
 						<AwesomeButton style={AwesomeButtonStyles2} cssModule={AwesomeButtonStyles1} type="primary">
-							{!loading ? 'Sign Up' : 'Creating user...'}
+							{!loading ? 'Sign Up' : <span>{'Creating user...'}</span>}
 						</AwesomeButton>
 					</StyledDiv2>
 					<StyledDiv3 theme={theme}>
