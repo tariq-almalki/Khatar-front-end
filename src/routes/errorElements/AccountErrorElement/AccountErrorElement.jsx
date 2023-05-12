@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { useContext } from 'react';
 
 const AccountErrorElementComponent = styled.div`
 	display: flex;
@@ -8,8 +9,10 @@ const AccountErrorElementComponent = styled.div`
 	width: 100vw;
 	font-size: 4em;
 	font-family: 'Rajdhani';
+	color: ${props => useContext(ThemeContext).colors[props.theme].errorElementTextColor};
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].errorElementBackgroundColor};
 `;
 
-export function AccountErrorElement() {
-	return <AccountErrorElementComponent>Non-existent Route</AccountErrorElementComponent>;
+export function AccountErrorElement({ theme }) {
+	return <AccountErrorElementComponent theme={theme}>Non-existent Route</AccountErrorElementComponent>;
 }

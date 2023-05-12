@@ -1,5 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+// hooks
+import { useLocalStorage } from '../hooks/useLocalStorage';
+
 // App & App components
 import { App } from '@components/App/App';
 import { AppErrorElement } from './errorElements/AppErrorElement/AppErrorElement';
@@ -85,11 +88,13 @@ import { ForgotPassword } from '../components/Auth/ForgotPassword/ForgotPassword
 // --------------------------------------------------------------------------------------------------------------------
 
 export function Router() {
+	const [theme] = useLocalStorage('theme', 'dark');
+
 	const router = createBrowserRouter([
 		{
 			path: '/',
 			element: <App />,
-			errorElement: <AppErrorElement />,
+			errorElement: <AppErrorElement theme={theme} />,
 			action: undefined,
 			loader: undefined,
 			children: [
@@ -112,14 +117,14 @@ export function Router() {
 		{
 			path: '/profile',
 			element: <Profile />,
-			errorElement: <ProfileErrorElement />,
+			errorElement: <ProfileErrorElement theme={theme} />,
 			action: undefined,
 			// loader: profileLoader,
 			children: [
 				{
 					path: 'awards',
 					element: <Awards />,
-					errorElement: <AwardsErrorElement />,
+					errorElement: <AwardsErrorElement theme={theme} />,
 					action: undefined,
 					loader: undefined,
 					children: [
@@ -142,7 +147,7 @@ export function Router() {
 				{
 					path: 'account',
 					element: <Account />,
-					errorElement: <AccountErrorElement />,
+					errorElement: <AccountErrorElement theme={theme} />,
 					action: undefined,
 					loader: undefined,
 					children: [
@@ -179,7 +184,7 @@ export function Router() {
 				{
 					path: 'team',
 					element: <Team />,
-					errorElement: <TeamErrorElement />,
+					errorElement: <TeamErrorElement theme={theme} />,
 					action: undefined,
 					loader: undefined,
 					children: [
@@ -202,7 +207,7 @@ export function Router() {
 				{
 					path: 'friends',
 					element: <Friends />,
-					errorElement: <FriendsErrorElement />,
+					errorElement: <FriendsErrorElement theme={theme} />,
 					action: undefined,
 					loader: undefined,
 					children: [
@@ -232,7 +237,7 @@ export function Router() {
 				{
 					path: 'chat',
 					element: <Chat />,
-					errorElement: <ChatErrorElement />,
+					errorElement: <ChatErrorElement theme={theme} />,
 					action: undefined,
 					loader: undefined,
 					children: [
@@ -262,7 +267,7 @@ export function Router() {
 				{
 					path: 'help-requests',
 					element: <HelpRequests />,
-					errorElement: <HelpRequestsErrorElement />,
+					errorElement: <HelpRequestsErrorElement theme={theme} />,
 					action: undefined,
 					loader: undefined,
 					children: [
@@ -308,7 +313,7 @@ export function Router() {
 				{
 					path: 'notifications',
 					element: <Notifications />,
-					errorElement: <NotificationsErrorElement />,
+					errorElement: <NotificationsErrorElement theme={theme} />,
 					action: undefined,
 					loader: undefined,
 					children: [
@@ -361,7 +366,7 @@ export function Router() {
 		{
 			path: '/auth',
 			element: <Auth />,
-			errorElement: <AuthErrorElement />,
+			errorElement: <AuthErrorElement theme={theme} />,
 			action: undefined,
 			loader: undefined,
 			children: [

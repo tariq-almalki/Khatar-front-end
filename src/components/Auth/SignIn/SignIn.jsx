@@ -5,8 +5,8 @@ import { useFormik } from 'formik';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt, faLock } from '@fortawesome/free-solid-svg-icons';
-import { AwesomeButtonProgress, AwesomeButton } from 'react-awesome-button';
-import AwesomeButtonStyles from '@/styles/styles.module.scss';
+import { AwesomeButton } from 'react-awesome-button';
+import AwesomeButtonStyles1 from '@/styles/styles.module.scss';
 import googleSVG from '@/assets/svgs/icons8-google.svg';
 import twitterSVG from '@/assets/svgs/icons8-twitter.svg';
 
@@ -169,6 +169,7 @@ const StyledLink = styled(Link)`
 	font-family: 'Rajdhani';
 	transition: all 0.2s ease;
 	color: ${props => useContext(ThemeContext).colors[props.theme].signInPageTextColor};
+	padding-left: 5px;
 
 	&:hover {
 		color: magenta;
@@ -224,7 +225,7 @@ export function SignIn() {
 		},
 	});
 
-	const AwesomeButtonProgressStyles = {
+	const AwesomeButtonStyles2 = {
 		'--button-primary-color': useContext(ThemeContext).colors[theme].authPageButtonColor,
 		'--button-primary-color-dark': useContext(ThemeContext).colors[theme].authPageButtonColorDark,
 		'--button-primary-color-hover': useContext(ThemeContext).colors[theme].authPageButtonColorHover,
@@ -265,13 +266,9 @@ export function SignIn() {
 						<input type="checkbox" id="checkbox" name="checkbox" /> Remember me
 					</StyledLabel2>
 
-					<AwesomeButtonProgress
-						style={AwesomeButtonProgressStyles}
-						cssModule={AwesomeButtonStyles}
-						type="primary"
-					>
+					<AwesomeButton style={AwesomeButtonStyles2} cssModule={AwesomeButtonStyles1} type="primary">
 						Sign in
-					</AwesomeButtonProgress>
+					</AwesomeButton>
 				</StyledForm>
 				<StyledDiv1>
 					<StyledLink theme={theme} to="../forgot-password">
@@ -281,15 +278,15 @@ export function SignIn() {
 						or continue with
 					</StyledDivider>
 					<StyledDiv3>
-						<StyledGoogleAwesomeButton style={AwesomeButtonProgressStyles} cssModule={AwesomeButtonStyles}>
+						<StyledGoogleAwesomeButton style={AwesomeButtonStyles2} cssModule={AwesomeButtonStyles1}>
 							<StyledGoogleImage src={googleSVG} alt="google icon" width={32} height={32} />
 						</StyledGoogleAwesomeButton>
-						<StyledTwitterAwesomeButton style={AwesomeButtonProgressStyles} cssModule={AwesomeButtonStyles}>
+						<StyledTwitterAwesomeButton style={AwesomeButtonStyles2} cssModule={AwesomeButtonStyles1}>
 							<StyledTwitterImage src={twitterSVG} alt="twitter icon" width={32} height={32} />
 						</StyledTwitterAwesomeButton>
 					</StyledDiv3>
 					<StyledDiv4 theme={theme}>
-						Don't have an account?{' '}
+						Don't have an account?
 						<StyledLink theme={theme} to="../sign-up">
 							Sign Up
 						</StyledLink>

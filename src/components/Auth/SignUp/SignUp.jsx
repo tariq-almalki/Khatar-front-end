@@ -1,13 +1,16 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
-import { useOutletContext, Form, Link, useSubmit } from 'react-router-dom';
+import { useOutletContext, Form, Link, useSubmit, redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { AwesomeButtonProgress } from 'react-awesome-button';
-import AwesomeButtonStyles from '@/styles/styles.module.scss';
+import { AwesomeButton } from 'react-awesome-button';
+import AwesomeButtonStyles1 from '@/styles/styles.module.scss';
 import InputMask from 'react-input-mask';
 
 // firebase
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase';
+import { firestore } from '@/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 // animations
 import { signUpAnimations } from './signUpAnimations';
@@ -203,6 +206,11 @@ const StyledErrorDiv = styled.div`
 export function SignUp() {
 	const { theme } = useOutletContext();
 	const submit = useSubmit();
+	const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+
+	if (error) {
+		throw error;
+	}
 
 	const formik = useFormik({
 		initialValues: {
@@ -218,11 +226,30 @@ export function SignUp() {
 		},
 		validationSchema,
 		onSubmit: async values => {
-			submit(values, { method: 'post' });
+			try {
+				// creating new user
+				const user = await createUserWithEmailAndPassword(values.email, values.password);
+				// Add a new document in collection "cities"
+				const result = await setDoc(doc(firestore, 'users', user.user.uid), {
+					name: values.name,
+					username: values.username,
+					address: values.address,
+					email: values.email,
+					phoneNumber: values.phoneNumber,
+					dob: values.dob,
+					gender: values.gender,
+				});
+
+				console.log(result);
+
+				redirect('/profile/account');
+			} catch (err) {
+				console.log(err);
+			}
 		},
 	});
 
-	const AwesomeButtonProgressStyles = {
+	const AwesomeButtonStyles2 = {
 		'--button-primary-color': useContext(ThemeContext).colors[theme].signUpButtonColor,
 		'--button-primary-color-dark': useContext(ThemeContext).colors[theme].signUpButtonColorDark,
 		'--button-primary-color-hover': useContext(ThemeContext).colors[theme].signUpButtonColorHover,
@@ -236,7 +263,7 @@ export function SignUp() {
 	return (
 		<StyledOuterDiv>
 			<StyledSignUp theme={theme} {...signUpAnimations}>
-				<StyledForm>
+				<StyledForm onSubmit={formik.handleSubmit}>
 					<StyledDiv1 theme={theme}>Sign Up</StyledDiv1>
 					<StyledDivider theme={theme} className="divider">
 						Basic Info
@@ -392,17 +419,14 @@ export function SignUp() {
 							<option value="male">Male</option>
 							<option value="female">Female</option>
 						</StyledSelect>
-						{formik.errors.gender && formik.touched.gender && <StyledErrorDiv>{formik.errors.gender}</StyledErrorDiv>}
+						{formik.errors.gender && formik.touched.gender && (
+							<StyledErrorDiv>{formik.errors.gender}</StyledErrorDiv>
+						)}
 					</StyledLabel>
 					<StyledDiv2>
-						<AwesomeButtonProgress
-							style={AwesomeButtonProgressStyles}
-							cssModule={AwesomeButtonStyles}
-							type="primary"
-							onPress={formik.handleSubmit}
-						>
-							Sign Up
-						</AwesomeButtonProgress>
+						<AwesomeButton style={AwesomeButtonStyles2} cssModule={AwesomeButtonStyles1} type="primary">
+							{!loading ? 'Sign Up' : 'Creating user...'}
+						</AwesomeButton>
 					</StyledDiv2>
 					<StyledDiv3 theme={theme}>
 						Already have an account?

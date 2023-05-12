@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { useContext } from 'react';
 
 const HelpRequestsErrorElementComponent = styled.div`
 	display: flex;
@@ -8,8 +9,10 @@ const HelpRequestsErrorElementComponent = styled.div`
 	width: 100vw;
 	font-size: 4em;
 	font-family: 'Rajdhani';
+	color: ${props => useContext(ThemeContext).colors[props.theme].errorElementTextColor};
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].errorElementBackgroundColor};
 `;
 
-export function HelpRequestsErrorElement() {
-	return <HelpRequestsErrorElementComponent>Non-existent Route</HelpRequestsErrorElementComponent>;
+export function HelpRequestsErrorElement({ theme }) {
+	return <HelpRequestsErrorElementComponent theme={theme}>Non-existent Route</HelpRequestsErrorElementComponent>;
 }

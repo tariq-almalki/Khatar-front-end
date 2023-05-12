@@ -1,6 +1,10 @@
 export const theme = {
 	colors: {
 		light: {
+			// error elements theme
+			errorElementBackgroundColor: '#fff',
+			errorElementTextColor: '#000',
+			// 
 			profileContainerColor: '#fff',
 			profileHeaderColor: '#000',
 			dividerColor: '#000',
@@ -136,6 +140,10 @@ export const theme = {
 			//
 		},
 		dark: {
+			// error elements theme
+			errorElementBackgroundColor: '#000',
+			errorElementTextColor: '#fff',
+			// 
 			profileContainerColor: '#000',
 			profileHeaderColor: '#fff',
 			dividerColor: '#fff',

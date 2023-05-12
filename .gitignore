@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # config files
-src/config/localhost
+src/config/localhost-https

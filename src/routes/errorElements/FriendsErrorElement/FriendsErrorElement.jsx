@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { useContext } from 'react';
 
 const FriendsErrorElementComponent = styled.div`
 	display: flex;
@@ -8,8 +9,10 @@ const FriendsErrorElementComponent = styled.div`
 	width: 100vw;
 	font-size: 4em;
 	font-family: 'Rajdhani';
+	color: ${props => useContext(ThemeContext).colors[props.theme].errorElementTextColor};
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].errorElementBackgroundColor};
 `;
 
-export function FriendsErrorElement() {
-	return <FriendsErrorElementComponent>Non-existent Route</FriendsErrorElementComponent>;
+export function FriendsErrorElement({ theme }) {
+	return <FriendsErrorElementComponent theme={theme}>Non-existent Route</FriendsErrorElementComponent>;
 }
