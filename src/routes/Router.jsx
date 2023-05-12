@@ -9,6 +9,7 @@ import { AppErrorElement } from './errorElements/AppErrorElement/AppErrorElement
 // Profile & Profile components
 import { Profile } from '@components/Profile/Profile.jsx';
 import { ProfileErrorElement } from './errorElements/ProfileErrorElement/ProfileErrorElement';
+import { profileLoader } from './loaders/profileLoader/profileLoader';
 
 // Account
 import { Account } from '../components/Profile/Account/Account';
@@ -113,7 +114,7 @@ export function Router() {
 			element: <Profile />,
 			errorElement: <ProfileErrorElement />,
 			action: undefined,
-			loader: undefined,
+			// loader: profileLoader,
 			children: [
 				{
 					path: 'awards',

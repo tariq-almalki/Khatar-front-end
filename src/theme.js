@@ -103,7 +103,8 @@ export const theme = {
 			signInButtonBorderColor: '#111',
 			signInButtonFontColor: '#000',
 			signInDividerColor: '#000',
-			signInInputTextColor: '#999',
+			signInInputTextColor: '#000',
+			signInInputPlaceHolderTextColor: '#999',
 			//
 			// sign up page colors
 			signUpPageBackgroundColor: '#ddd',
@@ -116,7 +117,22 @@ export const theme = {
 			signUpButtonBorderColor: '#111',
 			signUpButtonFontColor: '#000',
 			signUpDividerColor: '#000',
-			signUpInputTextColor: '#999',
+			signUpInputTextColor: '#000',
+			signUpInputPlaceHolderTextColor: '#999',
+			//
+			// forget password page colors
+			forgetPasswordPageBackgroundColor: '#ddd',
+			forgetPasswordPageTextColor: '#000',
+			forgetPasswordRightBorderColor: '#ddd',
+			forgetPasswordButtonColor: '#FCFCFC',
+			forgetPasswordButtonColorDark: '#FCFCFC',
+			forgetPasswordButtonColorHover: '#eee',
+			forgetPasswordButtonColorActive: '#ccc',
+			forgetPasswordButtonBorderColor: '#111',
+			forgetPasswordButtonFontColor: '#000',
+			forgetPasswordDividerColor: '#000',
+			forgetPasswordInputTextColor: '#999',
+			forgetPasswordInputBorderColor: '#333',
 			//
 		},
 		dark: {
@@ -222,7 +238,8 @@ export const theme = {
 			signInButtonBorderColor: '#FCFCFC',
 			signInButtonFontColor: '#fff',
 			signInDividerColor: '#fff',
-			signInInputTextColor: '#999',
+			signInInputTextColor: '#000',
+			signUpInputPlaceHolderTextColor: '#999',
 			//
 			// sign up page colors
 			signUpPageBackgroundColor: '#000',
@@ -235,7 +252,22 @@ export const theme = {
 			signUpButtonBorderColor: '#FCFCFC',
 			signUpButtonFontColor: '#fff',
 			signUpDividerColor: '#fff',
-			signUpInputTextColor: '#999',
+			signUpInputTextColor: '#000',
+			signUpInputPlaceHolderTextColor: '#999',
+			//
+			// forget password colors
+			forgetPasswordPageBackgroundColor: '#000',
+			forgetPasswordPageTextColor: '#fff',
+			forgetPasswordRightBorderColor: '#000',
+			forgetPasswordButtonColor: '#222',
+			forgetPasswordButtonColorDark: '#222',
+			forgetPasswordButtonColorHover: '#444',
+			forgetPasswordButtonColorActive: '#444',
+			forgetPasswordButtonBorderColor: '#FCFCFC',
+			forgetPasswordButtonFontColor: '#fff',
+			forgetPasswordDividerColor: '#fff',
+			forgetPasswordInputTextColor: '#000',
+			forgetPasswordInputBorderColor: '#fff',
 			//
 		},
 	},

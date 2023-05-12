@@ -5,7 +5,7 @@ import { AwesomeButtonsLinked } from './AwesomeButtonsLinked/AwesomeButtonsLinke
 export function StyledBottomNavigationWithButtonsAndIcons(props) {
 	return (
 		<StyledBottomNavigationWithButtonsAndIconsContainer>
-			<AwesomeButtonsLinked theme={props.theme} />
+			<AwesomeButtonsLinked user={props.user} theme={props.theme} />
 		</StyledBottomNavigationWithButtonsAndIconsContainer>
 	);
 }

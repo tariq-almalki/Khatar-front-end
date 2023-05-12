@@ -148,18 +148,18 @@ const StyledInput = styled.input`
 
 	::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
-		color: ${props => useContext(ThemeContext).colors[props.theme].signInInputTextColor} !important;
+		color: ${props => useContext(ThemeContext).colors[props.theme].signInInputPlaceHolderTextColor} !important;
 		opacity: 1; /* Firefox */
 	}
 
 	:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
-		color: ${props => useContext(ThemeContext).colors[props.theme].signInInputTextColor} !important;
+		color: ${props => useContext(ThemeContext).colors[props.theme].signInInputPlaceHolderTextColor} !important;
 	}
 
 	::-ms-input-placeholder {
 		/* Microsoft Edge */
-		color: ${props => useContext(ThemeContext).colors[props.theme].signInInputTextColor} !important;
+		color: ${props => useContext(ThemeContext).colors[props.theme].signInInputPlaceHolderTextColor} !important;
 	}
 `;
 

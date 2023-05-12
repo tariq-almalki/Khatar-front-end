@@ -13,6 +13,7 @@ import { LinkCommonStyles } from './styles';
 import { awesomeButtonsLinkedConfig } from './awesomeButtonsLinkedConfig.js';
 
 export function AwesomeButtonsLinked(props) {
+	awesomeButtonsLinkedConfig[2].link.to = !props.user ? '/auth' : 'profile/account';
 	return (
 		<>
 			{awesomeButtonsLinkedConfig.map((config, index) => {

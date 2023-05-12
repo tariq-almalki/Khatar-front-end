@@ -1,5 +1,7 @@
 // General
 import { nanoid } from 'nanoid';
+import { auth } from '@/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 // icons imports
 import { faHandshakeAngle, faSquarePollVertical, faUserLarge } from '@fortawesome/free-solid-svg-icons';
@@ -40,8 +42,7 @@ export const awesomeButtonsLinkedConfig = [
 	},
 	{
 		link: {
-			to: '/auth',
-			// to: 'profile/account',
+			to: 'profile/account',
 			id: nanoid(),
 		},
 		button: {

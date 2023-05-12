@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useRouteError } from 'react-router-dom';
 
 const ProfileErrorElementComponent = styled.div`
 	display: flex;
@@ -11,5 +12,7 @@ const ProfileErrorElementComponent = styled.div`
 `;
 
 export function ProfileErrorElement() {
+	const error = useRouteError();
+	console.error(error);
 	return <ProfileErrorElementComponent>Non-existent Route</ProfileErrorElementComponent>;
 }

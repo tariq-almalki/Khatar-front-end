@@ -2,10 +2,12 @@ import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
 import { useOutletContext, Form, Link, useSubmit } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAt } from '@fortawesome/free-solid-svg-icons';
 import { AwesomeButtonProgress } from 'react-awesome-button';
 import AwesomeButtonStyles from '@/styles/styles.module.scss';
+import InputMask from 'react-input-mask';
+
+// firebase
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 // animations
 import { signUpAnimations } from './signUpAnimations';
@@ -57,7 +59,7 @@ const StyledForm = styled(Form)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1em;
+	gap: 1.5em;
 `;
 
 // ----------------------------------------------
@@ -99,9 +101,11 @@ const StyledDivider = styled.div`
 
 // ----------------------------------------------
 
-const StyledSpan = styled.span``;
-
 const StyledLabel = styled.label`
+	display: flex;
+	position: relative;
+	flex-direction: column;
+
 	&.input-group > :first-child {
 		border-top-left-radius: 4px !important;
 		border-bottom-left-radius: 4px !important;
@@ -128,18 +132,48 @@ const StyledInput = styled.input`
 
 	::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
-		color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputTextColor} !important;
+		color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputPlaceHolderTextColor} !important;
 		opacity: 1; /* Firefox */
 	}
 
 	:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
-		color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputTextColor} !important;
+		color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputPlaceHolderTextColor} !important;
 	}
 
 	::-ms-input-placeholder {
 		/* Microsoft Edge */
-		color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputTextColor} !important;
+		color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputPlaceHolderTextColor} !important;
+	}
+
+	::-webkit-calendar-picker-indicator {
+		filter: invert(1);
+	}
+`;
+
+// ----------------------------------------------
+
+const StyledSelect = styled.select`
+	font-family: 'Rajdhani';
+	color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputTextColor} !important;
+	background-color: white !important;
+	width: 100% !important;
+
+	&:focus {
+		outline: none !important;
+	}
+`;
+
+// ----------------------------------------------
+
+const StyledInputMaskPhoneNumber = styled(InputMask)`
+	font-family: 'Rajdhani';
+	color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputTextColor} !important;
+	background-color: white !important;
+	width: 100% !important;
+
+	&:focus {
+		outline: none !important;
 	}
 `;
 
@@ -149,13 +183,20 @@ const StyledLink = styled(Link)`
 	font-family: 'Rajdhani';
 	transition: all 0.2s ease;
 	color: ${props => useContext(ThemeContext).colors[props.theme].signUpPageTextColor};
-
+	padding-left: 5px;
 	&:hover {
 		color: magenta;
 	}
 `;
 
 // ----------------------------------------------
+
+const StyledErrorDiv = styled.div`
+	position: absolute;
+	top: 28px;
+	font-family: 'Rajdhani';
+	color: red;
+`;
 
 // ----------------------------------------------
 
@@ -173,7 +214,7 @@ export function SignUp() {
 			email: '',
 			phoneNumber: '',
 			dob: '',
-			gender: '',
+			gender: 'gender',
 		},
 		validationSchema,
 		onSubmit: async values => {
@@ -200,74 +241,171 @@ export function SignUp() {
 					<StyledDivider theme={theme} className="divider">
 						Basic Info
 					</StyledDivider>
-					<StyledLabel theme={theme} className="input-group-md input-group">
-						<StyledInput theme={theme} type="text" placeholder="Name" required className="input input-md" />
-					</StyledLabel>
-					<StyledLabel theme={theme} className="input-group-md input-group">
-						<StyledInput theme={theme} type="text" placeholder="Username" required className="input input-md" />
-					</StyledLabel>
-					<StyledLabel theme={theme} className="input-group-md input-group">
+					<StyledLabel theme={theme} className="input-group-sm input-group">
 						<StyledInput
+							id="name"
+							name="name"
+							value={formik.values.name}
+							onChange={formik.handleChange}
+							theme={theme}
+							type="text"
+							placeholder="Name"
+							required
+							className="input input-sm"
+						/>
+						{formik.errors.name && formik.touched.name && <StyledErrorDiv>{formik.errors.name}</StyledErrorDiv>}
+					</StyledLabel>
+					<StyledLabel theme={theme} className="input-group-sm input-group">
+						<StyledInput
+							id="username"
+							name="username"
+							value={formik.values.username}
+							onChange={formik.handleChange}
+							theme={theme}
+							type="text"
+							placeholder="Username"
+							required
+							className="input input-sm"
+						/>
+						{formik.errors.username && formik.touched.username && (
+							<StyledErrorDiv>{formik.errors.username}</StyledErrorDiv>
+						)}
+					</StyledLabel>
+					<StyledLabel theme={theme} className="input-group-sm input-group">
+						<StyledInput
+							id="password"
+							name="password"
+							value={formik.values.password}
+							onChange={formik.handleChange}
 							theme={theme}
 							type="password"
 							placeholder="Password"
 							required
-							className="input input-md"
+							className="input input-sm"
 						/>
+						{formik.errors.password && formik.touched.password && (
+							<StyledErrorDiv>{formik.errors.password}</StyledErrorDiv>
+						)}
 					</StyledLabel>
-					<StyledLabel theme={theme} className="input-group-md input-group">
+					<StyledLabel theme={theme} className="input-group-sm input-group">
 						<StyledInput
+							id="confirmPassword"
+							name="confirmPassword"
+							value={formik.values.confirmPassword}
+							onChange={formik.handleChange}
 							theme={theme}
 							type="password"
 							placeholder="Confirm Password"
 							required
-							className="input input-md"
+							className="input input-sm"
 						/>
+						{formik.errors.confirmPassword && formik.touched.confirmPassword && (
+							<StyledErrorDiv>{formik.errors.confirmPassword}</StyledErrorDiv>
+						)}
 					</StyledLabel>
-					<StyledLabel theme={theme} className="input-group-md input-group">
-						<StyledInput theme={theme} type="text" placeholder="address" required className="input input-md" />
+					<StyledLabel theme={theme} className="input-group-sm input-group">
+						<StyledInput
+							id="address"
+							name="address"
+							value={formik.values.address}
+							onChange={formik.handleChange}
+							theme={theme}
+							type="text"
+							placeholder="address"
+							required
+							className="input input-sm"
+						/>
+						{formik.errors.address && formik.touched.address && (
+							<StyledErrorDiv>{formik.errors.address}</StyledErrorDiv>
+						)}
 					</StyledLabel>
 					<StyledDivider theme={theme} className="divider">
 						Contact Info
 					</StyledDivider>
-					<StyledLabel theme={theme} className="input-group-md input-group">
-						<StyledInput theme={theme} type="email" placeholder="Email" required className="input input-md" />
-					</StyledLabel>
-					<StyledLabel theme={theme} className="input-group-md input-group">
+					<StyledLabel theme={theme} className="input-group-sm input-group">
 						<StyledInput
+							id="email"
+							name="email"
+							value={formik.values.email}
+							onChange={formik.handleChange}
 							theme={theme}
-							type="text"
-							placeholder="Phone Number"
+							type="email"
+							placeholder="Email"
 							required
-							className="input input-md"
+							className="input input-sm"
 						/>
+						{formik.errors.email && formik.touched.email && (
+							<StyledErrorDiv>{formik.errors.email}</StyledErrorDiv>
+						)}
+					</StyledLabel>
+					<StyledLabel theme={theme} className="input-group-sm input-group">
+						<StyledInputMaskPhoneNumber
+							id="phoneNumber"
+							name="phoneNumber"
+							value={formik.values.phoneNumber}
+							onChange={formik.handleChange}
+							mask={'+\\966 059 999 9999'}
+							formatChars={{
+								9: '[0-9]',
+							}}
+							// alwaysShowMask
+							className="input input-sm"
+							theme={theme}
+							required
+							placeholder="Phone Number"
+						/>
+						{formik.errors.phoneNumber && formik.touched.phoneNumber && (
+							<StyledErrorDiv>{formik.errors.phoneNumber}</StyledErrorDiv>
+						)}
 					</StyledLabel>
 					<StyledDivider theme={theme} className="divider">
 						Birth Info
 					</StyledDivider>
-					<StyledLabel theme={theme} className="input-group-md input-group">
+					<StyledLabel theme={theme} className="input-group-sm input-group">
 						<StyledInput
+							id="dob"
+							name="dob"
+							value={formik.values.dob}
+							onChange={formik.handleChange}
 							theme={theme}
-							type="text"
-							placeholder="Date of birth"
+							type="date"
 							required
-							className="input input-md"
+							className="input input-sm"
+							min="1950-01-01"
+							max="2015-01-01"
 						/>
+						{formik.errors.dob && formik.touched.dob && <StyledErrorDiv>{formik.errors.dob}</StyledErrorDiv>}
 					</StyledLabel>
-					<StyledLabel theme={theme} className="input-group-md input-group">
-						<StyledInput theme={theme} type="text" placeholder="Gender" required className="input input-md" />
+					<StyledLabel theme={theme} className="input-group-sm input-group">
+						<StyledSelect
+							id="gender"
+							name="gender"
+							value={formik.values.gender}
+							onChange={formik.handleChange}
+							theme={theme}
+							className="select-bordered select-sm w-full max-w-xs"
+							required
+						>
+							<option disabled value="gender" style={{ color: '#999' }}>
+								Gender
+							</option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+						</StyledSelect>
+						{formik.errors.gender && formik.touched.gender && <StyledErrorDiv>{formik.errors.gender}</StyledErrorDiv>}
 					</StyledLabel>
 					<StyledDiv2>
 						<AwesomeButtonProgress
 							style={AwesomeButtonProgressStyles}
 							cssModule={AwesomeButtonStyles}
 							type="primary"
+							onPress={formik.handleSubmit}
 						>
 							Sign Up
 						</AwesomeButtonProgress>
 					</StyledDiv2>
 					<StyledDiv3 theme={theme}>
-						Already have an account?{' '}
+						Already have an account?
 						<StyledLink theme={theme} to="../sign-in">
 							Sign In
 						</StyledLink>
