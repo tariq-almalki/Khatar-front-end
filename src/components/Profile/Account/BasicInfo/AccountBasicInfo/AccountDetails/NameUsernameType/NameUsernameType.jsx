@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
-import { firestore } from '@/firebase';
-import { doc } from 'firebase/firestore';
-import { useDocument } from 'react-firebase-hooks/firestore';
 
-const StyledNameUsernameType = styled.div``;
+const StyledNameUsernameType = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+`;
 
 const StyleSpan = styled.span`
 	color: ${props => useContext(ThemeContext).colors[props.theme].accountSpanTextColor} !important;
@@ -15,73 +16,108 @@ const StyledInput = styled.input`
 	color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].accountInputBackgroundColor} !important;
 
-	::placeholder {
+	&::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
 		color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 		opacity: 1; /* Firefox */
 	}
 
-	:-ms-input-placeholder {
+	&:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
 		color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 	}
 
-	::-ms-input-placeholder {
+	&::-ms-input-placeholder {
 		/* Microsoft Edge */
 		color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 	}
+
+	&:disabled {
+		opacity: 0.5; /* reduce opacity to indicate disabled state */
+		cursor: not-allowed; /* change cursor to indicate disabled state */
+		/* optionally, you can also change the background color and text color */
+		background-color: #ccc;
+		color: #999;
+	}
 `;
 
-export function NameUsernameType({ theme, user }) {
-	const [value, loading, error] = useDocument(doc(firestore, 'users', user.uid));
+const StyledDiv = styled.div`
+	display: flex;
+	position: relative;
+	flex-direction: column;
+`;
 
+const StyledErrorDiv = styled.div`
+	position: absolute;
+	font-size: 0.8em;
+	top: -10px;
+	font-family: 'Rajdhani';
+	color: red;
+`;
+
+export function NameUsernameType({ theme, formik, disabled }) {
 	return (
 		<StyledNameUsernameType>
-			<div>
+			<StyledDiv>
 				<label className="label">
 					<StyleSpan theme={theme} className="label-text">
 						Name
 					</StyleSpan>
 				</label>
 				<StyledInput
-					value={loading ? 'Loading...' : value.data().name}
-					disabled
+					id="name"
+					name="name"
+					value={formik.values.name}
+					onChange={formik.handleChange}
+					required
+					disabled={disabled}
 					theme={theme}
 					type="text"
 					placeholder="Name"
 					className="input-bordered input w-full max-w-xs"
 				/>
-			</div>
-			<div>
+				{formik.errors.name && formik.touched.name && <StyledErrorDiv>{formik.errors.name}</StyledErrorDiv>}
+			</StyledDiv>
+			<StyledDiv>
 				<label className="label">
 					<StyleSpan theme={theme} className="label-text">
 						Username
 					</StyleSpan>
 				</label>
 				<StyledInput
-					value={loading ? 'Loading...' : value.data().username}
-					disabled
+					id="username"
+					name="username"
+					value={formik.values.username}
+					onChange={formik.handleChange}
+					required
+					disabled={disabled}
 					theme={theme}
 					type="text"
 					placeholder="Username"
 					className="input-bordered input w-full max-w-xs"
 				/>
-			</div>
-			<div>
+				{formik.errors.username && formik.touched.username && <StyledErrorDiv>{formik.errors.username}</StyledErrorDiv>}
+			</StyledDiv>
+			<StyledDiv>
 				<label className="label">
 					<StyleSpan theme={theme} className="label-text">
 						Type
 					</StyleSpan>
 				</label>
 				<StyledInput
-					value={loading ? 'Loading...' : value.data().type}
-					disabled
+					id="type"
+					name="type"
+					value={formik.values.type}
+					onChange={formik.handleChange}
+					required
+					disabled={true}
 					theme={theme}
 					type="text"
 					placeholder="Type"
 					className="input-bordered input w-full max-w-xs"
 				/>
-			</div>
+				{formik.errors.type && formik.touched.type && <StyledErrorDiv>{formik.errors.type}</StyledErrorDiv>}
+			</StyledDiv>
 		</StyledNameUsernameType>
 	);
 }

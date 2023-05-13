@@ -1,6 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
-import { useOutletContext, Form, Link, useSubmit } from 'react-router-dom';
+import { useOutletContext, Form, Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,10 @@ import { AwesomeButton } from 'react-awesome-button';
 import AwesomeButtonStyles1 from '@/styles/styles.module.scss';
 import googleSVG from '@/assets/svgs/icons8-google.svg';
 import twitterSVG from '@/assets/svgs/icons8-twitter.svg';
+
+// firebase
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase';
 
 // animations
 import { signInAnimations } from './signInAnimations';
@@ -59,7 +63,7 @@ const StyledForm = styled(Form)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1em;
+	gap: 1.5em;
 `;
 
 // ----------------------------------------------
@@ -210,9 +214,30 @@ const StyledContinueAsGuest = styled(Link)`
 
 // ----------------------------------------------
 
+const StyledDiv = styled.div`
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	width: 100%;
+`;
+
+const StyledErrorDiv = styled.div`
+	position: absolute;
+	font-size: 1em;
+	top: -25px;
+	left: 2px;
+	font-family: 'Rajdhani';
+	color: red;
+`;
+
+// ----------------------------------------------
+
 export function SignIn() {
 	const { theme } = useOutletContext();
-	const submit = useSubmit();
+
+	const navigate = useNavigate();
+
+	const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
 
 	const formik = useFormik({
 		initialValues: {
@@ -221,7 +246,15 @@ export function SignIn() {
 		},
 		validationSchema,
 		onSubmit: async values => {
-			submit(values, { method: 'post' });
+			const userCred = await signInWithEmailAndPassword(values.email, values.password);
+
+			if(userCred){
+				alert('Signed In successfully!!!')
+				navigate('/profile/account')
+			}else {
+				alert('Something Happend')
+			}
+
 		},
 	});
 
@@ -239,33 +272,50 @@ export function SignIn() {
 	return (
 		<StyledOuterDiv>
 			<StyledSignIn theme={theme} {...signInAnimations}>
-				<StyledForm>
+				<StyledForm onSubmit={formik.handleSubmit}>
 					<StyledDiv2 theme={theme}>Sign In</StyledDiv2>
-
-					<StyledLabel1 theme={theme} className="input-group-md input-group">
-						<StyledSpan>
-							<FontAwesomeIcon icon={faAt} />
-						</StyledSpan>
-						<StyledInput theme={theme} type="email" placeholder="Email" required className="input input-md" />
-					</StyledLabel1>
-
-					<StyledLabel1 theme={theme} className="input-group-md input-group">
-						<StyledSpan>
-							<FontAwesomeIcon icon={faLock} />
-						</StyledSpan>
-						<StyledInput
-							theme={theme}
-							type="password"
-							placeholder="Password"
-							required
-							className="input input-md"
-						/>
-					</StyledLabel1>
-
-					<StyledLabel2 theme={theme} htmlFor="checkbox">
-						<input type="checkbox" id="checkbox" name="checkbox" /> Remember me
-					</StyledLabel2>
-
+					<StyledDiv>
+						<StyledLabel1 theme={theme} className="input-group-md input-group">
+							<StyledSpan>
+								<FontAwesomeIcon icon={faAt} />
+							</StyledSpan>
+							<StyledInput
+								id="email"
+								name="email"
+								value={formik.values.email}
+								onChange={formik.handleChange}
+								theme={theme}
+								type="email"
+								placeholder="Email"
+								required
+								className="input input-md"
+							/>
+							{formik.errors.email && formik.touched.email && (
+								<StyledErrorDiv>{formik.errors.email}</StyledErrorDiv>
+							)}
+						</StyledLabel1>
+					</StyledDiv>
+					<StyledDiv>
+						<StyledLabel1 theme={theme} className="input-group-md input-group">
+							<StyledSpan>
+								<FontAwesomeIcon icon={faLock} />
+							</StyledSpan>
+							<StyledInput
+								id="password"
+								name="password"
+								value={formik.values.password}
+								onChange={formik.handleChange}
+								theme={theme}
+								type="password"
+								placeholder="Password"
+								required
+								className="input input-md"
+							/>
+							{formik.errors.password && formik.touched.password && (
+								<StyledErrorDiv>{formik.errors.password}</StyledErrorDiv>
+							)}
+						</StyledLabel1>
+					</StyledDiv>
 					<AwesomeButton style={AwesomeButtonStyles2} cssModule={AwesomeButtonStyles1} type="primary">
 						Sign in
 					</AwesomeButton>

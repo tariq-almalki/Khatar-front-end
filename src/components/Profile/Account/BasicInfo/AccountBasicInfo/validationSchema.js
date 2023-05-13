@@ -9,13 +9,12 @@ export const validationSchema = yup.object({
 		.min(5)
 		.max(15)
 		.matches(
-			/^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
-			"name must be >5, <15, doesn't start with nums or _"
+			/^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![0-9_.])$/,
+			"name must be >4, <16, doesn't start with nums or _"
 		),
 	address: yup.string().required(),
-	// add date.min and date.max if you chose the way you will be displaying date.
-	birthday: yup.string().required(),
+	dob: yup.string().required(),
 	gender: yup.string().oneOf(['male', 'female'], 'ONLY Male or Female').required(),
-	userType: yup.string().notOneOf(['normal', 'super', 'admin'], 'CAN NOT BE SET'),
+	type: yup.string().notOneOf(['normal', 'super', 'admin'], 'CAN NOT BE SET'),
 	bio: yup.string().max(150).ensure().trim(),
 });

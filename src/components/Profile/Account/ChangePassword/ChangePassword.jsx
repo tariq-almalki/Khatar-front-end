@@ -1,10 +1,12 @@
 import styled, { ThemeContext } from 'styled-components';
 import { motion } from 'framer-motion';
-import { useSubmit, useNavigation, Form, useOutletContext } from 'react-router-dom';
+import {  Form, useOutletContext } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useContext } from 'react';
-import { AwesomeButtonProgress } from 'react-awesome-button';
-import AwesomeButtonStyles from '@/styles/styles.module.scss';
+
+// firebase
+import { useUpdatePassword } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase';
 
 // validation schema
 import { validationSchema } from './validationSchema';
@@ -27,7 +29,7 @@ const StyledForm = styled(Form)`
 	flex-direction: column;
 	gap: 1em;
 	padding: 1em;
-	flex-grow: 0.04;
+	flex-grow: 0.09;
 	max-width: 820px;
 	min-width: 300px;
 
@@ -73,93 +75,131 @@ const StyledButtonDiv = styled.div`
 	align-items: end;
 `;
 
+const StyledButton = styled.button`
+	color: ${props => useContext(ThemeContext).colors[props.theme].deleteAccountButtonFontColor};
+	border: 1px solid ${props => useContext(ThemeContext).colors[props.theme].deleteAccountButtonBorderColor};
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].deleteAccountButtonColor} !important;
+	padding: 0.3em;
+	padding-left: 1em;
+	padding-right: 1em;
+	border-radius: 4px;
+	transition: all 0.2s ease;
+	width: fit-content;
+
+	&:active {
+		transform: translateY(2px);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	}
+
+	&:disabled {
+		opacity: 0.5; /* reduce opacity to indicate disabled state */
+		cursor: not-allowed; /* change cursor to indicate disabled state */
+		/* optionally, you can also change the background color and text color */
+		background-color: #ccc;
+		color: #999;
+	}
+`;
+
+const StyledDiv = styled.div`
+	display: flex;
+	position: relative;
+	flex-direction: column;
+`;
+
+const StyledErrorDiv = styled.div`
+	position: absolute;
+	font-size: 0.8em;
+	top: -10px;
+	font-family: 'Rajdhani';
+	color: red;
+`;
+
 export function ChangePassword() {
-	const outletContext = useOutletContext();
+	const { theme } = useOutletContext();
 
-	const navigation = useNavigation();
-
-	const submit = useSubmit();
+	const [updatePassword, updating, error] = useUpdatePassword(auth);
 
 	const formik = useFormik({
 		initialValues: {
+			oldPassword: '',
 			newPassword: '',
 			confirmNewPassword: '',
 		},
 		validationSchema,
 		onSubmit: async values => {
-			submit(values, { method: 'post' });
+			const res = await updatePassword(values.newPassword);
+			if (res) {
+				alert('Password Changed succesfully');
+				formik.resetForm();
+			}
 		},
 	});
 
-	const AwesomeButtonProgressStyles = {
-		'--button-primary-color': useContext(ThemeContext).colors[outletContext.theme].changePasswordButtonColor,
-		'--button-primary-color-dark': useContext(ThemeContext).colors[outletContext.theme].changePasswordButtonColorDark,
-		'--button-primary-color-hover': useContext(ThemeContext).colors[outletContext.theme].changePasswordButtonColorHover,
-		'--button-primary-color-active':
-			useContext(ThemeContext).colors[outletContext.theme].changePasswordButtonColorActive,
-		'--button-primary-border': `1px solid ${
-			useContext(ThemeContext).colors[outletContext.theme].changePasswordButtonBorderColor
-		}`,
-		'--button-font-color': useContext(ThemeContext).colors[outletContext.theme].changePasswordButtonFontColor,
-	};
-
 	return (
 		<ChangePasswordComponent {...accountAnimations}>
-			<StyledForm theme={outletContext.theme}>
-				<div>
+			<StyledForm theme={theme} onSubmit={formik.handleSubmit}>
+				<StyledDiv>
 					<label className="label">
-						<StyledSpan theme={outletContext.theme} className="label-text">
+						<StyledSpan theme={theme} className="label-text">
 							Old password
 						</StyledSpan>
 					</label>
 					<StyledInput
-						theme={outletContext.theme}
-						type="text"
+						id="oldPassword"
+						name="oldPassword"
+						value={formik.values.oldPassword}
+						onChange={formik.handleChange}
+						theme={theme}
+						type="password"
 						placeholder="Type Here"
 						className="input-bordered input w-full max-w-xs"
 					/>
-				</div>
-				<div>
+					{formik.errors.oldPassword && formik.touched.oldPassword && (
+						<StyledErrorDiv>{formik.errors.oldPassword}</StyledErrorDiv>
+					)}
+				</StyledDiv>
+				<StyledDiv>
 					<label className="label">
-						<StyledSpan theme={outletContext.theme} className="label-text">
+						<StyledSpan theme={theme} className="label-text">
 							New password
 						</StyledSpan>
 					</label>
 					<StyledInput
-						theme={outletContext.theme}
-						type="text"
+						id="newPassword"
+						name="newPassword"
+						value={formik.values.newPassword}
+						onChange={formik.handleChange}
+						theme={theme}
+						type="password"
 						placeholder="Type Here"
 						className="input-bordered input w-full max-w-xs"
 					/>
-				</div>
-				<div>
+					{formik.errors.newPassword && formik.touched.newPassword && (
+						<StyledErrorDiv>{formik.errors.newPassword}</StyledErrorDiv>
+					)}
+				</StyledDiv>
+				<StyledDiv>
 					<label className="label">
-						<StyledSpan theme={outletContext.theme} className="label-text">
+						<StyledSpan theme={theme} className="label-text">
 							Confirm new password
 						</StyledSpan>
 					</label>
 					<StyledInput
-						theme={outletContext.theme}
-						type="text"
+						id="confirmNewPassword"
+						name="confirmNewPassword"
+						value={formik.values.confirmNewPassword}
+						onChange={formik.handleChange}
+						theme={theme}
+						type="password"
 						placeholder="Type Here"
 						className="input-bordered input w-full max-w-xs"
 					/>
-				</div>
+					{formik.errors.confirmNewPassword && formik.touched.confirmNewPassword && (
+						<StyledErrorDiv>{formik.errors.confirmNewPassword}</StyledErrorDiv>
+					)}
+				</StyledDiv>
 				<StyledButtonDiv>
-					<AwesomeButtonProgress
-						type="primary"
-						style={AwesomeButtonProgressStyles}
-						theme={outletContext.theme}
-						cssModule={AwesomeButtonStyles}
-						loadingLabel="Wait..."
-						resultLabel="Success!"
-						releaseDelay={1000}
-						onPress={(event, release) => {
-							release();
-						}}
-					>
-						Update Password
-					</AwesomeButtonProgress>
+					<StyledButton theme={theme}>Update Password</StyledButton>
 				</StyledButtonDiv>
 			</StyledForm>
 		</ChangePasswordComponent>

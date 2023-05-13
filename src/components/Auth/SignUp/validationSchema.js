@@ -9,20 +9,20 @@ export const validationSchema = yup.object({
 		.min(5)
 		.max(15)
 		.matches(
-			/^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
-			"username must be >5, <15, doesn't start with nums or _"
+			/^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![0-9_.])$/,
+			"username must be >4, <16, doesn't start with nums or _"
 		),
 	password: yup
 		.string()
 		.required('Password is required')
 		.min(8, 'Password must be at least 8 characters')
-		.test('isValidPass', 'Password is not valid', (value, context) => {
+		.test('isValidPass', 'Password must contain capital/small letters, numbers', (value, context) => {
 			const hasUpperCase = /[A-Z]/.test(value);
 			const hasLowerCase = /[a-z]/.test(value);
 			const hasNumber = /[0-9]/.test(value);
-			const hasSymbol = /[!@#%&]/.test(value);
-			const validConditions = [hasUpperCase, hasLowerCase, hasNumber, hasSymbol].filter(Boolean).length;
-			return validConditions === 4;
+			// const hasSymbol = /[!@#%&]/.test(value);
+			const validConditions = [hasUpperCase, hasLowerCase, hasNumber].filter(Boolean).length;
+			return validConditions === 3;
 		}),
 	confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match'),
 	address: yup.string().required(),

@@ -1,9 +1,15 @@
 import styled, { ThemeContext } from 'styled-components';
 import { motion } from 'framer-motion';
-import { Form, useOutletContext } from 'react-router-dom';
-import { AwesomeButtonProgress } from 'react-awesome-button';
-import AwesomeButtonStyles from '@/styles/styles.module.scss';
+import { Form, useOutletContext, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
+import { useFormik } from 'formik';
+
+// firebase
+import { useDeleteUser } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase';
+
+// validation schema
+import { validationSchema } from './validationSchema';
 
 // animations
 import { accountAnimations } from '../accountAnimations';
@@ -70,77 +76,92 @@ const StyledButtonDiv = styled.div`
 	flex-grow: 0.7;
 `;
 
-export function DeleteAccount() {
-	const outletContext = useOutletContext();
+const StyledButton = styled.button`
+	color: ${props => useContext(ThemeContext).colors[props.theme].changePasswordButtonFontColor};
+	border: 1px solid ${props => useContext(ThemeContext).colors[props.theme].changePasswordButtonBorderColor};
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].changePasswordButtonColor} !important;
+	padding: 0.3em;
+	padding-left: 1em;
+	padding-right: 1em;
+	border-radius: 4px;
+	transition: all 0.2s ease;
+	width: fit-content;
 
-	const AwesomeButtonProgressStyles = {
-		'--button-primary-color': useContext(ThemeContext).colors[outletContext.theme].deleteAccountButtonColor,
-		'--button-primary-color-dark': useContext(ThemeContext).colors[outletContext.theme].deleteAccountButtonColorDark,
-		'--button-primary-color-hover': useContext(ThemeContext).colors[outletContext.theme].deleteAccountButtonColorHover,
-		'--button-primary-color-active': useContext(ThemeContext).colors[outletContext.theme].deleteAccountButtonColorActive,
-		'--button-primary-border': `1px solid ${
-			useContext(ThemeContext).colors[outletContext.theme].deleteAccountButtonBorderColor
-		}`,
-		'--button-font-color': useContext(ThemeContext).colors[outletContext.theme].deleteAccountButtonFontColor,
-	};
+	&:active {
+		transform: translateY(2px);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	}
+
+	&:disabled {
+		opacity: 0.5; /* reduce opacity to indicate disabled state */
+		cursor: not-allowed; /* change cursor to indicate disabled state */
+		/* optionally, you can also change the background color and text color */
+		background-color: #ccc;
+		color: #999;
+	}
+`;
+
+const StyledDiv = styled.div`
+	display: flex;
+	position: relative;
+	flex-direction: column;
+`;
+
+const StyledErrorDiv = styled.div`
+	position: absolute;
+	font-size: 0.8em;
+	top: -10px;
+	font-family: 'Rajdhani';
+	color: red;
+`;
+
+export function DeleteAccount() {
+	const { theme } = useOutletContext();
+
+	const navigate = useNavigate();
+
+	const [deleteUser, loading, error] = useDeleteUser(auth);
+
+	const formik = useFormik({
+		initialValues: {
+			verify: '',
+		},
+		validationSchema,
+		onSubmit: async values => {
+			console.log('hello');
+			const success = await deleteUser();
+			if (success) {
+				alert('You have been deleted');
+				navigate('/')
+			}
+		},
+	});
 
 	return (
 		<DeleteAccountComponent {...accountAnimations}>
-			<StyledForm theme={outletContext.theme}>
-				<div>
+			<StyledForm theme={theme} onSubmit={formik.handleSubmit}>
+				<StyledDiv>
 					<label className="label">
-						<StyledSpan theme={outletContext.theme} className="label-text">
-							username or email:
-						</StyledSpan>
-					</label>
-					<StyledInput
-						theme={outletContext.theme}
-						type="text"
-						placeholder="Type here"
-						className="input-bordered input w-full max-w-xs"
-					/>
-				</div>
-				<div>
-					<label className="label">
-						<StyledSpan theme={outletContext.theme} className="label-text">
+						<StyledSpan theme={theme} className="label-text">
 							To verify, type <i>delete my account</i> below:
 						</StyledSpan>
 					</label>
 					<StyledInput
-						theme={outletContext.theme}
+						id="verify"
+						name="verify"
+						value={formik.values.verify}
+						onChange={formik.handleChange}
+						theme={theme}
 						type="text"
 						placeholder="Type here"
 						className="input-bordered input w-full max-w-xs"
 					/>
-				</div>
-				<div>
-					<label className="label">
-						<StyledSpan theme={outletContext.theme} className="label-text">
-							Confirm your password:
-						</StyledSpan>
-					</label>
-					<StyledInput
-						theme={outletContext.theme}
-						type="text"
-						placeholder="Type here"
-						className="input-bordered input w-full max-w-xs"
-					/>
-				</div>
+					{formik.errors.verify && formik.touched.verify && (
+						<StyledErrorDiv>{formik.errors.verify}</StyledErrorDiv>
+					)}
+				</StyledDiv>
 				<StyledButtonDiv>
-					<AwesomeButtonProgress
-						type="primary"
-						style={AwesomeButtonProgressStyles}
-						theme={outletContext.theme}
-						cssModule={AwesomeButtonStyles}
-						loadingLabel="Wait..."
-						resultLabel="Success!"
-						releaseDelay={1000}
-						onPress={(event, release) => {
-							release();
-						}}
-					>
-						Delete Account
-					</AwesomeButtonProgress>
+					<StyledButton theme={theme}>Delete My Account</StyledButton>
 				</StyledButtonDiv>
 			</StyledForm>
 		</DeleteAccountComponent>

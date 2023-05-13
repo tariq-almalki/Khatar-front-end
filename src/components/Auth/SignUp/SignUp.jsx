@@ -1,6 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
-import { useOutletContext, Form, Link, useSubmit, useNavigate } from 'react-router-dom';
+import { useOutletContext, Form, Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { AwesomeButton } from 'react-awesome-button';
 import AwesomeButtonStyles1 from '@/styles/styles.module.scss';
@@ -14,7 +14,7 @@ import { doc, setDoc } from 'firebase/firestore';
 
 // animations
 import { signUpAnimations } from './signUpAnimations';
-
+// validation schema
 import { validationSchema } from './validationSchema';
 
 const StyledOuterDiv = styled.div`
@@ -205,7 +205,6 @@ const StyledErrorDiv = styled.div`
 
 export function SignUp() {
 	const { theme } = useOutletContext();
-	const submit = useSubmit();
 	const navigate = useNavigate();
 	const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
 
@@ -240,6 +239,7 @@ export function SignUp() {
 					dob: values.dob,
 					gender: values.gender,
 					type: 'basic',
+					bio: '',
 				});
 
 				navigate('/profile/account');
@@ -371,7 +371,7 @@ export function SignUp() {
 							name="phoneNumber"
 							value={formik.values.phoneNumber}
 							onChange={formik.handleChange}
-							mask={'+\\966 059 999 9999'}
+							mask={'+\\966 59 999 9999'}
 							formatChars={{
 								9: '[0-9]',
 							}}
