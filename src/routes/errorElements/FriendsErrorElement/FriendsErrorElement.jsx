@@ -1,5 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 const FriendsErrorElementComponent = styled.div`
 	display: flex;
@@ -13,6 +14,7 @@ const FriendsErrorElementComponent = styled.div`
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].errorElementBackgroundColor};
 `;
 
-export function FriendsErrorElement({ theme }) {
+export function FriendsErrorElement() {
+	const [theme] = useLocalStorage('theme', 'dark');
 	return <FriendsErrorElementComponent theme={theme}>Non-existent Route</FriendsErrorElementComponent>;
 }

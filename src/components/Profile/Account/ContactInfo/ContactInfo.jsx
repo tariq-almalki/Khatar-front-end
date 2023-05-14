@@ -4,12 +4,14 @@ import { Form, useOutletContext } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useContext, useState } from 'react';
 import InputMask from 'react-input-mask';
+import {capitalize} from 'underscore.string';
 
 // validation schema
 import { validationSchema } from './validationSchema';
 
 // firebase
 import { firestore } from '@/firebase';
+import { EmailAuthProvider, reauthenticateWithCredential, getAuth } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import { useUpdateEmail } from 'react-firebase-hooks/auth';
@@ -79,6 +81,10 @@ const StyledInput = styled.input`
 		/* optionally, you can also change the background color and text color */
 		background-color: #ccc;
 		color: #999;
+	}
+
+	&:focus {
+		outline: none !important;
 	}
 `;
 
@@ -173,21 +179,22 @@ const StyledInputMaskPhoneNumber = styled(InputMask)`
 	}
 `;
 
+const StyledGoogleAndTwitterContactInfo = styled.div`
+	font-family: 'Rajdhani';
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
 export function ContactInfo() {
 	const { theme, user } = useOutletContext();
 
 	const [value, loading, docError] = useDocument(doc(firestore, 'users', user.uid));
 	const [updateEmail, updating, updateEmailError] = useUpdateEmail(auth);
 
-	const [button1, setButton1] = useState({
-		text: 'Edit',
-		type: 'submit',
-	});
-
-	const [button2, setButton2] = useState({
-		styles: {},
-		disabled: true,
-	});
+	if (updateEmailError) {
+		alert(updateEmailError.message.match(/(?<=auth\/).+(?=\)\.)/));
+	}
 
 	const formik = useFormik({
 		initialValues: {
@@ -198,13 +205,40 @@ export function ContactInfo() {
 		onSubmit: async values => {
 			const docRef = doc(firestore, 'users', user.uid);
 
-			// updating in firestore
-			await updateDoc(docRef, values);
-			// updating email in firebase auth
-			const res = await updateEmail(values.email);
-			console.log(res);
+			if (auth.currentUser.providerId === 'firebase') {
+				const password = prompt('enter your password for Re-Authenticating', '');
+
+				const credential = EmailAuthProvider.credential(auth.currentUser.email, password);
+				try {
+					const result = await reauthenticateWithCredential(auth.currentUser, credential);
+					if (result) {
+						// updating email in firebase auth
+						const res = await updateEmail(values.email);
+
+						if (res) {
+							// updating in firestore
+							await updateDoc(docRef, values);
+							return alert('updated successfully');
+						}
+					}
+				} catch (err) {
+					formik.resetForm();
+					return alert(err.message.match(/(?<=auth\/).+(?=\)\.)/));
+				}
+			}
+
 		},
 		enableReinitialize: true,
+	});
+
+	const [button1, setButton1] = useState({
+		text: 'Edit',
+		type: 'submit',
+	});
+
+	const [button2, setButton2] = useState({
+		styles: {},
+		disabled: true,
 	});
 
 	function button1Handler() {
@@ -234,6 +268,11 @@ export function ContactInfo() {
 		}));
 	}
 
+	if (auth.currentUser.providerData[0].providerId === 'google.com' || 'twitter.com') {
+		const provider = auth.currentUser.providerData[0].providerId.match(/.+(?=\.)/)
+		return <StyledGoogleAndTwitterContactInfo>Unable to Change Email for {capitalize(provider)} Account</StyledGoogleAndTwitterContactInfo>;
+	}
+
 	return (
 		<ContactInfoComponent {...accountAnimations}>
 			<StyledForm theme={theme} onSubmit={formik.handleSubmit}>
@@ -251,6 +290,7 @@ export function ContactInfo() {
 						theme={theme}
 						disabled={button2.disabled}
 						type="text"
+						autocomplete="off"
 						placeholder="Type here"
 						className="input-bordered input w-full max-w-xs"
 					/>
@@ -268,6 +308,7 @@ export function ContactInfo() {
 						value={formik.values.phoneNumber}
 						onChange={formik.handleChange}
 						theme={theme}
+						autocomplete="off"
 						mask={'+\\966 59 999 9999'}
 						formatChars={{
 							9: '[0-9]',

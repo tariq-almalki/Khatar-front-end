@@ -9,16 +9,27 @@ import { AwesomeButton } from 'react-awesome-button';
 import AwesomeButtonStyles1 from '@/styles/styles.module.scss';
 import googleSVG from '@/assets/svgs/icons8-google.svg';
 import twitterSVG from '@/assets/svgs/icons8-twitter.svg';
+import { customAlphabet } from 'nanoid';
+import { randomGender, randomDate } from '@/utils/random';
 
 // firebase
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import {
+	useSignInWithEmailAndPassword,
+	useSignInWithGoogle,
+	useSignInWithTwitter,
+	useAuthState,
+} from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
+import { firestore } from '@/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 // animations
 import { signInAnimations } from './signInAnimations';
 
 // validation schema
 import { validationSchema } from './validationSchema';
+
+const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 10);
 
 const StyledOuterDiv = styled.div`
 	display: flex;
@@ -237,7 +248,76 @@ export function SignIn() {
 
 	const navigate = useNavigate();
 
-	const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+	const [authUser] = useAuthState(auth);
+
+	if (authUser) {
+		navigate('/profile/account');
+	}
+
+	const [signInWithEmailAndPassword, emailAndPasswordUser, emailAndPasswordLoading, emailAndPasswordError] =
+		useSignInWithEmailAndPassword(auth);
+	const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+	const [signInWithTwitter, twitterUser, twitterLoading, twitterError] = useSignInWithTwitter(auth);
+
+	if (googleError) {
+		alert(googleError.message.match(/(?<=auth\/).+(?=\)\.)/));
+	}
+
+	if (twitterError) {
+		alert(twitterError.message.match(/(?<=auth\/).+(?=\)\.)/));
+	}
+
+	if (emailAndPasswordError) {
+		throw new Error(error.message.match(/(?<=auth\/).+(?=\)\.)/));
+	}
+
+	// Handlers
+
+	async function googleHandler() {
+		const userCred = await signInWithGoogle();
+
+		if (!userCred) {
+			throw new Error('Something Happened');
+		}
+
+		// Add a new document in collection "cities"
+		const res = await setDoc(doc(firestore, 'users', userCred.user.uid), {
+			name: userCred.user.displayName,
+			username: nanoid(),
+			address: 'default',
+			email: userCred.user.email,
+			phoneNumber: '',
+			dob: randomDate(new Date(1950, 1, 1), new Date(2015, 1, 1)).toISOString().slice(0, 10),
+			gender: randomGender(['male', 'female']),
+			type: 'basic',
+			bio: '',
+		});
+
+		navigate('/profile/account');
+	}
+
+	async function twitterHandler() {
+		const userCred = await signInWithTwitter();
+
+		if (!userCred) {
+			throw new Error('Something Happened');
+		}
+
+		// Add a new document in collection "cities"
+		await setDoc(doc(firestore, 'users', userCred.user.uid), {
+			name: userCred.user.displayName,
+			username: nanoid(),
+			address: 'default',
+			email: '',
+			phoneNumber: '',
+			dob: randomDate(new Date(1950, 1, 1), new Date(2015, 1, 1)).toISOString().slice(0, 10),
+			gender: randomGender(['male', 'female']),
+			type: 'basic',
+			bio: '',
+		});
+
+		navigate('/profile/account');
+	}
 
 	const formik = useFormik({
 		initialValues: {
@@ -248,13 +328,10 @@ export function SignIn() {
 		onSubmit: async values => {
 			const userCred = await signInWithEmailAndPassword(values.email, values.password);
 
-			if(userCred){
-				alert('Signed In successfully!!!')
-				navigate('/profile/account')
-			}else {
-				alert('Something Happend')
+			if (userCred) {
+				alert('Signed In successfully!!!');
+				navigate('/profile/account');
 			}
-
 		},
 	});
 
@@ -328,10 +405,18 @@ export function SignIn() {
 						or continue with
 					</StyledDivider>
 					<StyledDiv3>
-						<StyledGoogleAwesomeButton style={AwesomeButtonStyles2} cssModule={AwesomeButtonStyles1}>
+						<StyledGoogleAwesomeButton
+							onPress={googleHandler}
+							style={AwesomeButtonStyles2}
+							cssModule={AwesomeButtonStyles1}
+						>
 							<StyledGoogleImage src={googleSVG} alt="google icon" width={32} height={32} />
 						</StyledGoogleAwesomeButton>
-						<StyledTwitterAwesomeButton style={AwesomeButtonStyles2} cssModule={AwesomeButtonStyles1}>
+						<StyledTwitterAwesomeButton
+							onPress={twitterHandler}
+							style={AwesomeButtonStyles2}
+							cssModule={AwesomeButtonStyles1}
+						>
 							<StyledTwitterImage src={twitterSVG} alt="twitter icon" width={32} height={32} />
 						</StyledTwitterAwesomeButton>
 					</StyledDiv3>

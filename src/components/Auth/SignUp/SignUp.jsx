@@ -7,7 +7,7 @@ import AwesomeButtonStyles1 from '@/styles/styles.module.scss';
 import InputMask from 'react-input-mask';
 
 // firebase
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { firestore } from '@/firebase';
 import { doc, setDoc } from 'firebase/firestore';
@@ -206,10 +206,19 @@ const StyledErrorDiv = styled.div`
 export function SignUp() {
 	const { theme } = useOutletContext();
 	const navigate = useNavigate();
+
+	// routing signed user to profile account
+
+	const [authUser] = useAuthState(auth);
+
+	if (authUser) {
+		navigate('/profile/account');
+	}
+
 	const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
 
 	if (error) {
-		throw error;
+		throw new Error(error.message.match(/(?<=auth\/).+(?=\)\.)/));
 	}
 
 	const formik = useFormik({
@@ -229,6 +238,11 @@ export function SignUp() {
 			try {
 				// creating new user
 				const userCredential = await createUserWithEmailAndPassword(values.email, values.password);
+
+				if (!userCredential) {
+					throw new Error('Something Happened');
+				}
+
 				// Add a new document in collection "cities"
 				await setDoc(doc(firestore, 'users', userCredential.user.uid), {
 					name: values.name,
@@ -244,7 +258,7 @@ export function SignUp() {
 
 				navigate('/profile/account');
 			} catch (err) {
-				console.log(err);
+				console.dir(err);
 			}
 		},
 	});
@@ -314,6 +328,7 @@ export function SignUp() {
 							<StyledErrorDiv>{formik.errors.password}</StyledErrorDiv>
 						)}
 					</StyledLabel>
+					{console.log(formik.values.password)}
 					<StyledLabel theme={theme} className="input-group-sm input-group">
 						<StyledInput
 							id="confirmPassword"

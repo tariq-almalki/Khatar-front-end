@@ -6,7 +6,9 @@ import { useFormik } from 'formik';
 
 // firebase
 import { useDeleteUser } from 'react-firebase-hooks/auth';
+import { doc, deleteDoc } from 'firebase/firestore';
 import { auth } from '@/firebase';
+import { firestore } from '@/firebase';
 
 // validation schema
 import { validationSchema } from './validationSchema';
@@ -52,6 +54,10 @@ const StyledSpan = styled.span`
 const StyledInput = styled.input`
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].accountInputBackgroundColor} !important;
 	color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
+
+	&:focus {
+		outline: none !important;
+	}
 
 	::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -116,7 +122,7 @@ const StyledErrorDiv = styled.div`
 `;
 
 export function DeleteAccount() {
-	const { theme } = useOutletContext();
+	const { theme, user } = useOutletContext();
 
 	const navigate = useNavigate();
 
@@ -128,12 +134,10 @@ export function DeleteAccount() {
 		},
 		validationSchema,
 		onSubmit: async values => {
-			console.log('hello');
-			const success = await deleteUser();
-			if (success) {
-				alert('You have been deleted');
-				navigate('/')
-			}
+			await deleteUser();
+			await deleteDoc(doc(firestore, 'users', user.uid));
+			alert('You have been deleted');
+			navigate('/');
 		},
 	});
 
@@ -152,6 +156,7 @@ export function DeleteAccount() {
 						value={formik.values.verify}
 						onChange={formik.handleChange}
 						theme={theme}
+						autocomplete="off"
 						type="text"
 						placeholder="Type here"
 						className="input-bordered input w-full max-w-xs"

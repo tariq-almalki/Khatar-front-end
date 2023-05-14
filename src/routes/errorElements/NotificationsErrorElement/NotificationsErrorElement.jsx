@@ -1,5 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 const NotificationsErrorElementComponent = styled.div`
 	display: flex;
@@ -13,6 +14,7 @@ const NotificationsErrorElementComponent = styled.div`
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].errorElementBackgroundColor};
 `;
 
-export function NotificationsErrorElement({ theme }) {
+export function NotificationsErrorElement() {
+	const [theme] = useLocalStorage('theme', 'dark');
 	return <NotificationsErrorElementComponent theme={theme}>Non-existent Route</NotificationsErrorElementComponent>;
 }

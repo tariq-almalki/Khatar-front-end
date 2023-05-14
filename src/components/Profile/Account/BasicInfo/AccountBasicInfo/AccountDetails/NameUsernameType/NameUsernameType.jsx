@@ -16,6 +16,10 @@ const StyledInput = styled.input`
 	color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].accountInputBackgroundColor} !important;
 
+	&:focus {
+		outline: none !important;
+	}
+
 	&::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
 		color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
@@ -71,6 +75,7 @@ export function NameUsernameType({ theme, formik, disabled }) {
 					onChange={formik.handleChange}
 					required
 					disabled={disabled}
+					autocomplete="off"
 					theme={theme}
 					type="text"
 					placeholder="Name"
@@ -90,13 +95,16 @@ export function NameUsernameType({ theme, formik, disabled }) {
 					value={formik.values.username}
 					onChange={formik.handleChange}
 					required
+					autocomplete="off"
 					disabled={disabled}
 					theme={theme}
 					type="text"
 					placeholder="Username"
 					className="input-bordered input w-full max-w-xs"
 				/>
-				{formik.errors.username && formik.touched.username && <StyledErrorDiv>{formik.errors.username}</StyledErrorDiv>}
+				{formik.errors.username && formik.touched.username && (
+					<StyledErrorDiv>{formik.errors.username}</StyledErrorDiv>
+				)}
 			</StyledDiv>
 			<StyledDiv>
 				<label className="label">
@@ -110,6 +118,7 @@ export function NameUsernameType({ theme, formik, disabled }) {
 					value={formik.values.type}
 					onChange={formik.handleChange}
 					required
+					autocomplete="off"
 					disabled={true}
 					theme={theme}
 					type="text"

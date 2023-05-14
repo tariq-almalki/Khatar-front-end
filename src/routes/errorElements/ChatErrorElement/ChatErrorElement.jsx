@@ -1,5 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 const ChatErrorElementComponent = styled.div`
 	display: flex;
@@ -13,6 +14,7 @@ const ChatErrorElementComponent = styled.div`
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].errorElementBackgroundColor};
 `;
 
-export function ChatErrorElement({ theme }) {
+export function ChatErrorElement() {
+	const [theme] = useLocalStorage('theme', 'dark');
 	return <ChatErrorElementComponent theme={theme}>Non-existent Route</ChatErrorElementComponent>;
 }

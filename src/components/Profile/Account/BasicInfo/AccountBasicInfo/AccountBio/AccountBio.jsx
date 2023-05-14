@@ -23,6 +23,10 @@ const StyledTextarea = styled.textarea`
 		max-width: 217px;
 	}
 
+	&:focus {
+		outline: none !important;
+	}
+
 	&::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
 		color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoBioTextColor} !important;
@@ -64,6 +68,7 @@ export function AccountBio({ theme, formik, disabled }) {
 				value={formik.values.bio}
 				onChange={formik.handleChange}
 				disabled={disabled}
+				autocomplete="off"
 				theme={theme}
 				placeholder="Bio"
 				className="textarea-bordered textarea textarea-md"

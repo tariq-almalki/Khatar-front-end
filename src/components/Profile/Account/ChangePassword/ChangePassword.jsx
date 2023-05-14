@@ -1,8 +1,9 @@
 import styled, { ThemeContext } from 'styled-components';
 import { motion } from 'framer-motion';
-import {  Form, useOutletContext } from 'react-router-dom';
+import { Form, useOutletContext } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useContext } from 'react';
+import { capitalize } from 'underscore.string';
 
 // firebase
 import { useUpdatePassword } from 'react-firebase-hooks/auth';
@@ -114,6 +115,14 @@ const StyledErrorDiv = styled.div`
 	color: red;
 `;
 
+const StyledGoogleAndTwitterContactInfo = styled.div`
+color: ${props => useContext(ThemeContext).colors[props.theme].accountSpanTextColor} !important;
+	font-family: 'Rajdhani';
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
 export function ChangePassword() {
 	const { theme } = useOutletContext();
 
@@ -134,6 +143,15 @@ export function ChangePassword() {
 			}
 		},
 	});
+
+	if (auth.currentUser.providerData[0].providerId === 'google.com' || 'twitter.com') {
+		const provider = auth.currentUser.providerData[0].providerId.match(/.+(?=\.)/);
+		return (
+			<StyledGoogleAndTwitterContactInfo>
+				Unable to Change Password for {capitalize(provider)} Account
+			</StyledGoogleAndTwitterContactInfo>
+		);
+	}
 
 	return (
 		<ChangePasswordComponent {...accountAnimations}>

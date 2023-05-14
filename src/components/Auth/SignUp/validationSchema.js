@@ -9,8 +9,8 @@ export const validationSchema = yup.object({
 		.min(5)
 		.max(15)
 		.matches(
-			/^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![0-9_.])$/,
-			"username must be >4, <16, doesn't start with nums or _"
+			/^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._-]+(?<![0-9_.])$/,
+			"username must be >4, <16, doesn't start with nums,_,."
 		),
 	password: yup
 		.string()

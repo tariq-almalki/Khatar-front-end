@@ -1,5 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 const AwardsErrorElementComponent = styled.div`
 	display: flex;
@@ -13,6 +14,7 @@ const AwardsErrorElementComponent = styled.div`
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].errorElementBackgroundColor};
 `;
 
-export function AwardsErrorElement({ theme }) {
+export function AwardsErrorElement() {
+	const [theme] = useLocalStorage('theme', 'dark');
 	return <AwardsErrorElementComponent theme={theme}>Non-existent Route</AwardsErrorElementComponent>;
 }

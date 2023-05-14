@@ -1,5 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 const HelpRequestsErrorElementComponent = styled.div`
 	display: flex;
@@ -13,6 +14,7 @@ const HelpRequestsErrorElementComponent = styled.div`
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].errorElementBackgroundColor};
 `;
 
-export function HelpRequestsErrorElement({ theme }) {
+export function HelpRequestsErrorElement() {
+	const [theme] = useLocalStorage('theme', 'dark');
 	return <HelpRequestsErrorElementComponent theme={theme}>Non-existent Route</HelpRequestsErrorElementComponent>;
 }

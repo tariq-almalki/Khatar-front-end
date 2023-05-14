@@ -1,9 +1,8 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useRouteError, Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
 
-const ProfileErrorElementComponent = styled.div`
+const SignUpErrorElementComponent = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -15,7 +14,7 @@ const ProfileErrorElementComponent = styled.div`
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].errorElementBackgroundColor};
 
 	@media only all and (max-width: 470px) {
-		font-size: 3em;
+		font-size: 2.5em;
 	}
 `;
 
@@ -41,18 +40,16 @@ const StyledLink = styled(Link)`
 	}
 `;
 
-export function ProfileErrorElement() {
+export function SignUpErrorElement({ theme }) {
 	const error = useRouteError();
-	const [theme] = useLocalStorage('theme', 'dark');
-
 	return (
-		<ProfileErrorElementComponent theme={theme}>
+		<SignUpErrorElementComponent theme={theme}>
 			<StyledDiv>
 				{error.message ? error.message : 'Non-existent Route'}
 				<StyledLink to="/" theme={theme}>
 					Go Back
 				</StyledLink>
 			</StyledDiv>
-		</ProfileErrorElementComponent>
+		</SignUpErrorElementComponent>
 	);
 }

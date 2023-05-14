@@ -4,10 +4,13 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite --host 192.168.137.1",
+		"dev": "vite",
 		"test": "vitest",
 		"build": "vite build",
 		"preview": "vite preview"
+	},
+	"//": {
+		"first_comment": "vite --host 192.168.137.1"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -37,6 +40,7 @@
 	},
 	"devDependencies": {
 		"@swc/plugin-styled-components": "^1.5.60",
+		"@types/firebase": "^3.2.1",
 		"@types/react": "^18.2.0",
 		"@types/react-dom": "^18.2.1",
 		"@vitejs/plugin-react-swc": "^3.3.0",

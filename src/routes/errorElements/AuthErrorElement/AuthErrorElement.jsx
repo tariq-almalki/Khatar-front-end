@@ -1,5 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 const AuthErrorElementComponent = styled.div`
 	display: flex;
@@ -13,6 +14,7 @@ const AuthErrorElementComponent = styled.div`
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].errorElementBackgroundColor};
 `;
 
-export function AuthErrorElement({ theme }) {
+export function AuthErrorElement() {
+	const [theme] = useLocalStorage('theme', 'dark');
 	return <AuthErrorElementComponent theme={theme}>Non-existent Route</AuthErrorElementComponent>;
 }
