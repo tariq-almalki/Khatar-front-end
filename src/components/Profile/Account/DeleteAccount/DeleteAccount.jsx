@@ -134,10 +134,10 @@ export function DeleteAccount() {
 		},
 		validationSchema,
 		onSubmit: async values => {
-			await deleteUser();
-			await deleteDoc(doc(firestore, 'users', user.uid));
 			alert('You have been deleted');
 			navigate('/');
+			await deleteUser();
+			await deleteDoc(doc(firestore, 'users', user.uid));
 		},
 	});
 

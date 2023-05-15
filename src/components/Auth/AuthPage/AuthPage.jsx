@@ -202,6 +202,20 @@ export function AuthPage() {
 			throw new Error('Something Happened');
 		}
 
+		let timeoutId;
+
+		auth.onAuthStateChanged(user => {
+			if (user) {
+				timeoutId = setTimeout(() => {
+					alert('signed out successfully');
+					navigate('/');
+					auth.signOut();
+				}, 900_000);
+			} else {
+				clearTimeout(timeoutId);
+			}
+		});
+
 		// Add a new document in collection "cities"
 		const res = await setDoc(doc(firestore, 'users', userCred.user.uid), {
 			name: userCred.user.displayName,
@@ -224,6 +238,20 @@ export function AuthPage() {
 		if (!userCred) {
 			throw new Error('Something Happened');
 		}
+
+		let timeoutId;
+
+		auth.onAuthStateChanged(user => {
+			if (user) {
+				timeoutId = setTimeout(() => {
+					alert('signed out successfully');
+					navigate('/');
+					auth.signOut();
+				}, 900_000);
+			} else {
+				clearTimeout(timeoutId);
+			}
+		});
 
 		// Add a new document in collection "cities"
 		await setDoc(doc(firestore, 'users', userCred.user.uid), {

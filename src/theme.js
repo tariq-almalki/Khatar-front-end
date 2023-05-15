@@ -1,6 +1,8 @@
 export const theme = {
 	colors: {
 		light: {
+			// Google and Twitter font color in contact-info and change-password
+			googleAndTwitterTextColor: '#000',	
 			// loading screen
 			loadingScreenBackgroundColor: '#fff',
 			loadingScreenTextColor: '#000',
@@ -145,7 +147,7 @@ export const theme = {
 		},
 		dark: {
             // Google and Twitter font color in contact-info and change-password
-									
+			googleAndTwitterTextColor: '#fff',						
 			// 
 			// loading screen
 			loadingScreenBackgroundColor: '#000',

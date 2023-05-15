@@ -31,14 +31,14 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
 `;
 
 const StyledLink = styled(Link)`
-&:hover {
+	&:hover {
 		background-color: ${props => useContext(ThemeContext).colors[props.theme].sideBarLinkHoverColor};
 	}
 
 	&.active {
 		background-color: ${props => useContext(ThemeContext).colors[props.theme].sideBarLinkActiveColor};
 	}
-`
+`;
 
 const StyledNavLink = styled(NavLink)`
 	&:hover {
@@ -56,9 +56,10 @@ export function TailWindUpperMenu(props) {
 
 	async function signOutHandler() {
 		const success = await signOut();
-		if (success) {
-			alert('signed out succesfully');
+		if(success){
+			alert('signed out successfully');
 			navigate('/');
+
 		}
 	}
 

@@ -180,6 +180,7 @@ const StyledInputMaskPhoneNumber = styled(InputMask)`
 `;
 
 const StyledGoogleAndTwitterContactInfo = styled.div`
+color: ${props => useContext(ThemeContext).colors[props.theme].googleAndTwitterTextColor};
 	font-family: 'Rajdhani';
 	display: flex;
 	justify-content: center;
@@ -268,9 +269,16 @@ export function ContactInfo() {
 		}));
 	}
 
-	if (auth.currentUser.providerData[0].providerId === 'google.com' || 'twitter.com') {
-		const provider = auth.currentUser.providerData[0].providerId.match(/.+(?=\.)/)
-		return <StyledGoogleAndTwitterContactInfo>Unable to Change Email for {capitalize(provider)} Account</StyledGoogleAndTwitterContactInfo>;
+	if (
+		auth.currentUser.providerData[0].providerId === 'google.com' ||
+		auth.currentUser.providerData[0].providerId === 'twitter.com'
+	) {
+		const provider = auth.currentUser.providerData[0].providerId.match(/.+(?=\.)/);
+		return (
+			<StyledGoogleAndTwitterContactInfo theme={theme}>
+				Unable to Change Email for {capitalize(provider)} Account
+			</StyledGoogleAndTwitterContactInfo>
+		);
 	}
 
 	return (

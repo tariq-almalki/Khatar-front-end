@@ -116,7 +116,7 @@ const StyledErrorDiv = styled.div`
 `;
 
 const StyledGoogleAndTwitterContactInfo = styled.div`
-color: ${props => useContext(ThemeContext).colors[props.theme].accountSpanTextColor} !important;
+	color: ${props => useContext(ThemeContext).colors[props.theme].googleAndTwitterTextColor};
 	font-family: 'Rajdhani';
 	display: flex;
 	justify-content: center;
@@ -144,10 +144,15 @@ export function ChangePassword() {
 		},
 	});
 
-	if (auth.currentUser.providerData[0].providerId === 'google.com' || 'twitter.com') {
+	console.log(auth);
+
+	if (
+		auth.currentUser.providerData[0].providerId === 'google.com' ||
+		auth.currentUser.providerData[0].providerId === 'twitter.com'
+	) {
 		const provider = auth.currentUser.providerData[0].providerId.match(/.+(?=\.)/);
 		return (
-			<StyledGoogleAndTwitterContactInfo>
+			<StyledGoogleAndTwitterContactInfo theme={theme}>
 				Unable to Change Password for {capitalize(provider)} Account
 			</StyledGoogleAndTwitterContactInfo>
 		);
