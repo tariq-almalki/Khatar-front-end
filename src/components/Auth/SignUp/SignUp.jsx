@@ -133,24 +133,34 @@ const StyledInput = styled.input`
 		outline: none !important;
 	}
 
-	::placeholder {
+	&::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
 		color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputPlaceHolderTextColor} !important;
 		opacity: 1; /* Firefox */
 	}
 
-	:-ms-input-placeholder {
+	&:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
 		color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputPlaceHolderTextColor} !important;
 	}
 
-	::-ms-input-placeholder {
+	&::-ms-input-placeholder {
 		/* Microsoft Edge */
 		color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputPlaceHolderTextColor} !important;
 	}
 
-	::-webkit-calendar-picker-indicator {
+	&::-webkit-calendar-picker-indicator {
 		filter: invert(1);
+	}
+
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+		-webkit-text-fill-color: ${props => useContext(ThemeContext).colors[props.theme].signUpInputTextColor} !important;
+		-webkit-box-shadow: 0 0 0px 1000px white inset !important;
+		border: none;
+		caret-color: black !important;
 	}
 `;
 
@@ -243,6 +253,20 @@ export function SignUp() {
 					throw new Error('Something Happened');
 				}
 
+				let timeoutId;
+
+				auth.onAuthStateChanged(user => {
+					if (user) {
+						timeoutId = setTimeout(() => {
+							auth.signOut();
+							alert('signed out successfully');
+							navigate('/');
+						}, 900_000);
+					} else {
+						clearTimeout(timeoutId);
+					}
+				});
+
 				// Add a new document in collection "cities"
 				await setDoc(doc(firestore, 'users', userCredential.user.uid), {
 					name: values.name,
@@ -328,7 +352,6 @@ export function SignUp() {
 							<StyledErrorDiv>{formik.errors.password}</StyledErrorDiv>
 						)}
 					</StyledLabel>
-					{console.log(formik.values.password)}
 					<StyledLabel theme={theme} className="input-group-sm input-group">
 						<StyledInput
 							id="confirmPassword"

@@ -86,6 +86,16 @@ const StyledInput = styled.input`
 	&:focus {
 		outline: none !important;
 	}
+
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+		-webkit-text-fill-color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
+		-webkit-box-shadow: 0 0 0px 1000px white inset !important;
+		border: none;
+		caret-color: black !important;
+	}
 `;
 
 const StyledButtonDiv = styled.div`

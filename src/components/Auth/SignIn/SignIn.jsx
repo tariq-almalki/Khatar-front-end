@@ -161,20 +161,31 @@ const StyledInput = styled.input`
 		outline: none !important;
 	}
 
-	::placeholder {
+	&::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
 		color: ${props => useContext(ThemeContext).colors[props.theme].signInInputPlaceHolderTextColor} !important;
 		opacity: 1; /* Firefox */
 	}
 
-	:-ms-input-placeholder {
+	&:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
 		color: ${props => useContext(ThemeContext).colors[props.theme].signInInputPlaceHolderTextColor} !important;
 	}
 
-	::-ms-input-placeholder {
+	&::-ms-input-placeholder {
 		/* Microsoft Edge */
 		color: ${props => useContext(ThemeContext).colors[props.theme].signInInputPlaceHolderTextColor} !important;
+	}
+
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active,
+	&:-webkit-autofill::first-line {
+		-webkit-text-fill-color: ${props => useContext(ThemeContext).colors[props.theme].signInInputTextColor} !important;
+		-webkit-box-shadow: 0 0 0px 1000px white inset !important;
+		border: none;
+		caret-color: black !important;
 	}
 `;
 
@@ -254,8 +265,8 @@ export function SignIn() {
 		navigate('/profile/account');
 	}
 
-	const [signInWithEmailAndPassword, emailAndPasswordUser, emailAndPasswordLoading, emailAndPasswordError] =
-		useSignInWithEmailAndPassword(auth);
+	// prettier-ignore
+	const [signInWithEmailAndPassword, emailAndPasswordUser, emailAndPasswordLoading, emailAndPasswordError] = useSignInWithEmailAndPassword(auth);
 	const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
 	const [signInWithTwitter, twitterUser, twitterLoading, twitterError] = useSignInWithTwitter(auth);
 
@@ -265,10 +276,6 @@ export function SignIn() {
 
 	if (twitterError) {
 		alert(twitterError.message.match(/(?<=auth\/).+(?=\)\.)/));
-	}
-
-	if (emailAndPasswordError) {
-		throw new Error(error.message.match(/(?<=auth\/).+(?=\)\.)/));
 	}
 
 	// Handlers
@@ -372,7 +379,11 @@ export function SignIn() {
 				});
 
 				alert('Signed In successfully!!!');
-				navigate('/profile/account');
+				return navigate('/profile/account');
+			}
+
+			if (emailAndPasswordError) {
+				alert(emailAndPasswordError.message.match(/(?<=auth\/).+(?=\)\.)/));
 			}
 		},
 	});

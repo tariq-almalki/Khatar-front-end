@@ -53,20 +53,30 @@ const StyledInput = styled.input`
 	background-color: ${props => useContext(ThemeContext).colors[props.theme].accountInputBackgroundColor} !important;
 	color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 
-	::placeholder {
+	&::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
 		color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 		opacity: 1; /* Firefox */
 	}
 
-	:-ms-input-placeholder {
+	&:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
 		color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
 	}
 
-	::-ms-input-placeholder {
+	&::-ms-input-placeholder {
 		/* Microsoft Edge */
 		color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
+	}
+
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+		-webkit-text-fill-color: ${props => useContext(ThemeContext).colors[props.theme].accountInputTextColor} !important;
+		-webkit-box-shadow: 0 0 0px 1000px white inset !important;
+		border: none;
+		caret-color: black !important;
 	}
 `;
 

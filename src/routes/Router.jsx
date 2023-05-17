@@ -83,6 +83,9 @@ import { SignUpErrorElement } from './errorElements/SignUpErrorElement/SignUpErr
 // ForgotPassword
 import { ForgotPassword } from '../components/Auth/ForgotPassword/ForgotPassword';
 
+// Reset Password
+import { ResetPassword } from '../components/Auth/ResetPassword/ResetPassword';
+
 // --------------------------------------------------------------------------------------------------------------------
 
 export function Router() {
@@ -390,6 +393,13 @@ export function Router() {
 				{
 					path: 'forgot-password',
 					element: <ForgotPassword />,
+					errorElement: null,
+					action: undefined,
+					loader: undefined,
+				},
+				{
+					path: 'reset-password',
+					element: <ResetPassword />,
 					errorElement: null,
 					action: undefined,
 					loader: undefined,

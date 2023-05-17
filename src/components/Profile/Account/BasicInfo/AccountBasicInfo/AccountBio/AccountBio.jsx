@@ -50,6 +50,16 @@ const StyledTextarea = styled.textarea`
 		background-color: #ccc;
 		color: #999;
 	}
+
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+		-webkit-text-fill-color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoBioTextColor} !important;
+		-webkit-box-shadow: 0 0 0px 1000px white inset !important;
+		border: none;
+		caret-color: black !important;
+	}
 `;
 
 const StyledErrorDiv = styled.div`

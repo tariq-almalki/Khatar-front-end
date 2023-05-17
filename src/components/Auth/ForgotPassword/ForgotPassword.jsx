@@ -1,8 +1,14 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
-import { useOutletContext, Form, Link } from 'react-router-dom';
-import { AwesomeButtonProgress } from 'react-awesome-button';
-import AwesomeButtonStyles from '@/styles/styles.module.scss';
+import { useOutletContext, Link } from 'react-router-dom';
+import { AwesomeButton } from 'react-awesome-button';
+import AwesomeButtonStyles1 from '@/styles/styles.module.scss';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+// firebase
+import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase';
 
 // animations
 import { forgotPasswordAnimations } from './forgotPasswordAnimations';
@@ -30,7 +36,7 @@ const StyledOuterDiv = styled.div`
 	scrollbar-width: none; /* Firefox */
 `;
 
-const StyledForgotPassword = styled.div`
+const StyledForgotPassword = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
@@ -46,7 +52,7 @@ const StyledForgotPassword = styled.div`
 
 // ----------------------------------------------
 
-const StyledForm = styled(Form)`
+const StyledDivContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
@@ -81,6 +87,21 @@ const StyledInput = styled.input`
 	color: ${props => useContext(ThemeContext).colors[props.theme].forgetPasswordInputTextColor} !important;
 	background-color: white !important;
 	border: 1px solid ${props => useContext(ThemeContext).colors[props.theme].forgetPasswordInputBorderColor} !important;
+
+	&:focus {
+		outline: none !important;
+	}
+
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+		-webkit-text-fill-color: ${props =>
+			useContext(ThemeContext).colors[props.theme].forgetPasswordInputTextColor} !important;
+		-webkit-box-shadow: 0 0 0px 1000px white inset !important;
+		border: none;
+		caret-color: black !important;
+	}
 `;
 
 // ----------------------------------------------
@@ -117,7 +138,14 @@ const StyledSpan2 = styled.span`
 export function ForgotPassword() {
 	const { theme } = useOutletContext();
 
-	const AwesomeButtonProgressStyles = {
+	const [email, setEmail] = useState('');
+	const [sendPasswordResetEmail, resetPasswordSending, resetPasswordError] = useSendPasswordResetEmail(auth);
+
+	// if (resetPasswordError) {
+	// 	alert(resetPasswordError.message.match(/(?<=auth\/).+(?=\)\.)/));
+	// }
+
+	const AwesomeButtonStyles2 = {
 		'--button-primary-color': useContext(ThemeContext).colors[theme].authPageButtonColor,
 		'--button-primary-color-dark': useContext(ThemeContext).colors[theme].authPageButtonColorDark,
 		'--button-primary-color-hover': useContext(ThemeContext).colors[theme].authPageButtonColorHover,
@@ -128,10 +156,28 @@ export function ForgotPassword() {
 		fontFamily: 'Rajdhani',
 	};
 
+	const actionCodeSettings = {
+		url: 'https://localhost:5173/auth/sign-in',
+	};
+
+	async function resetPasswordHandler() {
+		const res = email.match(
+			/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/);
+
+		if (res) {
+			const success = await sendPasswordResetEmail(email, actionCodeSettings);
+			if (success) {
+				return alert('Email Sent!');
+			}
+		}
+
+		alert('Invalid Email');
+	}
+
 	return (
 		<StyledOuterDiv>
 			<StyledForgotPassword theme={theme} {...forgotPasswordAnimations}>
-				<StyledForm>
+				<StyledDivContainer>
 					<StyledDiv1>
 						<StyledSpan1 theme={theme}>Reset Your Password</StyledSpan1>{' '}
 					</StyledDiv1>
@@ -145,23 +191,28 @@ export function ForgotPassword() {
 						<StyledLabel theme={theme} className="label">
 							Email:
 						</StyledLabel>
-						<StyledInput theme={theme} className="input-bordered input w-full max-w-xs" />
+						<StyledInput
+							onChange={e => setEmail(e.target.value)}
+							theme={theme}
+							className="input-bordered input w-full max-w-xs"
+						/>
 					</div>
 					<StyledDiv2>
-						<AwesomeButtonProgress
-							style={AwesomeButtonProgressStyles}
-							cssModule={AwesomeButtonStyles}
+						<AwesomeButton
+							onPress={resetPasswordHandler}
+							style={AwesomeButtonStyles2}
+							cssModule={AwesomeButtonStyles1}
 							type="primary"
 						>
-							Reset Password
-						</AwesomeButtonProgress>
+							Request Reset Password
+						</AwesomeButton>
 					</StyledDiv2>
 					<StyledDiv3>
 						<StyledLink to="../sign-in" theme={theme}>
 							<StyledSpan2 theme={theme}>or</StyledSpan2> Sign In
 						</StyledLink>
 					</StyledDiv3>
-				</StyledForm>
+				</StyledDivContainer>
 			</StyledForgotPassword>
 		</StyledOuterDiv>
 	);

@@ -141,7 +141,7 @@ export const theme = {
 			forgetPasswordButtonBorderColor: '#111',
 			forgetPasswordButtonFontColor: '#000',
 			forgetPasswordDividerColor: '#000',
-			forgetPasswordInputTextColor: '#999',
+			forgetPasswordInputTextColor: '#000',
 			forgetPasswordInputBorderColor: '#333',
 			//
 		},

@@ -1,5 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useRouteError, Link } from 'react-router-dom';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useContext } from 'react';
 
 const SignInErrorElementComponent = styled.div`
@@ -40,8 +41,9 @@ const StyledLink = styled(Link)`
 	}
 `;
 
-export function SignInErrorElement({ theme }) {
+export function SignInErrorElement() {
 	const error = useRouteError();
+	const [theme] = useLocalStorage('theme', 'dark');
 	return (
 		<SignInErrorElementComponent theme={theme}>
 			<StyledDiv>
