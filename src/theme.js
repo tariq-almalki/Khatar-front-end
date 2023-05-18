@@ -2,7 +2,7 @@ export const theme = {
 	colors: {
 		light: {
 			// Google and Twitter font color in contact-info and change-password
-			googleAndTwitterTextColor: '#000',	
+			googleAndTwitterTextColor: '#000',
 			// loading screen
 			loadingScreenBackgroundColor: '#fff',
 			loadingScreenTextColor: '#000',
@@ -25,7 +25,7 @@ export const theme = {
 			bigSquaresOrDividerColor: '#000',
 			//
 			accountBackgroundColor: '#ddd',
-			basicInfoAccountImageBackgroundColor: '#111',
+			basicInfoAccountImageBackgroundColor: '#eee',
 			basicInfoFileInputBackgroundColor: '#111',
 			basicInfoFileInputTextColor: '#fff',
 			accountSpanTextColor: '#000',
@@ -146,9 +146,9 @@ export const theme = {
 			//
 		},
 		dark: {
-            // Google and Twitter font color in contact-info and change-password
-			googleAndTwitterTextColor: '#fff',						
-			// 
+			// Google and Twitter font color in contact-info and change-password
+			googleAndTwitterTextColor: '#fff',
+			//
 			// loading screen
 			loadingScreenBackgroundColor: '#000',
 			loadingScreenTextColor: '#fff',
@@ -171,7 +171,7 @@ export const theme = {
 			bigSquaresOrDividerColor: '#fff',
 			//
 			accountBackgroundColor: '#222',
-			basicInfoAccountImageBackgroundColor: '#eee',
+			basicInfoAccountImageBackgroundColor: '#111',
 			basicInfoFileInputBackgroundColor: '#eee',
 			basicInfoFileInputTextColor: '#000',
 			accountSpanTextColor: '#fff',

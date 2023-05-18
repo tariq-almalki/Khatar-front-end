@@ -29,7 +29,7 @@ export function Profile() {
 	if (user) {
 		return (
 			<StyledProfileContainer theme={theme} {...profileAnimations}>
-				<TailWindSideBar theme={theme} setTheme={setTheme} />
+				<TailWindSideBar user={user} theme={theme} setTheme={setTheme} />
 				<StyledProfileMainSectionContainer user={user} theme={theme} location={location} />
 			</StyledProfileContainer>
 		);

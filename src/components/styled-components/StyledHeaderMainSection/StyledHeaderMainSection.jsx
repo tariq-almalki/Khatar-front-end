@@ -15,7 +15,7 @@ const StyledHeaderMainSectionComponent = styled.div`
 	color: ${props => useContext(ThemeContext).colors[props.theme].profileHeaderColor};
 `;
 
-export function StyledHeaderMainSection(props) {
-	const header = titleize(humanize(props.location.pathname.match(/(?<=\/profile\/)([\w-]+)(?=\/?)/g)[0]));
-	return <StyledHeaderMainSectionComponent theme={props.theme}>{header}</StyledHeaderMainSectionComponent>;
+export function StyledHeaderMainSection({ location, theme }) {
+	const header = titleize(humanize(location.pathname.match(/(?<=\/profile\/)([\w-]+)(?=\/?)/g)[0]));
+	return <StyledHeaderMainSectionComponent theme={theme}>{header}</StyledHeaderMainSectionComponent>;
 }

@@ -9,11 +9,11 @@ const StyledDiv = styled.div`
 	transition: all 0.2s ease;
 `;
 
-export function TailWindSideBar(props) {
+export function TailWindSideBar({ theme, setTheme, user }) {
 	return (
-		<StyledDiv theme={props.theme} className="flex flex-col place-content-between">
-			<TailWindUpperMenu theme={props.theme} />
-			<TailWindLowerMenu theme={props.theme} setTheme={props.setTheme} />
+		<StyledDiv theme={theme} className="flex flex-col place-content-between">
+			<TailWindUpperMenu theme={theme} />
+			<TailWindLowerMenu user={user} theme={theme} setTheme={setTheme} />
 		</StyledDiv>
 	);
 }

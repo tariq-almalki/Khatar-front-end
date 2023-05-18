@@ -18,6 +18,7 @@ import {
 	useSignInWithGoogle,
 	useSignInWithTwitter,
 	useAuthState,
+	useUpdateProfile,
 } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { firestore } from '@/firebase';
@@ -259,6 +260,8 @@ export function SignIn() {
 
 	const navigate = useNavigate();
 
+	const [updateProfile, updatingProfileError, updateProfileError] = useUpdateProfile(auth);
+
 	const [authUser] = useAuthState(auth);
 
 	if (authUser) {
@@ -292,17 +295,28 @@ export function SignIn() {
 		auth.onAuthStateChanged(user => {
 			if (user) {
 				timeoutId = setTimeout(() => {
-					auth.signOut();
 					alert('signed out successfully');
 					navigate('/');
+					auth.signOut();
 				}, 900_000);
 			} else {
 				clearTimeout(timeoutId);
 			}
 		});
 
+		if (!(userCred._tokenResponse.isNewUser === true)) {
+			return navigate('/profile/account');
+		}
+
+		// For fields you don't want to update, pass NULL. For fields you want to reset, pass "".
+		await updateProfile({
+			displayName: null,
+			photoURL: 'default-profile-image.png',
+		});
+
 		// Add a new document in collection "cities"
-		const res = await setDoc(doc(firestore, 'users', userCred.user.uid), {
+		await setDoc(doc(firestore, 'users', userCred.user.uid), {
+			photoURL: 'default-profile-image.png',
 			name: userCred.user.displayName,
 			username: nanoid(),
 			address: 'default',
@@ -338,8 +352,18 @@ export function SignIn() {
 			}
 		});
 
+		if (!(userCred._tokenResponse.isNewUser === true)) {
+			return navigate('/profile/account');
+		}
+
+		await updateProfile({
+			displayName: null,
+			photoURL: 'default-profile-image.png',
+		});
+
 		// Add a new document in collection "cities"
 		await setDoc(doc(firestore, 'users', userCred.user.uid), {
+			photoURL: 'default-profile-image.png',
 			name: userCred.user.displayName,
 			username: nanoid(),
 			address: 'default',

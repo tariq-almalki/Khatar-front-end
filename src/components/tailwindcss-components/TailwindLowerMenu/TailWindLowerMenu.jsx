@@ -3,6 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
+// firebase
+import { useDownloadURL } from 'react-firebase-hooks/storage';
+import { ref } from 'firebase/storage';
+import { storage } from '@/firebase';
+
 // toggle styles
 import '@theme-toggles/react/css/InnerMoon.css';
 
@@ -47,22 +52,39 @@ const StyledImageIndicator = styled.div`
 	}
 `;
 
-export function TailWindLowerMenu(props) {
+const StyledDivImage = styled.div`
+	background-color: ${props =>
+		useContext(ThemeContext).colors[props.theme].basicInfoAccountImageBackgroundColor} !important;
+`;
+
+const StyledSpan = styled.span`
+	color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoFileInputTextColor} !important;
+`;
+
+export function TailWindLowerMenu({ theme, setTheme, user }) {
+	const [downloadUrl, downloadUrlLoading, downloadUrlError] = useDownloadURL(ref(storage, user.photoURL));
+
 	function themeHandler() {
-		props.setTheme(props.theme === 'dark' ? 'light' : 'dark');
+		setTheme(theme === 'dark' ? 'light' : 'dark');
 	}
 
 	return (
-		<StyledUl theme={props.theme} className="menu gap-1 p-1">
+		<StyledUl theme={theme} className="menu gap-1 p-1">
 			<li>
-				<StyledInnerMoon theme={props.theme} toggled={props.theme === 'dark' ? true : false} toggle={themeHandler} />
+				<StyledInnerMoon theme={theme} toggled={theme === 'dark' ? true : false} toggle={themeHandler} />
 			</li>
 			<li>
-				<StyledNavLink theme={props.theme} to="account">
-					<StyledImageIndicator theme={props.theme} className="placeholder indicator online avatar">
-						<div className="w-8 rounded-xl bg-neutral-focus text-neutral-content ">
-							<span className="text-xl">K</span>
-						</div>
+				<StyledNavLink theme={theme} to="account">
+					<StyledImageIndicator theme={theme} className="placeholder indicator online avatar">
+						<StyledDivImage theme={theme} className="w-8 rounded-xl bg-neutral-focus text-neutral-content ">
+							{downloadUrlLoading ? (
+								<StyledSpan theme={theme} className="text-xs">
+									K
+								</StyledSpan>
+							) : (
+								<img src={downloadUrl} alt="default-profile-image" />
+							)}
+						</StyledDivImage>
 					</StyledImageIndicator>
 				</StyledNavLink>
 			</li>

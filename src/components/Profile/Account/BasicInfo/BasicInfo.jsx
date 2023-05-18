@@ -1,6 +1,7 @@
 import styled, { ThemeContext } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useOutletContext } from 'react-router-dom';
+import { useContext, useState } from 'react';
 
 // components
 import { AccountImage } from './AccountImage/AccountImage';
@@ -8,7 +9,6 @@ import { AccountBasicInfo } from './AccountBasicInfo/AccountBasicInfo';
 
 // animations
 import { accountAnimations } from '../accountAnimations';
-import { useContext } from 'react';
 
 const BasicInfoComponent = styled(motion.div)`
 	display: flex;
@@ -27,11 +27,26 @@ const BasicInfoComponent = styled(motion.div)`
 
 export function BasicInfo() {
 	const { theme, user } = useOutletContext();
+	const [file, setFile] = useState('');
+	const [button2State, setButton2State] = useState({
+		styles: {},
+		disabled: true,
+	});
+
+	function button2StateHandler(stateFunction) {
+		setButton2State(stateFunction);
+	}
 
 	return (
 		<BasicInfoComponent theme={theme} {...accountAnimations}>
-			<AccountImage user={user} theme={theme} />
-			<AccountBasicInfo user={user} theme={theme} />
+			<AccountImage setFile={setFile} disabled={button2State.disabled} user={user} theme={theme} />
+			<AccountBasicInfo
+				file={file}
+				button2State={button2State}
+				button2StateHandler={button2StateHandler}
+				user={user}
+				theme={theme}
+			/>
 		</BasicInfoComponent>
 	);
 }

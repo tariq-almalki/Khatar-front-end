@@ -9,7 +9,7 @@ import { customAlphabet } from 'nanoid';
 import { randomGender, randomDate } from '@/utils/random';
 
 // firebase
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuthState, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { firestore } from '@/firebase';
 import { doc, setDoc } from 'firebase/firestore';
@@ -178,6 +178,9 @@ const StyledContinueAsGuest = styled(Link)`
 export function AuthPage() {
 	const { theme } = useOutletContext();
 	const navigate = useNavigate();
+
+	const [updateProfile, updatingProfileError, updateProfileError] = useUpdateProfile(auth);
+
 	const [authUser] = useAuthState(auth);
 
 	if (authUser) {
@@ -216,8 +219,20 @@ export function AuthPage() {
 			}
 		});
 
+
+		if (!(userCred._tokenResponse.isNewUser === true)) {
+			return navigate('/profile/account');
+		}
+
+		// For fields you don't want to update, pass NULL. For fields you want to reset, pass "".
+		await updateProfile({
+			displayName: null,
+			photoURL: 'default-profile-image.png',
+		});
+
 		// Add a new document in collection "cities"
 		const res = await setDoc(doc(firestore, 'users', userCred.user.uid), {
+			photoURL: 'default-profile-image.png',
 			name: userCred.user.displayName,
 			username: nanoid(),
 			address: 'default',
@@ -253,8 +268,18 @@ export function AuthPage() {
 			}
 		});
 
+		if (!(userCred._tokenResponse.isNewUser === true)) {
+			return navigate('/profile/account');
+		}
+
+		await updateProfile({
+			displayName: null,
+			photoURL: 'default-profile-image.png',
+		});
+
 		// Add a new document in collection "cities"
 		await setDoc(doc(firestore, 'users', userCred.user.uid), {
+			photoURL: 'default-profile-image.png',
 			name: userCred.user.displayName,
 			username: nanoid(),
 			address: 'default',

@@ -7,7 +7,7 @@ import AwesomeButtonStyles1 from '@/styles/styles.module.scss';
 import InputMask from 'react-input-mask';
 
 // firebase
-import { useCreateUserWithEmailAndPassword, useAuthState } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useAuthState, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { firestore } from '@/firebase';
 import { doc, setDoc } from 'firebase/firestore';
@@ -217,6 +217,8 @@ export function SignUp() {
 	const { theme } = useOutletContext();
 	const navigate = useNavigate();
 
+	const [updateProfile, updatingProfileError, updateProfileError] = useUpdateProfile(auth);
+
 	// routing signed user to profile account
 
 	const [authUser] = useAuthState(auth);
@@ -258,17 +260,28 @@ export function SignUp() {
 				auth.onAuthStateChanged(user => {
 					if (user) {
 						timeoutId = setTimeout(() => {
-							auth.signOut();
 							alert('signed out successfully');
 							navigate('/');
+							auth.signOut();
 						}, 900_000);
 					} else {
 						clearTimeout(timeoutId);
 					}
 				});
 
+				if (!userCredential._tokenResponse) {
+					return navigate('/profile/account');
+				}
+
+				// For fields you don't want to update, pass NULL. For fields you want to reset, pass "".
+				await updateProfile({
+					displayName: null,
+					photoURL: 'default-profile-image.png',
+				});
+
 				// Add a new document in collection "cities"
 				await setDoc(doc(firestore, 'users', userCredential.user.uid), {
+					photoURL: 'default-profile-image.png',
 					name: values.name,
 					username: values.username,
 					address: values.address,
