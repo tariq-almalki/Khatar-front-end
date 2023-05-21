@@ -5,7 +5,7 @@ export const StyledBottomNavigationGlossyContainer = styled.div`
 	justify-content: space-around;
 	position: fixed;
 	bottom: 0;
-	z-index: 1;
+	z-index: 9999;
 	width: 100%;
 	padding: 1em;
 

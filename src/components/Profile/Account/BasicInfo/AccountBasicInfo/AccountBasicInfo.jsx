@@ -96,7 +96,6 @@ const StyledButton2 = styled.button`
 export function AccountBasicInfo({ theme, user, button2State, button2StateHandler, file }) {
 	const [value, documentLoading, documentError] = useDocument(doc(firestore, 'users', user.uid));
 	const [uploadFile, uploading, uploadSnapshot, uploadError] = useUploadFile();
-	console.log(auth);
 	const [updateProfile, updating, updateProfileError] = useUpdateProfile(auth);
 	const bucketRef = storageRef(storage, `${user.uid}/${file.name}`);
 

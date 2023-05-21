@@ -16,6 +16,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 // loading page
 import { StyledLoadingScreen } from '../styled-components/StyledLoadingScreen/StyledLoadingScreen.jsx';
 
+import { Mapbox } from '../Mapbox/Mapbox.jsx';
+
 export function App() {
 	const [theme] = useLocalStorage('theme', 'dark');
 	const [user] = useAuthState(auth);
@@ -28,6 +30,7 @@ export function App() {
 		<>
 			{/* <StyledLoadingScreen /> */}
 			<StyledAppContainer {...appAnimations}>
+				<Mapbox user={user} theme={theme} />
 				<StyledBottomNavigation user={user} theme={theme} />
 			</StyledAppContainer>
 		</>
