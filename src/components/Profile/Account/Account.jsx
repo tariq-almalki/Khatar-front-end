@@ -66,7 +66,7 @@ const StyledDivider = styled.div`
 export function Account() {
 	const location = useLocation();
 
-	const { theme, user } = useOutletContext();
+	const { theme, authUser } = useOutletContext();
 
 	const regexExpr = /(?<=\/profile\/account\/)(basic\-info|contact\-info|change\-password|delete\-account)(?=\/?)/;
 
@@ -75,7 +75,7 @@ export function Account() {
 	return (
 		<>
 			{result ? (
-				<Outlet context={{ theme, user }} />
+				<Outlet context={{ theme, authUser }} />
 			) : (
 				<StyledAccount {...accountAnimations}>
 					<StyledButtonLink to="basic-info">

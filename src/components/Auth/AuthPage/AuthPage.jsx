@@ -179,8 +179,6 @@ export function AuthPage() {
 	const { theme } = useOutletContext();
 	const navigate = useNavigate();
 
-	const [updateProfile, updatingProfileError, updateProfileError] = useUpdateProfile(auth);
-
 	const [authUser] = useAuthState(auth);
 
 	if (authUser) {
@@ -189,6 +187,7 @@ export function AuthPage() {
 
 	const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
 	const [signInWithTwitter, twitterUser, twitterLoading, twitterError] = useSignInWithTwitter(auth);
+	const [updateProfile, updating, error] = useUpdateProfile(auth);
 
 	if (googleError) {
 		alert(googleError.message.match(/(?<=auth\/).+(?=\)\.)/));
@@ -219,19 +218,13 @@ export function AuthPage() {
 			}
 		});
 
-
 		if (!(userCred._tokenResponse.isNewUser === true)) {
 			return navigate('/profile/account');
 		}
 
-		// For fields you don't want to update, pass NULL. For fields you want to reset, pass "".
-		await updateProfile({
-			displayName: null,
-			photoURL: 'default-profile-image.png',
-		});
-
 		// Add a new document in collection "cities"
-		const res = await setDoc(doc(firestore, 'users', userCred.user.uid), {
+		await setDoc(doc(firestore, 'users', userCred.user.uid), {
+			uid: userCred.user.uid,
 			photoURL: 'default-profile-image.png',
 			name: userCred.user.displayName,
 			username: nanoid(),
@@ -242,6 +235,8 @@ export function AuthPage() {
 			gender: randomGender(['male', 'female']),
 			type: 'basic',
 			bio: '',
+			isSuspended: false,
+			team: '',
 		});
 
 		navigate('/profile/account');
@@ -272,13 +267,9 @@ export function AuthPage() {
 			return navigate('/profile/account');
 		}
 
-		await updateProfile({
-			displayName: null,
-			photoURL: 'default-profile-image.png',
-		});
-
 		// Add a new document in collection "cities"
 		await setDoc(doc(firestore, 'users', userCred.user.uid), {
+			uid: userCred.user.uid,
 			photoURL: 'default-profile-image.png',
 			name: userCred.user.displayName,
 			username: nanoid(),
@@ -289,6 +280,8 @@ export function AuthPage() {
 			gender: randomGender(['male', 'female']),
 			type: 'basic',
 			bio: '',
+			isSuspended: false,
+			team: '',
 		});
 
 		navigate('/profile/account');

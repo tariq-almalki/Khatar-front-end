@@ -85,7 +85,6 @@ export function NameUsernameType({ theme, formik, disabled }) {
 					onChange={formik.handleChange}
 					required
 					disabled={disabled}
-					autocomplete="off"
 					theme={theme}
 					type="text"
 					placeholder="Name"
@@ -105,7 +104,6 @@ export function NameUsernameType({ theme, formik, disabled }) {
 					value={formik.values.username}
 					onChange={formik.handleChange}
 					required
-					autocomplete="off"
 					disabled={disabled}
 					theme={theme}
 					type="text"
@@ -128,7 +126,6 @@ export function NameUsernameType({ theme, formik, disabled }) {
 					value={formik.values.type}
 					onChange={formik.handleChange}
 					required
-					autocomplete="off"
 					disabled={true}
 					theme={theme}
 					type="text"

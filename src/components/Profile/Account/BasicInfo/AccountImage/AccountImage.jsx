@@ -62,8 +62,12 @@ const StyledSpan = styled.span`
 	color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoFileInputTextColor} !important;
 `;
 
-export function AccountImage({ theme, user, disabled, setFile }) {
-	const [downloadUrl, downloadUrlLoading, downloadUrlError] = useDownloadURL(storageRef(storage, user.photoURL));
+export function AccountImage({ theme, docUser, disabled, setFile }) {
+	const [downloadUrl, downloadUrlLoading, downloadUrlError] = useDownloadURL(storageRef(storage, docUser.photoURL));
+
+	if (downloadUrlError) {
+		console.log(downloadUrlError);
+	}
 
 	function fileImageHandler(e) {
 		if (e.target.files[0].size > 200000) {

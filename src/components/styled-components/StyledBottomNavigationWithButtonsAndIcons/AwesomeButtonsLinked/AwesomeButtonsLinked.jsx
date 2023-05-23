@@ -12,24 +12,22 @@ import { LinkCommonStyles } from './styles';
 // config
 import { awesomeButtonsLinkedConfig } from './awesomeButtonsLinkedConfig.js';
 
-export function AwesomeButtonsLinked(props) {
-	awesomeButtonsLinkedConfig[2].link.to = !props.user ? '/auth' : 'profile/account';
+export function AwesomeButtonsLinked({ theme, user }) {
+	awesomeButtonsLinkedConfig[2].link.to = !user ? '/auth' : 'profile/account';
 	return (
 		<>
 			{awesomeButtonsLinkedConfig.map((config, index) => {
 				const updatedStyles = {
 					...config.button.style,
-					'--button-primary-color': useContext(ThemeContext).colors[props.theme].buttonPrimaryColor,
-					'--button-primary-color-dark': useContext(ThemeContext).colors[props.theme].buttonPrimaryColorDark,
+					'--button-primary-color': useContext(ThemeContext).colors[theme].buttonPrimaryColor,
+					'--button-primary-color-dark': useContext(ThemeContext).colors[theme].buttonPrimaryColorDark,
 					'--button-primary-color-hover':
-						useContext(ThemeContext).colors[props.theme][`button${index}PrimaryColorHover`],
+						useContext(ThemeContext).colors[theme][`button${index}PrimaryColorHover`],
 					'--button-primary-color-active':
-						useContext(ThemeContext).colors[props.theme][`button${index}PrimaryColorActive`],
-					'--button-primary-border': `1px solid ${
-						useContext(ThemeContext).colors[props.theme].buttonPrimaryBorder
-					}`,
-					'--button-font-color': useContext(ThemeContext).colors[props.theme].buttonFontColor,
-					iconStylesColor: useContext(ThemeContext).colors[props.theme].buttonIconColor,
+						useContext(ThemeContext).colors[theme][`button${index}PrimaryColorActive`],
+					'--button-primary-border': `1px solid ${useContext(ThemeContext).colors[theme].buttonPrimaryBorder}`,
+					'--button-font-color': useContext(ThemeContext).colors[theme].buttonFontColor,
+					iconStylesColor: useContext(ThemeContext).colors[theme].buttonIconColor,
 				};
 
 				return (

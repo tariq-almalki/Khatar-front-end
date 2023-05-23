@@ -154,8 +154,6 @@ export function ChangePassword() {
 		},
 	});
 
-	console.log(auth);
-
 	if (
 		auth.currentUser.providerData[0].providerId === 'google.com' ||
 		auth.currentUser.providerData[0].providerId === 'twitter.com'

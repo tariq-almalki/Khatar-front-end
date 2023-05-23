@@ -61,8 +61,8 @@ const StyledSpan = styled.span`
 	color: ${props => useContext(ThemeContext).colors[props.theme].basicInfoFileInputTextColor} !important;
 `;
 
-export function TailWindLowerMenu({ theme, setTheme, user }) {
-	const [downloadUrl, downloadUrlLoading, downloadUrlError] = useDownloadURL(ref(storage, user.photoURL));
+export function TailWindLowerMenu({ theme, setTheme, docUser }) {
+	const [downloadUrl, downloadUrlLoading, downloadUrlError] = useDownloadURL(ref(storage, docUser.photoURL));
 
 	function themeHandler() {
 		setTheme(theme === 'dark' ? 'light' : 'dark');

@@ -78,7 +78,6 @@ export function AccountBio({ theme, formik, disabled }) {
 				value={formik.values.bio}
 				onChange={formik.handleChange}
 				disabled={disabled}
-				autocomplete="off"
 				theme={theme}
 				placeholder="Bio"
 				className="textarea-bordered textarea textarea-md"

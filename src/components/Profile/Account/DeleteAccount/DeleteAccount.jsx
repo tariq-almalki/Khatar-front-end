@@ -132,7 +132,7 @@ const StyledErrorDiv = styled.div`
 `;
 
 export function DeleteAccount() {
-	const { theme, user } = useOutletContext();
+	const { theme, authUser } = useOutletContext();
 
 	const navigate = useNavigate();
 
@@ -147,7 +147,7 @@ export function DeleteAccount() {
 			alert('You have been deleted');
 			navigate('/');
 			await deleteUser();
-			await deleteDoc(doc(firestore, 'users', user.uid));
+			await deleteDoc(doc(firestore, 'users', authUser.uid));
 		},
 	});
 
@@ -166,7 +166,6 @@ export function DeleteAccount() {
 						value={formik.values.verify}
 						onChange={formik.handleChange}
 						theme={theme}
-						autocomplete="off"
 						type="text"
 						placeholder="Type here"
 						className="input-bordered input w-full max-w-xs"

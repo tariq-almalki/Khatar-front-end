@@ -1,5 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 // components
 import { AccountDetails } from './AccountDetails/AccountDetails';
@@ -12,10 +13,8 @@ import { firestore } from '@/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import { useUploadFile } from 'react-firebase-hooks/storage';
-import { useUpdateProfile } from 'react-firebase-hooks/auth';
 import { storage } from '@/firebase';
 import { ref as storageRef } from 'firebase/storage';
-import { auth } from '@/firebase';
 
 // validation schema
 import { validationSchema } from './validationSchema';
@@ -93,11 +92,10 @@ const StyledButton2 = styled.button`
 	}
 `;
 
-export function AccountBasicInfo({ theme, user, button2State, button2StateHandler, file }) {
-	const [value, documentLoading, documentError] = useDocument(doc(firestore, 'users', user.uid));
+export function AccountBasicInfo({ theme, docUser, button2State, button2StateHandler, file }) {
+	const [value, documentLoading, documentError] = useDocument(doc(firestore, 'users', docUser.uid));
 	const [uploadFile, uploading, uploadSnapshot, uploadError] = useUploadFile();
-	const [updateProfile, updating, updateProfileError] = useUpdateProfile(auth);
-	const bucketRef = storageRef(storage, `${user.uid}/${file.name}`);
+	const navigate = useNavigate();
 
 	const [button1, setButton1] = useState({
 		text: 'Edit',
@@ -116,18 +114,23 @@ export function AccountBasicInfo({ theme, user, button2State, button2StateHandle
 		},
 		validationSchema,
 		onSubmit: async values => {
-			const docRef = doc(firestore, 'users', user.uid);
+			const photoURL = file === undefined ? docUser.photoURL : `${docUser.uid}/${file.name}`;
+
+			const bucketRef = storageRef(storage, photoURL);
+
+			const docRef = doc(firestore, 'users', docUser.uid);
 
 			// firestore update
-			await updateDoc(docRef, { ...values, photoURL: `${user.uid}/${file.name}` });
+			await updateDoc(docRef, { ...values, photoURL: photoURL });
 
-			// auth update
-			await updateProfile({ displayName: null, photoURL: `${user.uid}/${file.name}` });
+			if (file) {
+				// storage update
+				await uploadFile(bucketRef, file, {
+					contentType: file.type,
+				});
 
-			// storage update
-			await uploadFile(bucketRef, file, {
-				contentType: file.type,
-			});
+				navigate(0);
+			}
 		},
 		enableReinitialize: true,
 	});

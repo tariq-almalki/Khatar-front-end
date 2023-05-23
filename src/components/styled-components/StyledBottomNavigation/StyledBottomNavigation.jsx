@@ -2,10 +2,10 @@ import { StyledBottomNavigationWithButtonsAndIcons } from '../StyledBottomNaviga
 import { StyledBottomNavigationGlossyContainer } from '../StyledBottomNavigationGlossyContainer/StyledBottomNavigationGlossyContainer.jsx';
 
 // motion component
-export function StyledBottomNavigation(props) {
+export function StyledBottomNavigation({ theme, user }) {
 	return (
-		<StyledBottomNavigationGlossyContainer className={props.theme}>
-			<StyledBottomNavigationWithButtonsAndIcons user={props.user} theme={props.theme} />
+		<StyledBottomNavigationGlossyContainer className={theme}>
+			<StyledBottomNavigationWithButtonsAndIcons user={user} theme={theme} />
 		</StyledBottomNavigationGlossyContainer>
 	);
 }

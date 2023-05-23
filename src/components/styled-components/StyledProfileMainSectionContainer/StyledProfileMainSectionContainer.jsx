@@ -26,13 +26,13 @@ const StyledDiv = styled.div`
 	}
 `;
 
-export function StyledProfileMainSectionContainer({ theme, location, user }) {
+export function StyledProfileMainSectionContainer({ theme, location, authUser }) {
 	return (
 		<StyledProfileMainSectionContainerComponent>
 			<StyledHeaderMainSection theme={theme} location={location} />
 			<TailWindDivider theme={theme} />
 			<StyledDiv>
-				<Outlet context={{ user, theme }} />
+				<Outlet context={{ authUser, theme }} />
 			</StyledDiv>
 		</StyledProfileMainSectionContainerComponent>
 	);

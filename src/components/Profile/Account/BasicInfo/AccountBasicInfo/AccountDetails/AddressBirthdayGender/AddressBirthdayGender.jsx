@@ -106,7 +106,6 @@ export function AddressBirthdayGender({ theme, formik, disabled }) {
 					onChange={formik.handleChange}
 					disabled={disabled}
 					required
-					autocomplete="off"
 					theme={theme}
 					type="text"
 					placeholder="Address"
@@ -127,7 +126,6 @@ export function AddressBirthdayGender({ theme, formik, disabled }) {
 					onChange={formik.handleChange}
 					disabled={disabled}
 					required
-					autocomplete="off"
 					theme={theme}
 					type="date"
 					min="1950-01-01"
@@ -148,7 +146,6 @@ export function AddressBirthdayGender({ theme, formik, disabled }) {
 					name="gender"
 					value={formik.values.gender}
 					onChange={formik.handleChange}
-					autocomplete="off"
 					disabled={disabled}
 					theme={theme}
 					className="select-bordered select-md w-full max-w-xs rounded-lg"

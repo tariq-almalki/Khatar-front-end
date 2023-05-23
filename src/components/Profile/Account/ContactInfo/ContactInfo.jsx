@@ -198,9 +198,9 @@ color: ${props => useContext(ThemeContext).colors[props.theme].googleAndTwitterT
 `;
 
 export function ContactInfo() {
-	const { theme, user } = useOutletContext();
+	const { theme, authUser } = useOutletContext();
 
-	const [value, loading, docError] = useDocument(doc(firestore, 'users', user.uid));
+	const [value, loading, docError] = useDocument(doc(firestore, 'users', authUser.uid));
 	const [updateEmail, updating, updateEmailError] = useUpdateEmail(auth);
 
 	if (updateEmailError) {
@@ -214,7 +214,7 @@ export function ContactInfo() {
 		},
 		validationSchema,
 		onSubmit: async values => {
-			const docRef = doc(firestore, 'users', user.uid);
+			const docRef = doc(firestore, 'users', authUser.uid);
 
 			if (auth.currentUser.providerId === 'firebase') {
 				const password = prompt('enter your password for Re-Authenticating', '');
@@ -308,7 +308,6 @@ export function ContactInfo() {
 						theme={theme}
 						disabled={button2.disabled}
 						type="text"
-						autocomplete="off"
 						placeholder="Type here"
 						className="input-bordered input w-full max-w-xs"
 					/>
@@ -326,7 +325,6 @@ export function ContactInfo() {
 						value={formik.values.phoneNumber}
 						onChange={formik.handleChange}
 						theme={theme}
-						autocomplete="off"
 						mask={'+\\966 59 999 9999'}
 						formatChars={{
 							9: '[0-9]',

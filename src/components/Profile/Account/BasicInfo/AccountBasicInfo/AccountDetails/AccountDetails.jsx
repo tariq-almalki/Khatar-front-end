@@ -12,11 +12,11 @@ const AccountDetailsComponent = styled.div`
 	gap: 1em;
 `;
 
-export function AccountDetails({ theme, user, formik, disabled }) {
+export function AccountDetails({ theme, formik, disabled }) {
 	return (
 		<AccountDetailsComponent>
-			<NameUsernameType disabled={disabled} user={user} theme={theme} formik={formik} />
-			<AddressBirthdayGender disabled={disabled} user={user} theme={theme} formik={formik} />
+			<NameUsernameType disabled={disabled} theme={theme} formik={formik} />
+			<AddressBirthdayGender disabled={disabled} theme={theme} formik={formik} />
 		</AccountDetailsComponent>
 	);
 }

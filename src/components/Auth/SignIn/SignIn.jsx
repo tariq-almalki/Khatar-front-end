@@ -18,7 +18,6 @@ import {
 	useSignInWithGoogle,
 	useSignInWithTwitter,
 	useAuthState,
-	useUpdateProfile,
 } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { firestore } from '@/firebase';
@@ -129,21 +128,6 @@ const StyledLabel1 = styled.label`
 	&.input-group > :last-child {
 		border-top-right-radius: 4px !important;
 		border-bottom-right-radius: 4px !important;
-	}
-`;
-
-const StyledLabel2 = styled.label`
-	font-family: 'Rajdhani';
-	transition: all 0.2s ease;
-	cursor: pointer;
-	color: ${props => useContext(ThemeContext).colors[props.theme].signInPageTextColor};
-
-	& > input {
-		accent-color: magenta;
-	}
-
-	&:hover {
-		color: magenta;
 	}
 `;
 
@@ -260,8 +244,6 @@ export function SignIn() {
 
 	const navigate = useNavigate();
 
-	const [updateProfile, updatingProfileError, updateProfileError] = useUpdateProfile(auth);
-
 	const [authUser] = useAuthState(auth);
 
 	if (authUser) {
@@ -290,6 +272,9 @@ export function SignIn() {
 			throw new Error('Something Happened');
 		}
 
+		// setting a photo for user
+		userCred.user.photoURL = 'default-profile-image.png';
+
 		let timeoutId;
 
 		auth.onAuthStateChanged(user => {
@@ -308,14 +293,9 @@ export function SignIn() {
 			return navigate('/profile/account');
 		}
 
-		// For fields you don't want to update, pass NULL. For fields you want to reset, pass "".
-		await updateProfile({
-			displayName: null,
-			photoURL: 'default-profile-image.png',
-		});
-
 		// Add a new document in collection "cities"
 		await setDoc(doc(firestore, 'users', userCred.user.uid), {
+			uid: userCred.user.uid,
 			photoURL: 'default-profile-image.png',
 			name: userCred.user.displayName,
 			username: nanoid(),
@@ -326,6 +306,8 @@ export function SignIn() {
 			gender: randomGender(['male', 'female']),
 			type: 'basic',
 			bio: '',
+			isSuspended: false,
+			team: '',
 		});
 
 		navigate('/profile/account');
@@ -356,13 +338,9 @@ export function SignIn() {
 			return navigate('/profile/account');
 		}
 
-		await updateProfile({
-			displayName: null,
-			photoURL: 'default-profile-image.png',
-		});
-
 		// Add a new document in collection "cities"
 		await setDoc(doc(firestore, 'users', userCred.user.uid), {
+			uid: userCred.user.uid,
 			photoURL: 'default-profile-image.png',
 			name: userCred.user.displayName,
 			username: nanoid(),
@@ -373,6 +351,8 @@ export function SignIn() {
 			gender: randomGender(['male', 'female']),
 			type: 'basic',
 			bio: '',
+			isSuspended: false,
+			team: '',
 		});
 
 		navigate('/profile/account');
