@@ -442,6 +442,7 @@ export function SignUp() {
 							onChange={formik.handleChange}
 							theme={theme}
 							type="date"
+							placeholder="date of birth"
 							required
 							className="input input-sm"
 							min="1950-01-01"
