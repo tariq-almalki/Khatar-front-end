@@ -33,4 +33,7 @@ export default defineConfig({
 			'@components': `${path.resolve()}/src/components`,
 		},
 	},
+	build: {
+		sourcemap: true,
+	},
 });
