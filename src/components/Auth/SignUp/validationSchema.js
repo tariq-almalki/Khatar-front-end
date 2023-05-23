@@ -6,12 +6,9 @@ export const validationSchema = yup.object({
 		.string()
 		.notOneOf([yup.ref('name')], 'Name and Username should be different')
 		.required('Username is Required')
-		.min(5)
-		.max(15)
-		.matches(
-			/^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._-]+(?<![0-9_.])$/,
-			"username must be >4, <16, doesn't start with nums,_,."
-		),
+		.min(5, 'username must be >4')
+		.max(15, 'username must be <16')
+		.matches(/^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._-]+(?<![0-9_.])$/, "username mustn't start with nums,_,."),
 	password: yup
 		.string()
 		.required('Password is required')
