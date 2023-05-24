@@ -20,7 +20,33 @@ export default defineConfig({
 		viteCompression({
 			algorithm: 'brotliCompress',
 		}),
-		VitePWA({ registerType: 'autoUpdate' }),
+		VitePWA({
+			registerType: 'autoUpdate',
+			manifest: {
+				name: 'Khatar Application',
+				short_name: 'Khatar',
+				description: 'Khatar Application',
+				theme_color: '#ffffff',
+				icons: [
+					{
+						src: '/AppIcons/icon-192x192.png',
+						sizes: '192x192',
+						type: 'image/png',
+					},
+					{
+						src: '/AppIcons/icon-512x512.png',
+						sizes: '512x512',
+						type: 'image/png',
+					},
+				],
+			},
+			workbox: {
+				globPatterns: ['**/*.{js,css,html,ico,png,svg,jpeg,jpg}'],
+			},
+			devOptions: {
+				enabled: true,
+			},
+		}),
 		mkcert(),
 		// inspect(),
 	],
