@@ -87,9 +87,9 @@ const StyledButtonDiv = styled.div`
 `;
 
 const StyledButton = styled.button`
-	color: ${props => useContext(ThemeContext).colors[props.theme].deleteAccountButtonFontColor};
-	border: 1px solid ${props => useContext(ThemeContext).colors[props.theme].deleteAccountButtonBorderColor};
-	background-color: ${props => useContext(ThemeContext).colors[props.theme].deleteAccountButtonColor} !important;
+	color: ${props => useContext(ThemeContext).colors[props.theme].changePasswordButtonFontColor};
+	border: 1px solid ${props => useContext(ThemeContext).colors[props.theme].changePasswordButtonBorderColor};
+	background-color: ${props => useContext(ThemeContext).colors[props.theme].changePasswordButtonColor} !important;
 	padding: 0.3em;
 	padding-left: 1em;
 	padding-right: 1em;
