@@ -1,1 +1,35 @@
-# Khatar-front-end
+# Khatar Application - status (WIP)
+
+> built with React, React Router, Mapbox, vite, vitePWA, HTML, CSS, Firebase auth, Firebase firestore, Firebase storage
+
+![main-page](public/readme-pics/main-page.png)
+
+---
+
+## Table of Content
+
+-   [Introduction](#introduction)
+-   [Features](#features)
+-   [Installation](#installation)
+-   [Preview](#preview)
+-   [Motivation](#motivation)
+
+## Introduction
+
+efesfwsef
+
+## Features
+
+eafesf
+
+## Installation
+
+efefef
+
+## Preview
+
+efwrgerg
+
+## Motivation
+
+awddwad
