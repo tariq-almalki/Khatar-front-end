@@ -43,9 +43,9 @@ export default defineConfig({
 			workbox: {
 				globPatterns: ['**/*.{js,css,html,ico,png,svg,jpeg,jpg}'],
 			},
-			devOptions: {
-				enabled: true,
-			},
+			// devOptions: {
+			// 	enabled: true,
+			// },
 		}),
 		mkcert(),
 		// inspect(),
