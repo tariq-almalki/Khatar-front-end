@@ -2,7 +2,7 @@
 
 > built with React, React Router, styled-components, tailwind, Mapbox, vite, vitePWA, HTML, CSS, Firebase auth, Firebase firestore, Firebase storage
 
-![main-page](public/readme-pics/main-page.png)
+![main-page](public/readme-pics/dark-mode/main-page.png)
 
 ---
 
@@ -77,16 +77,100 @@ Non-Functional Requirements
 - Compatible with a wide range of web browsers, devices including desktops, laptops, tablets, smartphones (Done)
 
 
-
-
 ## Installation
 
-efefef
+you can visit the website at: https://khatar-front-end.vercel.app/
+
+but if you wanted to test it locally, follow instructions below:
+
+1. install Node.js
+2. clone the repo `git clone https://github.com/tariq-almalki/Khatar-front-end.git`
+3. cd to `Khatar-front-end`
+4. execute the command `npm i`
+5. execute the command `npm run dev`
+
+that is it.
 
 ## Preview
 
-efwrgerg
+(Dark Mode)
+
+main page:
+![main-page](/public/readme-pics/dark-mode/main-page.png)
+auth page:
+![auth-page](/public/readme-pics/dark-mode/auth-page.png)
+sign-in page:
+![sign-in-page](/public/readme-pics/dark-mode/sign-in-page.png)
+sign-up page:
+![sign-up-page](/public/readme-pics/dark-mode/sign-up-page.png)
+reset password page:
+![reset-password-page](/public/readme-pics/dark-mode/reset-password-page.png)
+profile page:
+![profile-page](/public/readme-pics/dark-mode/profile-page.png)
+basic info page:
+![basic-info-page](/public/readme-pics/dark-mode/basic-info-page.png)
+contact info page:
+![contact-info-page](/public/readme-pics/dark-mode/contact-info-page.png)
+change password page:
+![change-password-page](/public/readme-pics/dark-mode/change-password-page.png)
+delete account page:
+![delete-account-page](/public/readme-pics/dark-mode/delete-account-page.png)
+awards page:
+![awards-page](/public/readme-pics/dark-mode/awards-page.png)
+team page:
+![team-page](/public/readme-pics/dark-mode/team-page.png)
+friends page:
+![friends-page](/public/readme-pics/dark-mode/friends-page.png)
+chat page:
+![chat-page](/public/readme-pics/dark-mode/chat-page.png)
+help requests page:
+![help-requests-page](/public/readme-pics/dark-mode/help-requests-page.png)
+polls page:
+![polls-page](/public/readme-pics/dark-mode/polls-page.png)
+notifications page:
+![notifications-page](/public/readme-pics/dark-mode/notifications-page.png)
+settings page:
+![settings-page](/public/readme-pics/dark-mode/settings-page.png)
+
+(Light Mode)
+
+main page:
+![main-page](/public/readme-pics/light-mode/main-page.png)
+auth page:
+![auth-page](/public/readme-pics/light-mode/auth-page.png)
+sign-in page:
+![sign-in-page](/public/readme-pics/light-mode/sign-in-page.png)
+sign-up page:
+![sign-up-page](/public/readme-pics/light-mode/sign-up-page.png)
+reset password page:
+![reset-password-page](/public/readme-pics/light-mode/reset-password-page.png)
+profile page:
+![profile-page](/public/readme-pics/light-mode/profile-page.png)
+basic info page:
+![basic-info-page](/public/readme-pics/light-mode/basic-info-page.png)
+contact info page:
+![contact-info-page](/public/readme-pics/light-mode/contact-info-page.png)
+change password page:
+![change-password-page](/public/readme-pics/light-mode/change-password-page.png)
+delete account page:
+![delete-account-page](/public/readme-pics/light-mode/delete-account-page.png)
+awards page:
+![awards-page](/public/readme-pics/light-mode/awards-page.png)
+team page:
+![team-page](/public/readme-pics/light-mode/team-page.png)
+friends page:
+![friends-page](/public/readme-pics/light-mode/friends-page.png)
+chat page:
+![chat-page](/public/readme-pics/light-mode/chat-page.png)
+help requests page:
+![help-requests-page](/public/readme-pics/light-mode/help-requests-page.png)
+polls page:
+![polls-page](/public/readme-pics/light-mode/polls-page.png)
+notifications page:
+![notifications-page](/public/readme-pics/light-mode/notifications-page.png)
+settings page:
+![settings-page](/public/readme-pics/light-mode/settings-page.png)
 
 ## Motivation
 
-awddwad
+THIS PROJECT WAS SUBMITTED IN PARTIAL FULFILLMENT OF THE REQUIREMENTS FOR THE AWARD OF BACHELOR OF SCIENCE IN COMPUTER SCIENCE 
