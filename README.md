@@ -47,7 +47,6 @@ the application will have dark/light theme modes.
 ## Features
 
 Functional Requirements
-: - --
 : - Users to create accounts (Done)
 : - Users to reset their account password (Done)
 : - Users to switch theme mode (Dark/Light) (Done)
@@ -68,7 +67,6 @@ Functional Requirements
 : - Users to Browse a map (Done)
 
 Non-Functional Requirements
-: - --
 : - Secured using SSL/TLS encryption (HTTPS) (Done)
 : - Intuitive and have user-friendly interface Web version and Mobile version (Done)
 : - Progressive Web Application (Done)
