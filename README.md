@@ -1,6 +1,6 @@
 # Khatar Application - status (WIP)
 
-> built with React, React Router, Mapbox, vite, vitePWA, HTML, CSS, Firebase auth, Firebase firestore, Firebase storage
+> built with React, React Router, styled-components, tailwind, Mapbox, vite, vitePWA, HTML, CSS, Firebase auth, Firebase firestore, Firebase storage
 
 ![main-page](public/readme-pics/main-page.png)
 
