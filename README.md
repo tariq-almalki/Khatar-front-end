@@ -18,7 +18,8 @@
 
 "check features for feature status"
 
-Khatar Application is a Progressive Web Application, the idea of the application revolve around providing a tool that make its users share knowledge of danger areas via polls that other users can vote on, polls either pass or fail, if the former happened then an area should be colored that then any users who enters that area should be notified of entering a danger area, level of danger vary, it has a color-coding system that range from green (no danger), yellow, red, purple (the most dangerous). if the latter happened then no change should be reflected on the map.
+Khatar Application is a Progressive Web Application. The idea of the application revolves around providing a tool that makes its users share knowledge of danger areas via polls that other users can vote on. Polls either pass or fail, and if the former happens, an area should be colored so that any users who enter that area should be notified of entering a danger area. Levels of danger vary, and it has a color-coding system that ranges from green (no danger), yellow, red, and purple (the most dangerous). If the latter happened, then no change should be reflected on the map.
+
 
 The application is installable at the home-screen of your phone as it's a PWA, and it's installable via play store as an app of android platform.
 
