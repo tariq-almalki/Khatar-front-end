@@ -1,7 +1,7 @@
 import Map, { Layer, GeolocateControl, FullscreenControl, NavigationControl, ScaleControl } from 'react-map-gl';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
-const MAPBOX_TOKEN = 'pk.eyJ1Ijoia2llbWtpc3QiLCJhIjoiY2xqdGc5enA2MTEzMzNkbGxiZDBnOTFmdiJ9.1_Z6LdzNAe2i4IDqx-T11w';
+const MAPBOX_TOKEN = 'pk.eyJ1Ijoia2llbWtpc3QiLCJhIjoiY2xwajFrcG1pMDVqYjJtbGVpa3U3a2w4ZSJ9.TuXnG58GOSDT1o2HGn9j4w';
 
 const threeDBuildings = {
     id: 'add-3d-buildings',
