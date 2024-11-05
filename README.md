@@ -1,3 +1,5 @@
+# Khatar-front-end
+
 > built with React, React Router, styled-components, tailwind, Mapbox, vite, vitePWA, HTML, CSS, Firebase auth, Firebase firestore, Firebase storage
 
 ![main-page](public/readme-pics/dark-mode/main-page.png)
